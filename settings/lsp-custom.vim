@@ -53,20 +53,20 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-
-  buf_set_keymap('n', '<leader>df', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  -- buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  -- buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  --
+  -- buf_set_keymap('n', '<leader>df', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  -- buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  -- buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
@@ -137,11 +137,65 @@ cmp.setup({
 EOF
 
 
-
+" 原项目：https://github.com/glepnir/lspsaga.nvim 
+" 维护版：https://github.com/tami5/lspsaga.nvim 
 lua << EOF
 local saga = require 'lspsaga'
-saga.init_lsp_saga()
+-- saga.init_lsp_saga()
+saga.init_lsp_saga {
+  -- add your config value here
+  -- default value
+  -- use_saga_diagnostic_sign = true
+  error_sign = 'E',
+  warn_sign = 'W',
+  hint_sign = 'H',
+  infor_sign = 'I',
+  diagnostic_header_icon = '',
+  code_action_icon = '',
+  -- code_action_prompt = {
+  --   enable = true,
+  --   sign = true,
+  --   sign_priority = 20,
+  --   virtual_text = true,
+  -- },
+  finder_definition_icon = '',
+  finder_reference_icon = '',
+  max_preview_lines = 20, -- preview lines of lsp_finder and definition preview
+  finder_action_keys = {
+    open = '<CR>', vsplit = 's',split = 'i',quit = '<Esc>',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+  },
+  code_action_keys = {
+    quit = '<Esc>',exec = '<CR>'
+  },
+  rename_action_keys = {
+    quit = '<Esc>',exec = '<CR>'  -- quit can be a table
+  },
+  definition_preview_icon = ''
+  -- "single" "double" "round" "plus"
+  -- border_style = "single"
+  -- rename_prompt_prefix = '➤',
+  -- if you don't use nvim-lspconfig you must pass your server name and
+  -- the related filetypes into this table
+  -- like server_filetype_map = {metals = {'sbt', 'scala'}}
+  -- server_filetype_map = {}
+}
 EOF
+
+nnoremap <silent> gr :Lspsaga lsp_finder<CR>
+nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+nnoremap <silent> K :Lspsaga hover_doc<CR>
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+nnoremap <silent> gs :Lspsaga signature_help<CR>
+nnoremap <silent> <leader>rn :Lspsaga rename<CR>
+nnoremap <silent> gd :Lspsaga preview_definition<CR>
+nnoremap <silent><leader>E :Lspsaga show_line_diagnostics<CR>
+nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
+" nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
+" tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
 
 lua << EOF
