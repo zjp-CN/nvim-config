@@ -1,0 +1,13 @@
+{
+  "luaEOF": {
+    "prefix": ["luaEOF"],
+    "body": [
+      "lua << EOF",
+      "require('$1').setup{",
+      "  $2",
+      "}",
+      "EOF",
+      "$0"
+    ]
+  }
+}

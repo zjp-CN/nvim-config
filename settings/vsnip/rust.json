@@ -51,7 +51,30 @@
         "prefix": "clone",
         "body": ["#[derive(Clone${1|\\,|})]"],
         "description": "Insert clone"
-   }
-    
-    
+   },
+    "cfg_dbg": {
+        "prefix": "cfg_dbg",
+        "body": ["aa"],
+        "description": "Insert cfg_dbg"
+    },
+    "cfg_assert": {
+        "prefix": "cfg_assert",
+        "body": [ "#[cfg(debug_assertions)]"],
+        "description": "Insert cfg_assert"
+    },
+    "cfg_test": {
+        "prefix": "cfg_test",
+        "body": [
+            "#[cfg(test)]",
+            "mod tests {",
+            "    use super::*;",
+            "",
+            "    #[test]",
+            "    fn ${1:function_name}($2) {",
+            "        ${TM_SELECTED_TEXT}$0",
+            "    }",
+            "}"
+        ],
+        "description": "Insert cfg_test"
+    }
 }
