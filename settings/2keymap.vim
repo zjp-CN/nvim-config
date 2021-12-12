@@ -64,10 +64,20 @@ command! E edit
 " 为了方便，test 配置文件当作临时配置文件，有空可以分类到别的配置文件上去
 let s:settings = expand(stdpath('config')) . '/settings'
 function VsplitSettings()
-  exe 'vsplit ' . s:settings
+  exe 'split ' . s:settings
 endfunction
 nnoremap <leader>ec :call VsplitSettings()<cr>
 nnoremap <leader>sc :source %<cr>
+
+" === 切分窗口 ===
+" Ctrl-w t makes the first (topleft) window current
+" Ctrl-w followed by H, J, K or L (capital) will move the current window to
+" the far left, bottom, top or right respectively like normal cursor
+" navigation.
+:nmap <leader>th <C-w>t<C-w>H 
+:nmap <leader>tj <C-w>t<C-w>J 
+:nmap <leader>tk <C-w>t<C-w>K 
+:nmap <leader>tl <C-w>t<C-w>L 
 
 " === other tricks ===
 " 向前向后插入空行

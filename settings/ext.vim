@@ -1,5 +1,15 @@
 " 此文件用于设置拓展功能
 
+" " == auto-pairs ===
+" let g:AutoPairsCompatibleMaps = 0
+" " 在 plugged/auto-pairs/autoload/autopairs/Variables.vim 下
+" " 定义了一些快捷键，但是我不需要
+" let g:AutoPairsMoveExpression = ""
+" let g:AutoPairsShortcutToggleMultilineClose = ""
+" let g:AutoPairsShortcutJump = ""
+" let g:AutoPairsShortcutToggle = ""
+" let g:AutoPairsShortcutFastWrap = ""
+
 " === vim-easy-align ===
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)

@@ -1,0 +1,38 @@
+{
+  "Vsnip sample2": {
+    "prefix": ["sample2"],
+    "body": [
+      "\"$1\": {",
+      "    \"prefix\": \"$3\",",
+      "    \"body\": [\"$2\"],",
+      "    \"description\": \"Insert $4\"",
+      "}${5|\\,|}",
+      "$0"
+    ]
+  },
+  "Vsnip sample": {
+    "prefix": ["sample"],
+    "body": [
+      "\"$1\": {",
+      "    \"prefix\": \"$1\",",
+      "    \"body\": [\"$2\"],",
+      "    \"description\": \"Insert $1\"",
+      "}${3|\\,|}",
+      "$0"
+    ]
+  },
+  "Vsnip sample multi lines": {
+    "prefix": ["sample-multi-line"],
+    "body": [
+      "\"$1\": {",
+      "    \"prefix\": \"$1\",",
+      "    \"body\": [",
+      "        \"$2\",",
+      "    ],",
+      "    \"description\": \"Insert $1\"",
+      "}${3|\\,|}",
+      "$0"
+    ]
+  }
+
+}

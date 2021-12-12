@@ -78,12 +78,15 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+-- 需要 cmp_nvim_lsp：利用 lsp 补全函数默认参数名
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
-    }
+    },
+  capabilities = capabilities
   }
 end
 EOF
@@ -111,30 +114,61 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-m>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     -- Add tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    --['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    --['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
+    ['<Tab>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    })
+    }),
+   -- ['<CR>'] = function(fallback)
+   --   if cmp.visible() then
+   --     cmp.confirm()
+   --   else
+   --     fallback() -- If you are using vim-endwise, this fallback function will be behaive as the vim-endwise.
+   --   end
+   -- end
   },
 
   -- Installed sources
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-    { name = 'path' },
-    { name = 'buffer' },
+    { name = 'vsnip'    },
+    { name = 'path'     },
+    { name = 'buffer'   },
   },
 })
 EOF
+
+" === vim-vsnip ===
+let g:vsnip_snippet_dir = expand(stdpath('config')) . '/settings/vsnip'
+" Expand
+" imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+" smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+" Expand or jump
+" imap <expr> <C-n>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-n>'
+" smap <expr> <C-n>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-n>'
+" Jump forward or backward
+imap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+smap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+" imap <expr> <C-m> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
+" smap <expr> <C-m> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
+" imap <C-m> <Plug>(vsnip-jump-prev)
+" smap <C-m> <Plug>(vsnip-jump-prev)
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap  <leader>s   <Plug>(vsnip-select-text)
+xmap  <leader>s   <Plug>(vsnip-select-text)
+nmap  <leader>S   <Plug>(vsnip-cut-text)
+xmap  <leader>S   <Plug>(vsnip-cut-text)
+
 
 
 " 原项目：https://github.com/glepnir/lspsaga.nvim 
@@ -182,8 +216,8 @@ saga.init_lsp_saga {
 EOF
 
 nnoremap <silent> gr :Lspsaga lsp_finder<CR>
-nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+nnoremap <silent><leader>a :Lspsaga code_action<CR>
+vnoremap <silent><leader>a :<C-U>Lspsaga range_code_action<CR>
 nnoremap <silent> K :Lspsaga hover_doc<CR>
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>

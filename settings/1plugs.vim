@@ -18,6 +18,8 @@ Proxy 'hrsh7th/nvim-cmp'
 " LSP completion source for nvim-cmp
 Proxy 'hrsh7th/cmp-nvim-lsp'
 
+" Snippet engine
+Proxy 'hrsh7th/vim-vsnip'
 " Snippet completion source for nvim-cmp
 Proxy 'hrsh7th/cmp-vsnip'
 
@@ -30,9 +32,6 @@ Proxy 'hrsh7th/cmp-buffer'
 " To enable more of the features of rust-analyzer, such as inlay hints and more!
 Proxy 'simrat39/rust-tools.nvim'
 
-" Snippet engine
-Proxy 'hrsh7th/vim-vsnip'
-
 " Fuzzy finder
 " Optional
 Proxy 'nvim-lua/popup.nvim'
@@ -42,11 +41,8 @@ Proxy 'nvim-telescope/telescope.nvim'
 " Proxy 'glepnir/lspsaga.nvim'
 Proxy 'tami5/lspsaga.nvim'
 
-" Color scheme used in the GIFs!
-Proxy 'arcticicestudio/nord-vim'
-
 " === 用着顺手的老插件 ===
-Proxy 'LunarWatcher/auto-pairs'
+" Proxy 'LunarWatcher/auto-pairs'
 Proxy 'tpope/vim-surround'
 Proxy 'junegunn/vim-easy-align'
 
