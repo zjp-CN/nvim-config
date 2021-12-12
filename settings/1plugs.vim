@@ -41,6 +41,9 @@ Proxy 'nvim-telescope/telescope.nvim'
 " Proxy 'glepnir/lspsaga.nvim'
 Proxy 'tami5/lspsaga.nvim'
 
+" autopairs for neovim 
+Proxy 'windwp/nvim-autopairs'
+
 " === 用着顺手的老插件 ===
 " Proxy 'LunarWatcher/auto-pairs'
 Proxy 'tpope/vim-surround'
