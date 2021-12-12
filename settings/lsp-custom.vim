@@ -157,17 +157,16 @@ let g:vsnip_snippet_dir = expand(stdpath('config')) . '/settings/vsnip'
 " Jump forward or backward
 imap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
 smap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-" imap <expr> <C-m> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
-" smap <expr> <C-m> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
-" imap <C-m> <Plug>(vsnip-jump-prev)
-" smap <C-m> <Plug>(vsnip-jump-prev)
+" 这个不能设置成 <C-m>，可能与 cmp 冲突（仅对我个人的配置而言）
+imap <expr> <C-p> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
+smap <expr> <C-p> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
 
 " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
 " See https://github.com/hrsh7th/vim-vsnip/pull/50
-nmap  <leader>s   <Plug>(vsnip-select-text)
-xmap  <leader>s   <Plug>(vsnip-select-text)
-nmap  <leader>S   <Plug>(vsnip-cut-text)
-xmap  <leader>S   <Plug>(vsnip-cut-text)
+" nmap <M-x> <Plug>(vsnip-select-text)
+" xmap <M-x> <Plug>(vsnip-select-text)
+nmap <M-x> <Plug>(vsnip-cut-text)
+xmap <M-x> <Plug>(vsnip-cut-text)
 
 
 
