@@ -8,5 +8,13 @@
       "prefix": "abbr",
       "body": ["<abbr title=\"${1:description}\">${TM_SELECTED_TEXT}$2</abbr>$0"],
       "description": "Insert abbr"
+  },
+  "rust-ignore": {
+    "prefix": ["rust-ignore"],
+    "body": [
+      "```rust,ignore",
+      "$0",
+      "```"
+    ]
   }
 }

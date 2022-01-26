@@ -41,7 +41,7 @@ nnoremap <leader>wa :wa<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>qa :qa<CR>
 nnoremap <leader>wq :wq<CR>
-nnoremap <leader>xa :xa<CR>
+nnoremap <leader>xa :wa \| :qa<CR>
 nnoremap <leader>wbd :w \| :bd<CR>
 
 " === :W :Q 命令 ===
@@ -91,6 +91,12 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <leader>T :terminal <CR> afish <CR>
 nnoremap <leader>ST :split \| :terminal <CR> afish <CR>
 nnoremap <leader>VT :vsplit \| :terminal <CR> afish <CR>
+
+" === split window ===
+nnoremap <c-w>[ :vertical resize -5<cr>
+nnoremap <c-w>] :vertical resize +5<cr>
+nnoremap <c-w>- :resize -5<cr>
+nnoremap <c-w>+ :resize +5<cr>
 
 " === lua ===
 

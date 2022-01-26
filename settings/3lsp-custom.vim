@@ -1,40 +1,3 @@
-" rust-tools 设置
-" https://github.com/simrat39/rust-tools.nvim#configuration
-lua << EOF
-local opts = {
-    tools = { -- rust-tools options
-        autoSetHints = true,
-        hover_with_actions = true,
-        inlay_hints = {
-            show_parameter_hints = true,
-            parameter_hints_prefix = "// <-",
-            other_hints_prefix = "// ",
-        },
-    },
-
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        -- on_attach = on_attach,
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                -- enable clippy on save
-                checkOnSave = {
-                    command = "clippy"
-                },
-            }
-        }
-    },
-}
-
-require('rust-tools').setup(opts)
-EOF
-
-
 " lspconfig 设置 
 " https://github.com/neovim/nvim-lspconfig
 lua << EOF
@@ -53,11 +16,11 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gd', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', '<leader>gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<leader>gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
 
   -- buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -77,20 +40,64 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+-- local servers = { 'rust_analyzer' }
 -- 需要 cmp_nvim_lsp：利用 lsp 补全函数默认参数名
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
+capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--for _, lsp in ipairs(servers) do
+--  nvim_lsp[lsp].setup {
+--    on_attach = on_attach,
+--    flags = {
+--      debounce_text_changes = 150,
+--    },
+--    capabilities = capabilities,
+--  }
+--end
+
+-- rust-tools 设置
+-- https://github.com/simrat39/rust-tools.nvim#configuration
+local opts = {
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        hover_with_actions = true,
+        inlay_hints = {
+            show_parameter_hints = true,
+            parameter_hints_prefix = "// <-",
+            other_hints_prefix = "// ",
+            highlight = "InlayHints",
+        },
     },
-  capabilities = capabilities
-  }
-end
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        on_attach = on_attach,
+        flags = { debounce_text_changes = 150, },
+        capabilities = capabilities,
+
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
 EOF
 
+nnoremap <leader>ls :LspStop \| :LspStart<CR>
+" nnoremap gd :lua vim.lsp.buf.definition()<CR>
+" nnoremap <leader>gD <Cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <leader>gi <Cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <leader>gt <Cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <leader>gr <Cmd>lua vim.lsp.buf.references()<CR>
 
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -121,8 +128,8 @@ cmp.setup({
     --['<Tab>'] = cmp.mapping.select_next_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    --['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
+    ['<C-e>'] = cmp.mapping.complete(),
+    ['<C-c>'] = cmp.mapping.close(),
     ['<Tab>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -141,10 +148,34 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'vsnip'    },
     { name = 'path'     },
-    { name = 'buffer'   },
+    { name = 'buffer',
+      option = {
+          get_bufnrs = function() return vim.api.nvim_list_bufs() end, -- search words in all buffers
+          keyword_pattern = [[\k\+]], -- use the iskeyword option for recognizing words
+      }
+    },
   },
 })
+
+-- cmp-cmdline 在底部命令栏支持补全提示
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(':', {
+--   sources = cmp.config.sources(
+--     { { name = 'path' } },
+--     { { name = 'cmdline'} })
+-- })
+
+-- The following example advertise capabilities to `rust_analyzer-standalone`.
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- require'lspconfig'['rust_analyzer-standalone'].setup {
+--   capabilities = capabilities,
+-- }
 EOF
+
+" iskeyword = @,48-57,_,192-255,-
+set iskeyword+=-
 
 " === vim-vsnip ===
 let g:vsnip_snippet_dir = expand(stdpath('config')) . '/settings/vsnip'
@@ -167,7 +198,6 @@ smap <expr> <C-p> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
 " xmap <M-x> <Plug>(vsnip-select-text)
 nmap <M-x> <Plug>(vsnip-cut-text)
 xmap <M-x> <Plug>(vsnip-cut-text)
-
 
 
 " 原项目：https://github.com/glepnir/lspsaga.nvim 
@@ -222,11 +252,11 @@ nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_sag
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 nnoremap <silent> <leader>rn :Lspsaga rename<CR>
-nnoremap <silent> gd :Lspsaga preview_definition<CR>
-nnoremap <silent><leader>E :Lspsaga show_line_diagnostics<CR>
-nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
-nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
+" nnoremap <silent> gd :Lspsaga preview_definition<CR>
+nnoremap <silent> ;l :Lspsaga show_line_diagnostics<CR>
+nnoremap <silent> ;c <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+nnoremap <silent> ]d :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> [d :Lspsaga diagnostic_jump_prev<CR>
 " nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
 " tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
@@ -234,9 +264,8 @@ nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
 lua << EOF
 require('telescope').setup{
   pickers = {
-    grep_string = {
-      theme = "dropdown",
-    }
+    grep_string = { theme = "dropdown", },
+    diagnostics = { theme = "dropdown", },
   },
 }
 EOF
@@ -256,4 +285,8 @@ npairs.add_rules({
   }
 )
 EOF
+
+
+autocmd Filetype rust nnoremap <F4> :RustToggleInlayHints<cr>
+autocmd Filetype rust nnoremap <leader>ct :RustOpenCargo<cr>
 

@@ -37,6 +37,12 @@
         "body": ["#![allow(unused)]"],
         "description": "Insert deadcode"
     },
+    "unused": {
+      "prefix": ["unused"],
+      "body": [
+        "#![allow(unused)]"
+      ]
+    },
     "skip": {
         "prefix": "skip",
         "body": ["#[rustfmt::skip]"],
@@ -76,5 +82,31 @@
             "}"
         ],
         "description": "Insert cfg_test"
+    },
+  "testfn": {
+    "prefix": ["testfn"],
+    "body": [
+      "#[test]",
+      "fn ${1:test}() {",
+      "$0",
+      "}"
+    ]
+  },
+    "main": {
+      "prefix": "main",
+      "body": [
+        "fn main() {",
+        "    $0",
+        "}"
+      ]
+    },
+    "proc_macro": {
+    "prefix": ["proc_macro"],
+    "body": [
+      "#[proc_macro]",
+      "pub fn ${1:name}(${2:_}: TokenStream) -> TokenStream {",
+      "    $0",
+      "}"
+      ]
     }
 }

@@ -1,5 +1,13 @@
 " “format-on-write” (with a timeout of 200ms)
-autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+" autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+" rust.vim
+let g:rustfmt_autosave = 1
+
+" 使用 :make 代替 :!cargo
+autocmd FileType rust compiler cargo
+" autocmd FileType rust :set makeprg=cargo
+" let g:rust_cargo_avoid_whole_workspace = 1
+
 
 " === 代码折叠 ===
 " autocmd Filetype rust set foldmethod=syntax

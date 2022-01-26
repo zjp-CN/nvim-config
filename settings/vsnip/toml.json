@@ -1,0 +1,18 @@
+{
+  "bin": {
+    "prefix": ["bin"],
+    "body": [
+      "[[bin]]",
+      "path = \"$1\"",
+      "name = \"$2\""
+    ]
+  },
+  "test": {
+    "prefix": ["test"],
+    "body": [
+      "[[test]]",
+      "name = \"$1\"",
+      "path = \"$2\""
+    ]
+  }
+}

@@ -31,6 +31,7 @@ hi  Function     guifg=#58D0F2    guibg=none
 hi  Type         guifg=#54F685    gui=bold
 hi  CocHintSign  guifg=#f06292    gui=underline
 hi  Comment      guifg=#80cbc4    guibg=none    gui=italic
+hi  InlayHints   guifg=Grey40     guibg=none    gui=italic
 hi  Identifier   gui=none         guifg=#FFFF4D gui=bold
 hi  Macro        guifg=#FD3F3F    gui=bold
 " Delimiter
@@ -45,3 +46,9 @@ hi  CocHintSign  guibg=Black
 hi  CocMenuSel   gui=inverse
 hi  Visual       ctermbg=242      guibg=Grey30
 
+" === neovim ===
+hi FloatBorder guifg=grey50
+hi NormalFloat guifg=#7cc6f4
+" === gitsigns.nvim ===
+hi GitSignsCurrentLineBlame guifg=Grey35 gui=inverse
+hi GitSignsAdd guifg=White guibg=#1E49C8 
