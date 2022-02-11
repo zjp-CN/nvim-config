@@ -9,15 +9,20 @@ autocmd FileType rust compiler cargo
 " let g:rust_cargo_avoid_whole_workspace = 1
 
 
+" bacon
+set nowritebackup
+set noequalalways
+
 " === 代码折叠 ===
 " autocmd Filetype rust set foldmethod=syntax
 " 由于无法同时存在多个 foldmethod，所以可以通过快捷键来设置不同方式的折叠
 nnoremap <leader>fs :set foldmethod=syntax<cr>
-autocmd FileType rust set foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
+" nnoremap <leader>ff :set foldmethod=expr foldexpr=folding_nvim#foldexpr()<cr>
+" autocmd FileType rust set foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
 nnoremap <leader>fe :set foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'<cr>
-" 更改原先行数在前的折叠样式
-" 第一行源代码 ........... 折叠行数 [折叠行数占总行数百分比] +--
-" http://gregsexton.org/2011/03/27/improving-the-text-displayed-in-a-vim-fold.html
+" " 更改原先行数在前的折叠样式
+" " 第一行源代码 ........... 折叠行数 [折叠行数占总行数百分比] +--
+" " http://gregsexton.org/2011/03/27/improving-the-text-displayed-in-a-vim-fold.html
 function! CustomFoldText() abort
     "get first non-blank line
     let fs = v:foldstart
@@ -38,4 +43,107 @@ function! CustomFoldText() abort
     let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage)-1)
     return line . " " . expansionString . foldSizeStr . foldPercentage . foldLevelStr
 endfunction
-set foldtext=CustomFoldText()
+" set foldtext=CustomFoldText()
+
+" autocmd Filetype rust set foldmethod=syntax | set foldcolumn=auto | set foldtext=CustomFoldText()
+autocmd Filetype rust set foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//' | set foldtext=CustomFoldText()
+
+" keymap
+autocmd Filetype rust nnoremap <F6> :RustExpandMacro<CR> | nnoremap <F5> :RustHoverActions<CR>
+autocmd FileType toml lua require('cmp').setup.buffer { sources = { { name = 'crates' } } }
+autocmd FileType toml nnoremap <silent> <F5> :lua require('crates').show_popup()<cr> 
+autocmd FileType toml nnoremap <silent> <F7> :lua require('crates').show_popup()<cr> 
+autocmd FileType toml nnoremap <silent> <F4> :lua require('crates').show_features_popup()<cr>
+lua << EOF
+require('crates').setup {
+    text = {
+        loading = "  Loading...",
+        version = "  v%s",
+        prerelease = "  %s",
+        yanked = "  %s yanked",
+        nomatch = "  Not found",
+        upgrade = "  upgrade to v%s",
+        error = "  Error fetching crate",
+    },
+    popup = {
+        text = {
+            title = " # %s ",
+            version = " %s ",
+            prerelease = " %s ",
+            yanked = " %s yanked ",
+            feature = "   %s ",
+            enabled = " * %s ",
+            transitive = " ~ %s ",
+        },
+    },
+    cmp = {
+        text = {
+            prerelease = " pre-release ",
+            yanked = " yanked ",
+        },
+    },
+}
+EOF
+
+
+lua << EOF
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode-14', -- adjust as needed
+  name = "lldb"
+}
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+
+    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+    --
+    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    --
+    -- Otherwise you might get the following error:
+    --
+    --    Error on launch: Failed to attach to the target process
+    --
+    -- But you should be aware of the implications:
+    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+    runInTerminal = false,
+  },
+}
+
+
+-- If you want to use this for rust and c, add something like this:
+
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
+
+-- nvim-dap-ui
+require("dapui").setup()
+EOF
+
+" === nvim-dap ===
+autocmd Filetype rust nnoremap <silent> <F7> :lua require'dap'.clear_breakpoints()<CR>
+autocmd Filetype rust nnoremap <silent> <F8> :lua require'dap'.continue()<CR>
+autocmd Filetype rust nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
+autocmd Filetype rust nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+autocmd Filetype rust nnoremap <silent> <F12> :lua require'dap'.run_to_cursor()<CR>
+autocmd Filetype rust nnoremap <silent> [i :lua require'dap'.step_into()<CR>
+autocmd Filetype rust nnoremap <silent> ]o :lua require'dap'.step_out()<CR>
+autocmd Filetype rust nnoremap <silent> <leader>dr :lua require'dap'.repl.toggle()<CR>
+autocmd Filetype rust nnoremap <silent> <leader>dc :lua require'dap'.disconnect()<CR>
+
+" === nvim-dap-ui ===
+" https://github.com/rcarriga/nvim-dap-ui
+" For a one time expression evaluation, you can call a hover window to show a value
+autocmd Filetype rust nnoremap <C-k> <Cmd>lua require("dapui").eval()<CR>
+autocmd Filetype rust nnoremap <M-k> <Cmd>lua require("dapui").float_element()<CR>
+
+

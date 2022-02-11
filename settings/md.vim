@@ -1,7 +1,7 @@
 " === vim-markdown ===
 let g:tex_conceal = ""
 let g:vim_markdown_conceal_code_blocks = 0
-autocmd Filetype markdown set conceallevel=2
+" autocmd Filetype markdown set conceallevel=2
 
 " === vim-table-mode ===
 " 暂时对所用文件使用 `|` 分隔

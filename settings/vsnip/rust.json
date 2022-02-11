@@ -108,5 +108,27 @@
       "    $0",
       "}"
       ]
-    }
+    },
+  "pub(super)": {
+    "prefix": ["pubsuper"],
+    "body": [
+      "pub(super) struct ${1: Name} {",
+      "    $0",
+      "}"
+    ]
+  },
+  "derive_default": {
+    "prefix": ["derive_default"],
+    "body": [
+      "#[derive(Default)]"
+    ]
+  },
+  "pfn": {
+    "prefix": ["pfn"],
+    "body": [
+      "pub fn ${1:name}(${2:self}) -> ${3:Self} {",
+      "    $0",
+      "}"
+    ]
+  }
 }

@@ -89,7 +89,7 @@ nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 tnoremap <Esc> <C-\><C-n>
 " nnoremap <leader>T :split \| :terminal <CR> a
 nnoremap <leader>T :terminal <CR> afish <CR>
-nnoremap <leader>ST :split \| :terminal <CR> afish <CR>
+nnoremap <leader>ST :split \| :resize 15 \| :terminal <CR> afish <CR>
 nnoremap <leader>VT :vsplit \| :terminal <CR> afish <CR>
 
 " === split window ===

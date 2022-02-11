@@ -36,6 +36,8 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- folding-nvim config
+  -- require('folding').on_attach()
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -85,7 +87,35 @@ local opts = {
                     command = "clippy"
                 },
             }
+        },
+
+        standalone = true,
+    },
+
+    -- debugging stuff
+    dap = {
+        adapter = {
+            type = 'executable',
+            command = 'lldb-vscode-14',
+            name = "rt_lldb"
         }
+    },
+
+    runnables = {
+        -- whether to use telescope for selection menu or not
+        use_telescope = true,
+
+        -- rest of the opts are forwarded to telescope
+    },
+    debuggables = {
+        -- whether to use telescope for selection menu or not
+        use_telescope = true,
+
+        -- rest of the opts are forwarded to telescope
+        --pickers = {
+        --  grep_string = { theme = "dropdown", },
+        --  diagnostics = { theme = "dropdown", },
+        --},
     },
 }
 
@@ -155,6 +185,15 @@ cmp.setup({
       }
     },
   },
+
+  -- https://github.com/hrsh7th/nvim-cmp/issues/101
+  -- completion = {
+  --   get_trigger_characters = function(trigger_characters)
+  --     return vim.tbl_filter(function(char)
+  --       return char ~= ' '
+  --     end, trigger_characters)
+  --   end
+  -- },
 })
 
 -- cmp-cmdline 在底部命令栏支持补全提示
