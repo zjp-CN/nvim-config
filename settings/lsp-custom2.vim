@@ -98,17 +98,62 @@ require("nvim-gps").setup({
 EOF
 
 lua << END
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed
+    }
+  end
+end
+local function window()
+  return vim.api.nvim_win_get_number(0)
+end
 local gps = require("nvim-gps")
 require'lualine'.setup {
     options = {icons_enabled = false, theme = 'nord'},
     sections = {
+        -- lualine_a = { {'mode'}, {window}, },
+        lualine_b = { 
+            -- {'b:gitsigns_status'},
+            -- {'b:gitsigns_head', icon = ''}, 
+            'branch', {'diff', source = diff_source}
+        },
         lualine_c = {
+           -- {'diff', source = diff_source}, 
+           'diagnostics',
             { 'filename', path = 1 },
-  --          { gps.get_location, cond = gps.is_available },
-            { 'lsp_progress',
-                display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }},
-                timer = { progress_enddelay = 2000, spinner = 1000, lsp_client_name_enddelay = 2500 }
-            }, 
+  --         { gps.get_location, cond = gps.is_available },
+           -- {
+           --   'diagnostics',
+
+           --   -- Table of diagnostic sources, available sources are:
+           --   --   'nvim_lsp', 'nvim_diagnostic', 'coc', 'ale', 'vim_lsp'.
+           --   -- or a function that returns a table as such:
+           --   --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+           --   sources = { 'nvim_diagnostic' },
+
+           --   -- Displays diagnostics for the defined severity types
+           --   sections = { 'error', 'warn', 'info', 'hint' },
+
+           --   diagnostics_color = {
+           --     -- Same values as the general color option can be used here.
+           --     error = 'DiagnosticError', -- Changes diagnostics' error color.
+           --     warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+           --     info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+           --     hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+           --   },
+           --   symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+           --   colored = true,           -- Displays diagnostics status in color if set to true.
+           --   update_in_insert = false, -- Update diagnostics in insert mode.
+           --   always_visible = false,   -- Show diagnostics even if there are none.
+           --},
+           { 'lsp_progress',
+               display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }},
+               timer = { progress_enddelay = 2000, spinner = 1000, lsp_client_name_enddelay = 2500 }
+           }, 
         },
         lualine_x = {'encoding', 'filetype'},
     }

@@ -57,6 +57,11 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make
 
 -- rust-tools 设置
 -- https://github.com/simrat39/rust-tools.nvim#configuration
+-- Update this path
+local extension_path = '/download/codelldb/extension/'
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+
 local opts = {
     tools = { -- rust-tools options
         autoSetHints = true,
@@ -86,6 +91,9 @@ local opts = {
                 checkOnSave = {
                     command = "clippy"
                 },
+                -- cargo = {
+                --     features = {"use_tokio"},
+                -- },
             }
         },
 
@@ -93,12 +101,16 @@ local opts = {
     },
 
     -- debugging stuff
+    -- dap = {
+    --     adapter = {
+    --         type = 'executable',
+    --         command = 'lldb-vscode-14',
+    --         name = "rt_lldb"
+    --     }
+    -- },
     dap = {
-        adapter = {
-            type = 'executable',
-            command = 'lldb-vscode-14',
-            name = "rt_lldb"
-        }
+        adapter = require('rust-tools.dap').get_codelldb_adapter(
+            codelldb_path, liblldb_path)
     },
 
     runnables = {
@@ -150,7 +162,7 @@ cmp.setup({
         vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<C-m>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     -- Add tab support
@@ -171,7 +183,7 @@ cmp.setup({
    --     fallback() -- If you are using vim-endwise, this fallback function will be behaive as the vim-endwise.
    --   end
    -- end
-  },
+  }),
 
   -- Installed sources
   sources = {
@@ -184,6 +196,7 @@ cmp.setup({
           keyword_pattern = [[\k\+]], -- use the iskeyword option for recognizing words
       }
     },
+    -- { name = "crates" },
   },
 
   -- https://github.com/hrsh7th/nvim-cmp/issues/101
@@ -225,11 +238,13 @@ let g:vsnip_snippet_dir = expand(stdpath('config')) . '/settings/vsnip'
 " imap <expr> <C-n>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-n>'
 " smap <expr> <C-n>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-n>'
 " Jump forward or backward
-imap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-smap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+imap <expr> <C-l> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
+smap <expr> <C-l> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
+imap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
+smap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
 " 这个不能设置成 <C-m>，可能与 cmp 冲突（仅对我个人的配置而言）
-imap <expr> <C-p> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
-smap <expr> <C-p> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
+imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-c>'
+smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-c>'
 
 " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
 " See https://github.com/hrsh7th/vim-vsnip/pull/50
@@ -326,6 +341,6 @@ npairs.add_rules({
 EOF
 
 
-autocmd Filetype rust nnoremap <F4> :RustToggleInlayHints<cr>
+" autocmd Filetype rust nnoremap <F4> :RustToggleInlayHints<cr>
 autocmd Filetype rust nnoremap <leader>ct :RustOpenCargo<cr>
 

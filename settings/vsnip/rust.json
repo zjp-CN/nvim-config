@@ -130,5 +130,11 @@
       "    $0",
       "}"
     ]
+  },
+  "cfg_feature": {
+    "prefix": ["cfg_feature"],
+    "body": [
+      "#[cfg(feature = \"${1:feature}\")]"
+    ]
   }
 }

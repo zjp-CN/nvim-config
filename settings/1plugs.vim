@@ -89,5 +89,8 @@ Plug 'preservim/nerdcommenter'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mg979/vim-visual-multi'
 Plug 'rhysd/clever-f.vim'
+Plug 'azabiong/vim-highlighter'
+
+Plug '/rust/tmp/neovim-calculator'
 call plug#end()
 

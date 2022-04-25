@@ -52,3 +52,8 @@ hi NormalFloat guifg=#7cc6f4
 " === gitsigns.nvim ===
 hi GitSignsCurrentLineBlame guifg=Grey35 gui=inverse
 hi GitSignsAdd guifg=White guibg=#1E49C8 
+" === lualine ===
+hi! DiagnosticError guifg=Red     ctermbg=none
+hi! DiagnosticWarn  guifg=Yellow  ctermbg=none
+hi! DiagnosticInfo  guifg=#7cc6f4 ctermbg=none
+hi! DiagnosticHint  guifg=#F3FCFE ctermbg=none

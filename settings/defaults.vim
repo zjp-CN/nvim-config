@@ -11,6 +11,9 @@ set linebreak
 set splitright
 set splitbelow
 
+" enable project local settings
+" set exrc
+
 " 如果没有这个设置，每次打开文件时光标都将定位在第一行。而加入了这个设置以后，你就可以恢复到上次关闭文件时光标所在的位置了。
 " https://github.com/wsdjeg/vim-galore-zh_cn
 autocmd BufReadPost *

@@ -7,7 +7,7 @@ set pastetoggle=<F2>
 " F3 触发搜索高亮开关
 nnoremap <F3> :noh<CR> 
 " 触发行号 relative number
-set number relativenumber
+" set number relativenumber
 nnoremap <leader>nb :set number! rnu!<CR>
 " 转换大小写
 nnoremap <leader>u vgu
@@ -87,10 +87,11 @@ nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 " === neovim native terminal  ===
 " https://neovim.io/doc/user/nvim_terminal_emulator.html
 tnoremap <Esc> <C-\><C-n>
+tnoremap <C-\> <C-\><C-n>
 " nnoremap <leader>T :split \| :terminal <CR> a
-nnoremap <leader>T :terminal <CR> afish <CR>
-nnoremap <leader>ST :split \| :resize 15 \| :terminal <CR> afish <CR>
-nnoremap <leader>VT :vsplit \| :terminal <CR> afish <CR>
+nnoremap <leader>T :terminal <CR> a
+nnoremap <leader>ST :split \| :resize 15 \| :terminal <CR> a
+nnoremap <leader>VT :vsplit \| :terminal <CR> a
 
 " === split window ===
 nnoremap <c-w>[ :vertical resize -5<cr>
