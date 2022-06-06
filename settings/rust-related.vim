@@ -49,6 +49,7 @@ endfunction
 autocmd Filetype rust set foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//' | set foldtext=CustomFoldText()
 
 " keymap
+autocmd FileType rust nnoremap <space>f <cmd>lua vim.lsp.buf.signature_help()<cr> 
 autocmd FileType rust nnoremap <silent> <C-s> :LspStop<cr> 
 autocmd FileType rust nnoremap <silent> <M-s> :LspStart<cr> 
 autocmd Filetype rust nnoremap <F6> :RustExpandMacro<CR> | nnoremap <F5> :RustHoverActions<CR>
@@ -59,7 +60,7 @@ autocmd FileType toml lua require('cmp').setup.buffer {
     \        { name = 'path' },
     \    }
 \}
-autocmd FileType toml nnoremap <silent> <F5> :lua require('crates').show_popup()<cr> 
+autocmd FileType toml nnoremap <silent> <F5> :lua require('crates').show_popup()<cr>
 autocmd FileType toml nnoremap <silent> <F6> :lua require('crates').show_dependencies_popup()<cr>
 autocmd FileType toml nnoremap <silent> <F4> :lua require('crates').show_features_popup()<cr>
 lua << EOF
@@ -166,30 +167,31 @@ end
 dap.listeners.before.event_terminated["dapui_config"] = function()
   dapui.close()
 end
-dap.listeners.after.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
+--dap.listeners.after.event_terminated["dapui_config"] = function()
+--  dapui.close()
+--end
+--dap.listeners.before.event_exited["dapui_config"] = function()
+--  dapui.close()
+--end
 EOF
 
 " === nvim-dap ===
-autocmd Filetype rust nnoremap <silent> <F7> :lua require'dap'.clear_breakpoints()<CR>
-autocmd Filetype rust nnoremap <silent> <F8> :lua require'dap'.continue()<CR>
-autocmd Filetype rust nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
-autocmd Filetype rust nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
-autocmd Filetype rust nnoremap <silent> <F12> :lua require'dap'.run_to_cursor()<CR>
-autocmd Filetype rust nnoremap <silent> <C-i> :lua require'dap'.step_into()<CR>
-autocmd Filetype rust nnoremap <silent> <C-o> :lua require'dap'.step_out()<CR>
-autocmd Filetype rust nnoremap <silent> <leader>dr :lua require'dap'.repl.toggle()<CR>
-autocmd Filetype rust nnoremap <silent> <leader>dc :lua require'dap'.terminate()<CR>
-autocmd Filetype rust nnoremap <silent> <leader>dt :lua require("dapui").toggle()<CR>
+autocmd FileType rust noremap  <silent> <F7>       <Cmd>lua require'dap'.clear_breakpoints()<CR>
+autocmd FileType rust noremap  <silent> <F8>       <Cmd>lua require'dap'.continue()<CR>
+autocmd FileType rust noremap  <silent> <F9>       <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+" autocmd FileType rust noremap  <silent> <F10>      <Cmd>lua require'dap'.step_over()<CR>
+autocmd FileType rust noremap  <silent> <F12>      <Cmd>lua require'dap'.run_to_cursor()<CR>
+autocmd FileType rust noremap  <space>i <Cmd>lua require'dap'.step_into()<CR>
+autocmd FileType rust noremap  <space>o <Cmd>lua require'dap'.step_over()<CR>
+" autocmd FileType rust noremap  <space>o <Cmd>lua require'dap'.step_out()<CR>
+autocmd FileType rust noremap  <silent> <leader>dr <Cmd>lua require'dap'.repl.toggle()<CR>
+autocmd FileType rust noremap  <silent> <leader>dc <Cmd>lua require'dap'.terminate()<CR>
+autocmd FileType rust nnoremap <silent> <leader>dt <Cmd>lua require"dapui".toggle()<CR>
 
 " === nvim-dap-ui ===
 " https://github.com/rcarriga/nvim-dap-ui
 " For a one time expression evaluation, you can call a hover window to show a value
-autocmd Filetype rust nnoremap <C-k> <Cmd>lua require("dapui").eval()<CR>
-autocmd Filetype rust nnoremap <M-k> <Cmd>lua require("dapui").float_element()<CR>
+autocmd FileType rust noremap <C-k> <Cmd>lua require("dapui").eval()<CR>
+autocmd FileType rust noremap <M-k> <Cmd>lua require("dapui").float_element()<CR>
 
 

@@ -27,11 +27,13 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 
 " See hrsh7th's other plugins for more completion sources!
 
 " To enable more of the features of rust-analyzer, such as inlay hints and more!
 Plug 'simrat39/rust-tools.nvim'
+Plug 'Canop/nvim-bacon'
 
 " Fuzzy finder
 " Optional
@@ -52,8 +54,16 @@ Plug 'arkav/lualine-lsp-progress'
 
 Plug 'lewis6991/gitsigns.nvim'
 
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'SmiteshP/nvim-gps'
+Plug 'ldelossa/litee.nvim'
+Plug 'ldelossa/litee-calltree.nvim'
+Plug 'ldelossa/litee-symboltree.nvim'
+" Plug 'file:///rust/github/litee-symboltree.nvim'
+Plug 'ldelossa/litee-filetree.nvim'
+" Plug 'file:///rust/github/litee-filetree.nvim'
+" Plug 'ldelossa/litee-bookmarks.nvim'
+
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'SmiteshP/nvim-gps'
 
 " 右侧阅读进度滚动条
 " Plug 'Xuyuanp/scrollbar.nvim'
@@ -91,6 +101,6 @@ Plug 'mg979/vim-visual-multi'
 Plug 'rhysd/clever-f.vim'
 Plug 'azabiong/vim-highlighter'
 
-Plug '/rust/tmp/neovim-calculator'
+" Plug '/rust/tmp/neovim-calculator'
 call plug#end()
 

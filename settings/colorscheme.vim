@@ -57,3 +57,7 @@ hi! DiagnosticError guifg=Red     ctermbg=none
 hi! DiagnosticWarn  guifg=Yellow  ctermbg=none
 hi! DiagnosticInfo  guifg=#7cc6f4 ctermbg=none
 hi! DiagnosticHint  guifg=#F3FCFE ctermbg=none
+" === Telescope ===
+hi! TelescopeBorder   guifg=Grey35
+hi! TelescopeMatching guifg=Yellow guibg=Red
+hi! TelescopePromptCounter guifg=Yellow

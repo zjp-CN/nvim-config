@@ -58,7 +58,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make
 -- rust-tools 设置
 -- https://github.com/simrat39/rust-tools.nvim#configuration
 -- Update this path
-local extension_path = '/download/codelldb/extension/'
+local extension_path = '/rust/codelldb/extension/'
 local codelldb_path = extension_path .. 'adapter/codelldb'
 local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 
@@ -89,7 +89,8 @@ local opts = {
             ["rust-analyzer"] = {
                 -- enable clippy on save
                 checkOnSave = {
-                    command = "clippy"
+                    enable = true,
+                    command = "clippy",
                 },
                 -- cargo = {
                 --     features = {"use_tokio"},
@@ -187,6 +188,7 @@ cmp.setup({
 
   -- Installed sources
   sources = {
+    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
     { name = 'vsnip'    },
     { name = 'path'     },
@@ -211,7 +213,10 @@ cmp.setup({
 
 -- cmp-cmdline 在底部命令栏支持补全提示
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+cmp.setup.cmdline('/', {
+    sources = { { name = 'buffer' } },
+    mapping = cmp.mapping.preset.cmdline(),
+})
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline(':', {
 --   sources = cmp.config.sources(
@@ -240,11 +245,12 @@ let g:vsnip_snippet_dir = expand(stdpath('config')) . '/settings/vsnip'
 " Jump forward or backward
 imap <expr> <C-l> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
 smap <expr> <C-l> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
-imap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
-smap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-c>'
+" imap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : ''
+" smap <expr> <Tab> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : ''
 " 这个不能设置成 <C-m>，可能与 cmp 冲突（仅对我个人的配置而言）
 imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-c>'
 smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-c>'
+
 
 " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
 " See https://github.com/hrsh7th/vim-vsnip/pull/50
@@ -317,10 +323,16 @@ nnoremap <silent> [d :Lspsaga diagnostic_jump_prev<CR>
 
 lua << EOF
 require('telescope').setup{
-  pickers = {
-    grep_string = { theme = "dropdown", },
-    diagnostics = { theme = "dropdown", },
+  defaults = {
+    layout_strategy = 'vertical',
+    layout_config = {
+      vertical = { width = 0.95, height = 0.95, prompt_position = 'top' }
+    },
   },
+  --pickers = {
+  --  grep_string = { theme = "dropdown", },
+  --  diagnostics = { theme = "dropdown", },
+  --},
 }
 EOF
 
