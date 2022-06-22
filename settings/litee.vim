@@ -73,7 +73,7 @@ local icon_set_custom = {
 
 require('litee.lib').setup{
   --tree = { icon_set_custom = { Struct = "s" }, icon_set = "codicons" } 
-  tree = { icon_set_custom = {Function="f"} } 
+  tree = { icon_set_custom = icon_set_custom } 
   -- tree = { icon_set = "codicons" }
 }
 local setup = {
@@ -86,16 +86,13 @@ require('litee.calltree').setup(setup)
 require('litee.symboltree').setup({
   map_resize_keys = false,
   hide_cursor = true,
-  icon_set_custom = {Function = "f-sym", File = "File"},
+  icon_set_custom = icon_set_custom,
   -- icon_set = "codicons",
 })
 require'litee.filetree'.setup{
   map_resize_keys = false,
   use_web_devicons = false,
   icon_set_custom = {dir = "dir:", folder = "folder:", file = "file:"}, -- Provide icons you want.
-  -- You don't need the following line if you want a default icon_set
-  -- to be merged.
-  icon_set = "codicons",
 }
 
 EOF

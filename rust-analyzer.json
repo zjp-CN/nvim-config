@@ -1,0 +1,14 @@
+{
+    "checkOnSave": {
+        "enable": true,
+        "command": "clippy"
+    },
+    "workspace": {
+        "symbol": {
+            "search": {
+                "kind": "all_symbols",
+                "limit": 2000
+            }
+        }
+    }
+}

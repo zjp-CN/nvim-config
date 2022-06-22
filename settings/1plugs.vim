@@ -35,11 +35,17 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'Canop/nvim-bacon'
 
+Plug 'folke/which-key.nvim'
+
 " Fuzzy finder
 " Optional
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+" Telescope plugins
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " Plug 'glepnir/lspsaga.nvim'
 Plug 'tami5/lspsaga.nvim'
@@ -67,11 +73,16 @@ Plug 'ldelossa/litee-filetree.nvim'
 
 " 右侧阅读进度滚动条
 " Plug 'Xuyuanp/scrollbar.nvim'
+Plug 'petertriho/nvim-scrollbar'
+
+Plug 'kevinhwang91/nvim-hlslens'
 
 Plug 'liuchengxu/vista.vim'
 Plug 'rust-lang/rust.vim'
 
 Plug 'saecki/crates.nvim'
+
+Plug 'sindrets/diffview.nvim'
 
 " debug
 Plug 'mfussenegger/nvim-dap'

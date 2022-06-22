@@ -49,7 +49,7 @@ endfunction
 autocmd Filetype rust set foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//' | set foldtext=CustomFoldText()
 
 " keymap
-autocmd FileType rust nnoremap <space>f <cmd>lua vim.lsp.buf.signature_help()<cr> 
+" autocmd FileType rust nnoremap <space>f <cmd>lua vim.lsp.buf.signature_help()<cr>
 autocmd FileType rust nnoremap <silent> <C-s> :LspStop<cr> 
 autocmd FileType rust nnoremap <silent> <M-s> :LspStart<cr> 
 autocmd Filetype rust nnoremap <F6> :RustExpandMacro<CR> | nnoremap <F5> :RustHoverActions<CR>
@@ -181,8 +181,13 @@ autocmd FileType rust noremap  <silent> <F8>       <Cmd>lua require'dap'.continu
 autocmd FileType rust noremap  <silent> <F9>       <Cmd>lua require'dap'.toggle_breakpoint()<CR>
 " autocmd FileType rust noremap  <silent> <F10>      <Cmd>lua require'dap'.step_over()<CR>
 autocmd FileType rust noremap  <silent> <F12>      <Cmd>lua require'dap'.run_to_cursor()<CR>
+" Requests the debugee to step into a function or method if possible.
+" If it cannot step into a function or method it behaves like `dap.step_over()`.
 autocmd FileType rust noremap  <space>i <Cmd>lua require'dap'.step_into()<CR>
-autocmd FileType rust noremap  <space>o <Cmd>lua require'dap'.step_over()<CR>
+" step_next: Requests the debugee to run again for one step.
+autocmd FileType rust noremap  <space>n <Cmd>lua require'dap'.step_over()<CR>
+" finish: Requests the debugee to step out of a function or method if possible.
+autocmd FileType rust noremap  <space>o <Cmd>lua require'dap'.step_out()<CR>
 " autocmd FileType rust noremap  <space>o <Cmd>lua require'dap'.step_out()<CR>
 autocmd FileType rust noremap  <silent> <leader>dr <Cmd>lua require'dap'.repl.toggle()<CR>
 autocmd FileType rust noremap  <silent> <leader>dc <Cmd>lua require'dap'.terminate()<CR>
@@ -192,6 +197,9 @@ autocmd FileType rust nnoremap <silent> <leader>dt <Cmd>lua require"dapui".toggl
 " https://github.com/rcarriga/nvim-dap-ui
 " For a one time expression evaluation, you can call a hover window to show a value
 autocmd FileType rust noremap <C-k> <Cmd>lua require("dapui").eval()<CR>
-autocmd FileType rust noremap <M-k> <Cmd>lua require("dapui").float_element()<CR>
+" autocmd FileType rust noremap <M-k> <Cmd>lua require("dapui").float_element()<CR>
+autocmd FileType rust nnoremap <space>k <cmd>lua require("dapui").float_element()<cr>
 
 
+autocmd FileType rust nnoremap <space>f :Telescope lsp_workspace_symbols<cr>
+autocmd FileType rust nnoremap <space>d :Lspsaga preview_definition<cr>

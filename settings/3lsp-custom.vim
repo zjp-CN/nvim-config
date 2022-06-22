@@ -1,6 +1,20 @@
 " lspconfig 设置 
 " https://github.com/neovim/nvim-lspconfig
 lua << EOF
+
+local function json_file(path)
+	local file = io.open(path, "rb")
+	if not file then
+		return {}
+	end
+	local content = file:read("*a")
+	file:close()
+	return vim.json.decode(content) or {}
+end
+
+local config_home = os.getenv("XDG_CONFIG_HOME") or (os.getenv("HOME") .. "/.config")
+local user_ra_config = json_file(config_home .. "/nvim/rust-analyzer.json")
+
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
@@ -86,16 +100,17 @@ local opts = {
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                -- enable clippy on save
-                checkOnSave = {
-                    enable = true,
-                    command = "clippy",
-                },
-                -- cargo = {
-                --     features = {"use_tokio"},
-                -- },
-            }
+            ["rust-analyzer"] = user_ra_config,
+            --["rust-analyzer"] = {
+            --    -- enable clippy on save
+            --    checkOnSave = {
+            --        enable = true,
+            --        command = "clippy",
+            --    },
+            --    -- cargo = {
+            --    --     features = {"use_tokio"},
+            --    -- },
+            --}
         },
 
         standalone = true,
@@ -213,16 +228,19 @@ cmp.setup({
 
 -- cmp-cmdline 在底部命令栏支持补全提示
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-    sources = { { name = 'buffer' } },
-    mapping = cmp.mapping.preset.cmdline(),
+require'cmp'.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
+
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(':', {
---   sources = cmp.config.sources(
---     { { name = 'path' } },
---     { { name = 'cmdline'} })
--- })
+--require'cmp'.setup.cmdline(':', {
+--  sources = {
+--    { name = 'cmdline' }
+--  }
+--})
 
 -- The following example advertise capabilities to `rust_analyzer-standalone`.
 -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -322,7 +340,8 @@ nnoremap <silent> [d :Lspsaga diagnostic_jump_prev<CR>
 
 
 lua << EOF
-require('telescope').setup{
+local tele = require('telescope')
+tele.setup{
   defaults = {
     layout_strategy = 'vertical',
     layout_config = {
@@ -333,7 +352,21 @@ require('telescope').setup{
   --  grep_string = { theme = "dropdown", },
   --  diagnostics = { theme = "dropdown", },
   --},
+  extensions = {
+   ["ui-select"] = {
+     require("telescope.themes").get_dropdown {
+     -- even more opts
+   },
+   file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+    },
+   }
+  }
 }
+tele.load_extension"ui-select"
+tele.load_extension"file_browser"
 EOF
 
 " === nvim-autopairs ===

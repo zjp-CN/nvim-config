@@ -63,3 +63,50 @@ let g:vista_sidebar_open_cmd = '10split'
 let g:vista_cursor_delay = 250
 let g:vista_echo_cursor_strategy = 'floating_win'
 nnoremap <leader>v :Vista!!<CR>
+
+set timeoutlen=500
+lua << EOF
+require("which-key").setup {
+  window = {
+    border = "single", -- none, single, double, shadow
+    position = "bottom", -- bottom, top
+    margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
+    padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
+    winblend = 0
+  },
+}
+EOF
+
+lua << EOF
+-- hlslens
+local kopts = {noremap = true, silent = true}
+
+vim.api.nvim_set_keymap('n', 'n',
+    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    kopts)
+vim.api.nvim_set_keymap('n', 'N',
+    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    kopts)
+vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
+-- scrollbar
+require("scrollbar").setup{
+    handle = {
+        text = "  ",
+    },
+    marks = {
+        Search = { color = "yellow", text = { "──", "━━" } },
+        Error =  { color = "red",    text = { "──", "━━" } },
+        Warn =   { color = "orange", text = { "──", "━━" } },
+        Info =   { color = "white",  text = { "──", "━━" } },
+        Hint =   { color = "white",  text = { "──", "━━" } },
+        Misc =   { color = "white",  text = { "──", "━━" } },
+    },
+}
+require("scrollbar.handlers.search").setup()
+EOF
+
