@@ -14,7 +14,7 @@ autocmd('BufWritePost', {
   pattern = '*',
   callback = function()
     if vim.fn.filereadable './book.toml' then
-        vim.cmd [[
+      vim.cmd [[
           echohl Title | echon ' mdbook build' | echohl None
           silent !mdbook build
         ]]
