@@ -5,13 +5,13 @@
     :'<,'>s/\vcommand! (.{-}) (.*)/new_cmd('\1', '\2', { bang = true })
 --]]
 
-local set = vim.opt
+local set     = vim.opt
 local new_cmd = vim.api.nvim_create_user_command
-local bind = function(mode, key, result)
+local bind    = function(mode, key, result)
   vim.keymap.set(mode, key, result, { silent = true })
 end
 
--- Leader
+-- Leader: `\`
 vim.g.mapleader = [[\]]
 
 -- F2 触发 paste 模式开关
@@ -40,10 +40,6 @@ bind('n', '<leader>dd', ':bp<bar>sp<bar>bn<bar>bd<CR>')
 bind('n', '<leader>bs', ':buffers<CR>')
 -- 跳转 tabs
 bind('n', '<leader>tb', ':tabnew<CR>')
-bind('n', '<leader>tc', ':tabclose<CR>')
-bind('n', '<leader>n', ':tabNext<CR>')
-bind('n', '<leader>p', ':tabprevious<CR>')
-
 
 -- 保存、退出
 bind('n', '<leader>w', ':w<CR>')
@@ -68,8 +64,8 @@ new_cmd('E', 'edit', { bang = true })
 
 -- 配置文件
 bind('n', '<leader>ec', function()
-    local path = vim.fn.stdpath('config') .. '/lua'
-    vim.api.nvim_command('split ' .. path)
+  local path = vim.fn.stdpath('config') .. '/lua'
+  vim.api.nvim_command('split ' .. path)
 end)
 bind('n', '<leader>sc', ':source %<cr>')
 
@@ -101,3 +97,50 @@ bind('n', '<c-w>[', ':vertical resize -5<cr>')
 bind('n', '<c-w>]', ':vertical resize +5<cr>')
 bind('n', '<c-w>-', ':resize -5<cr>')
 bind('n', '<c-w>+', ':resize +5<cr>')
+
+-- ========================================================================== --
+-- ==                                 LSP                                  == --
+-- ========================================================================== --
+
+local augroup = vim.api.nvim_create_augroup('mapping_cmds', { clear = true })
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd('User', {
+  pattern = 'LSPKeybindings',
+  group = augroup,
+  callback = function()
+    local telescope = require('telescope.builtin')
+    local lsp = vim.lsp.buf
+    local bind = vim.keymap.set
+    local opts = { silent = true, buffer = true }
+
+  end
+})
+
+-- ========================================================================== --
+-- ==                                Lspsaga                                  == --
+-- ========================================================================== --
+
+autocmd('User', {
+  pattern = 'LSPSageKeybindings',
+  group = augroup,
+  callback = function()
+    bind('n', 'gr', ":Lspsaga lsp_finder<CR>")
+    bind('n', '<leader>a', ":Lspsaga code_action<CR>")
+    bind('v', '<leader>a', ':<C-U>Lspsaga range_code_action<CR>')
+    bind('n', 'K', ":Lspsaga hover_doc<CR>")
+    bind('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
+    bind('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
+    bind('n', 'gs', ":Lspsaga signature_help<CR>")
+    bind('n', '<leader>rn', ":Lspsaga rename<CR>")
+    bind('n', '<space>d', ":Lspsaga preview_definition<CR>")
+    bind('n', ';l', ":Lspsaga show_line_diagnostics<CR>")
+    bind('n', ';c', "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>")
+    bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
+    bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
+  end
+})
+
+local M = {}
+M.bind = bind
+return M
