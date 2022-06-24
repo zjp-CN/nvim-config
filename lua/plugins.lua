@@ -32,11 +32,12 @@ local packer = require 'packer'.startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp-signature-help'
 
   -- Rust
-  --use 'rust-lang/rust.vim'
+  use 'rust-lang/rust.vim'
   use 'simrat39/rust-tools.nvim'
   use 'Canop/nvim-bacon'
   use 'saecki/crates.nvim'
 
+  -- Debug
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
 
