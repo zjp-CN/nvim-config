@@ -109,11 +109,12 @@ autocmd('User', {
   pattern = 'LSPKeybindings',
   group = augroup,
   callback = function()
-    local telescope = require('telescope.builtin')
-    local lsp = vim.lsp.buf
-    local bind = vim.keymap.set
-    local opts = { silent = true, buffer = true }
-
+    -- local telescope = require('telescope.builtin')
+    -- local lsp = vim.lsp.buf
+    -- local bind = vim.keymap.set
+    -- local opts = { silent = true, buffer = true }
+    bind('n', '<C-s>', ":LspStop<cr> ")
+    bind('n', '<M-s>', ":LspStart<cr> ")
   end
 })
 
@@ -138,9 +139,19 @@ autocmd('User', {
     bind('n', ';c', "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>")
     bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
     bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
+    bind('n', '<space>f', ":Telescope lsp_workspace_symbols<cr>")
+    bind('n', '<space>d', ":Lspsaga preview_definition<cr>")
   end
 })
 
 local M = {}
 M.bind = bind
+M.augroup = augroup
+M.autocmd = function(pat, callback)
+  autocmd('User', {
+    pattern = pat,
+    group = augroup,
+    callback = callback,
+  })
+end
 return M

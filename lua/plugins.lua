@@ -53,7 +53,6 @@ local packer = require 'packer'.startup(function(use)
   use 'tpope/vim-surround'
   use 'junegunn/vim-easy-align'
 
-
   use 'ldelossa/litee.nvim'
   use 'ldelossa/litee-calltree.nvim'
   use 'ldelossa/litee-symboltree.nvim'
@@ -67,11 +66,11 @@ local packer = require 'packer'.startup(function(use)
   use 'mg979/vim-visual-multi'
   use 'rhysd/clever-f.vim'
   use 'azabiong/vim-highlighter'
-end)
 
--- local plugins_path = fn.glob(fn.stdpath'config' .. '/lua/plugins/*lua', '\n')
--- for _, path in ipairs(vim.split(plugins_path, '\n')) do
---   require(path:match'.*/(plugins/.*).lua')
--- end
+  -- TODO
+  use 'j-hui/fidget.nvim'
+  use 'kevinhwang91/nvim-ufo'
+  use 'rafcamlet/nvim-luapad'
+end)
 
 return packer

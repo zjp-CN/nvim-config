@@ -13,3 +13,5 @@ set noequalalways
 ]]
 
 bind('n', '<leader>ct', ":RustOpenCargo<CR>")
+bind('n', '<F6>', ":RustExpandMacro<CR>")
+bind('n', '<F5>', ":RustHoverActions<CR>")
