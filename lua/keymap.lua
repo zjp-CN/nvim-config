@@ -111,7 +111,7 @@ autocmd('User', {
   callback = function()
     bind('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
     bind('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>')
-    bind('n', 'gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
+    bind('n', '<leader>gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
 
     bind('n', '<space>f', ":Telescope lsp_workspace_symbols<cr>")
     bind('n', '<C-s>', ":LspStop<cr> ")
@@ -146,10 +146,6 @@ local M = {}
 M.bind = bind
 M.augroup = augroup
 M.autocmd = function(pat, callback)
-  autocmd('User', {
-    pattern = pat,
-    group = augroup,
-    callback = callback,
-  })
+  autocmd('User', { pattern = pat, group = augroup, callback = callback, })
 end
 return M
