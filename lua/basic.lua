@@ -28,14 +28,3 @@ autocmd BufReadPost *
     \   exe "normal! g`\"" |
     \ endif
 ]]
-
--- 查找并加载 ~/.config/nvim/lua/xxx 文件夹下的所有 lua 脚本（如果没有文件会报错）
-local function load_in_path(dir)
-  local plugins_path = fn.glob(fn.stdpath 'config' .. '/lua/' .. dir .. '/*lua', '\n')
-  for _, path in ipairs(vim.split(plugins_path, '\n')) do
-    local pat = '.*/(' .. dir .. '/.*).lua'
-    require(path:match(pat))
-  end
-end
-
-load_in_path 'plugins'
