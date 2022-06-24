@@ -15,7 +15,6 @@ local packer = require 'packer'.startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'tami5/lspsaga.nvim'
   use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
@@ -40,6 +39,10 @@ local packer = require 'packer'.startup(function(use)
   -- Debug
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
+
+  -- TreeSitter
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/playground'
 
   -- Misc
   use 'folke/which-key.nvim'
