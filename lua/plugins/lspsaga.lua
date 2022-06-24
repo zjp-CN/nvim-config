@@ -11,7 +11,7 @@ saga.init_lsp_saga {
   code_action_icon = '',
   finder_definition_icon = '',
   finder_reference_icon = '',
-  max_preview_lines = 40, -- preview lines of lsp_finder and definition preview
+  max_preview_lines = 30, -- preview lines of lsp_finder and definition preview
   finder_action_keys = {
     open = '<CR>', vsplit = 's', split = 'i',
     quit = '<Esc>', scroll_down = '<C-f>', scroll_up = '<C-b>'

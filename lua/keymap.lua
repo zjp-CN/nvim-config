@@ -109,10 +109,11 @@ autocmd('User', {
   pattern = 'LSPKeybindings',
   group = augroup,
   callback = function()
-    -- local telescope = require('telescope.builtin')
-    -- local lsp = vim.lsp.buf
-    -- local bind = vim.keymap.set
-    -- local opts = { silent = true, buffer = true }
+    bind('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
+    bind('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>')
+    bind('n', 'gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
+
+    bind('n', '<space>f', ":Telescope lsp_workspace_symbols<cr>")
     bind('n', '<C-s>', ":LspStop<cr> ")
     bind('n', '<M-s>', ":LspStart<cr> ")
   end
@@ -126,21 +127,18 @@ autocmd('User', {
   pattern = 'LSPSageKeybindings',
   group = augroup,
   callback = function()
-    bind('n', 'gr', ":Lspsaga lsp_finder<CR>")
-    bind('n', '<leader>a', ":Lspsaga code_action<CR>")
-    bind('v', '<leader>a', ':<C-U>Lspsaga range_code_action<CR>')
-    bind('n', 'K', ":Lspsaga hover_doc<CR>")
-    bind('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
-    bind('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
-    bind('n', 'gs', ":Lspsaga signature_help<CR>")
-    bind('n', '<leader>rn', ":Lspsaga rename<CR>")
-    bind('n', '<space>d', ":Lspsaga preview_definition<CR>")
-    bind('n', ';l', ":Lspsaga show_line_diagnostics<CR>")
     bind('n', ';c', "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>")
-    bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
-    bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
-    bind('n', '<space>f', ":Telescope lsp_workspace_symbols<cr>")
+    bind('n', ';l', ":Lspsaga show_line_diagnostics<CR>")
+    bind('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
+    bind('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
+    bind('n', '<leader>a', ":Lspsaga code_action<CR>")
+    bind('n', '<leader>rn', ":Lspsaga rename<CR>")
     bind('n', '<space>d', ":Lspsaga preview_definition<cr>")
+    bind('n', 'K', ":Lspsaga hover_doc<CR>")
+    bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
+    bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
+    bind('n', 'gr', ":Lspsaga lsp_finder<CR>")
+    bind('v', '<leader>a', ':<C-U>Lspsaga range_code_action<CR>')
   end
 })
 
