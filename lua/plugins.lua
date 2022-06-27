@@ -44,14 +44,17 @@ local packer = require 'packer'.startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
 
+  -- Git
+  use 'lewis6991/gitsigns.nvim'
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+
   -- Misc
   use 'folke/which-key.nvim'
   use 'windwp/nvim-autopairs'
-  use 'lewis6991/gitsigns.nvim'
   use 'petertriho/nvim-scrollbar'
   use 'kevinhwang91/nvim-hlslens'
   use 'liuchengxu/vista.vim'
-  use 'sindrets/diffview.nvim'
   use 'tpope/vim-surround'
   use 'junegunn/vim-easy-align'
 
