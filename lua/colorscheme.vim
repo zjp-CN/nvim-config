@@ -30,13 +30,14 @@ hi  Keyword      guifg=#FFA89A
 hi  Function     guifg=#58D0F2    guibg=none
 hi  Type         guifg=#54F685    gui=bold
 hi  CocHintSign  guifg=#f06292    gui=underline
-hi  Comment      guifg=#80cbc4    guibg=none    gui=italic
+" hi  Comment      guifg=#80cbc4    guibg=none    gui=italic
 hi  InlayHints   guifg=Grey40     guibg=none    gui=italic
 hi  Identifier   gui=none         guifg=#FFFF4D gui=bold
 hi  Macro        guifg=#FD3F3F    gui=bold
 " Delimiter
 hi  Special      guifg=#FFA89A
 hi  String       guifg=#9e9e9e
+hi! link Comment String
 hi  Operator     guifg=#f44336    gui=bold
 hi  LineNr       guifg=Grey70
 hi  Normal       guifg=#F3FCFE    guibg=Black
@@ -64,3 +65,13 @@ hi! TelescopePromptCounter guifg=Yellow
 " === tree-sitter ===
 hi!   Delimiter       guifg=white
 hi!   TSConstructor   guifg=white
+hi link rustModPath String
+hi link TSInclude String
+hi link TSNamespace String
+hi link TSVariableBuiltin String
+hi link rustTSLabel String
+hi link rustTSParameter String
+hi link TSConstant String
+hi rustTrait guifg=#8daef4
+hi rustEnum guifg=#292A00
+
