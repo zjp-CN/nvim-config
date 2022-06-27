@@ -47,8 +47,6 @@ local packer = require 'packer'.startup(function(use)
   -- Misc
   use 'folke/which-key.nvim'
   use 'windwp/nvim-autopairs'
-  use 'nvim-lualine/lualine.nvim'
-  use 'arkav/lualine-lsp-progress'
   use 'lewis6991/gitsigns.nvim'
   use 'petertriho/nvim-scrollbar'
   use 'kevinhwang91/nvim-hlslens'
@@ -71,9 +69,13 @@ local packer = require 'packer'.startup(function(use)
   use 'rhysd/clever-f.vim'
   use 'azabiong/vim-highlighter'
 
-  -- TODO
   use 'j-hui/fidget.nvim'
-  use 'kevinhwang91/nvim-ufo'
+  use 'SmiteshP/nvim-gps'
+  use 'nvim-lualine/lualine.nvim'
+  use 'arkav/lualine-lsp-progress'
+
+  -- TODO
+  use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
   use 'rafcamlet/nvim-luapad'
 end)
 
