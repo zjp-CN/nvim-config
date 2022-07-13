@@ -13,7 +13,7 @@ local packer = require 'packer'.startup(function(use)
 
   -- LSP
   use 'neovim/nvim-lspconfig'
-  use 'tami5/lspsaga.nvim'
+  use 'glepnir/lspsaga.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
@@ -32,7 +32,7 @@ local packer = require 'packer'.startup(function(use)
 
   -- Rust
   use 'rust-lang/rust.vim'
-  use 'simrat39/rust-tools.nvim'
+  use { 'simrat39/rust-tools.nvim', branch = 'modularize_and_inlay_rewrite' }
   use 'Canop/nvim-bacon'
   use 'saecki/crates.nvim'
 
@@ -68,7 +68,7 @@ local packer = require 'packer'.startup(function(use)
   use 'ap/vim-css-color'
   use 'preservim/nerdcommenter'
   use 'dhruvasagar/vim-table-mode'
-  use 'mg979/vim-visual-multi'
+  -- use 'mg979/vim-visual-multi'
   use 'rhysd/clever-f.vim'
   use 'azabiong/vim-highlighter'
 
