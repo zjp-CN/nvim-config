@@ -11,7 +11,7 @@ g.table_mode_corner = '|'
 
 -- 保存时自动运行 mdbook build
 autocmd('BufWritePost', {
-  pattern = '*',
+  pattern = '*.md',
   callback = function()
     if vim.fn.filereadable './book.toml' then
       vim.cmd [[
