@@ -254,6 +254,11 @@ _G.packer_plugins = {
     path = "/root/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["riv.vim"] = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/riv.vim",
+    url = "https://github.com/Rykka/riv.vim"
+  },
   ["rust-tools.nvim"] = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
@@ -263,6 +268,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/rust.vim",
     url = "https://github.com/rust-lang/rust.vim"
+  },
+  sonokai = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/sonokai",
+    url = "https://github.com/sainnhe/sonokai"
   },
   tabular = {
     loaded = true,

@@ -44,13 +44,14 @@ local codelldb_path = extension_path .. 'adapter/codelldb'
 local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 require 'rust-tools'.setup {
   tools = {
-    autoSetHints = true,
+    autoSetHints = false,
     hover_with_actions = true,
     inlay_hints = {
-      show_parameter_hints = true,
+      show_parameter_hints = false,
       parameter_hints_prefix = '// <-',
       other_hints_prefix = '// ',
-      highlight = 'InlayHints',
+      highlight = 'InlayHint',
+      auto = false,
     },
   },
   server = {

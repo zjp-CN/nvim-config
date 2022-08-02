@@ -10,6 +10,7 @@ vim.cmd [[packadd packer.nvim]]
 local packer = require 'packer'.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
+  use 'sainnhe/sonokai'
 
   -- LSP
   use 'neovim/nvim-lspconfig'
@@ -76,6 +77,8 @@ local packer = require 'packer'.startup(function(use)
   use 'SmiteshP/nvim-gps'
   use 'nvim-lualine/lualine.nvim'
   use 'arkav/lualine-lsp-progress'
+
+  use 'Rykka/riv.vim'
 
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
