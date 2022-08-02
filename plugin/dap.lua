@@ -32,29 +32,26 @@ require 'dapui'.setup {
 dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
 dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end
 
-k.autocmd('DAPKeybindings', function()
-  local bind = k.bind
+local bind = k.bind
 
-  -- nvim-dap
-  bind('n', '<F7>', "<Cmd>lua require'dap'.clear_breakpoints()<CR>")
-  bind('n', '<F8>', "<Cmd>lua require'dap'.continue()<CR>")
-  bind('n', '<F9>', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
-  bind('n', '<F12>', "<Cmd>lua require'dap'.run_to_cursor()<CR>")
-  bind('n', '<leader>dr', "<Cmd>lua require'dap'.repl.toggle()<CR>")
-  bind('n', '<leader>dc', "<Cmd>lua require'dap'.terminate()<CR>")
-  bind('n', '<leader>dt', "<Cmd>lua require'dapui'.toggle()<CR>")
+-- nvim-dap
+bind('n', '<F7>', "<Cmd>lua require'dap'.clear_breakpoints()<CR>")
+bind('n', '<F8>', "<Cmd>lua require'dap'.continue()<CR>")
+bind('n', '<F9>', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
+bind('n', '<F12>', "<Cmd>lua require'dap'.run_to_cursor()<CR>")
+bind('n', '<leader>dr', "<Cmd>lua require'dap'.repl.toggle()<CR>")
+bind('n', '<leader>dc', "<Cmd>lua require'dap'.terminate()<CR>")
+bind('n', '<leader>dt', "<Cmd>lua require'dapui'.toggle()<CR>")
 
-  -- Requests the debugee to step into a function or method if possible.
-  -- If it cannot step into a function or method it behaves like `dap.step_over()`.
-  bind('n', '<space>i', "<Cmd>lua require'dap'.step_into()<CR>")
-  -- step_next: Requests the debugee to run again for one step.
-  bind('n', '<space>n', "<Cmd>lua require'dap'.step_over()<CR>")
-  -- finish: Requests the debugee to step out of a function or method if possible.
-  bind('n', '<space>o', "<Cmd>lua require'dap'.step_out()<CR>")
+-- Requests the debugee to step into a function or method if possible.
+-- If it cannot step into a function or method it behaves like `dap.step_over()`.
+bind('n', '<space>i', "<Cmd>lua require'dap'.step_into()<CR>")
+-- step_next: Requests the debugee to run again for one step.
+bind('n', '<space>n', "<Cmd>lua require'dap'.step_over()<CR>")
+-- finish: Requests the debugee to step out of a function or method if possible.
+bind('n', '<space>o', "<Cmd>lua require'dap'.step_out()<CR>")
 
-  -- nvim-dap-ui
-  -- For a one time expression evaluation, you can call a hover window to show a value
-  bind('<C-k>', "<Cmd>lua require('dapui').eval()<CR>")
-  bind('n', '<space>k', "<cmd>lua require('dapui').float_element()<cr>")
-
-end)
+-- nvim-dap-ui
+-- For a one time expression evaluation, you can call a hover window to show a value
+bind('n', '<C-k>', "<Cmd>lua require('dapui').eval()<CR>")
+bind('n', '<space>k', "<cmd>lua require('dapui').float_element()<cr>")
