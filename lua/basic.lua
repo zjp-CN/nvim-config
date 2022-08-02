@@ -14,12 +14,35 @@ set.linebreak = true
 set.splitright = true
 set.splitbelow = true
 
+-- 多 buffer 只留一个 statusline
+set.laststatus = 3
+
 set.timeoutlen = 500
 
 set.fillchars:append 'diff:╱'
 
 -- colorscheme
-vim.cmd(':source ' .. vim.fn.stdpath 'config' .. '/lua/colorscheme.vim')
+-- vim.cmd(':source ' .. vim.fn.stdpath 'config' .. '/lua/colorscheme.vim')
+-- vim.cmd 'colorscheme slate'
+vim.cmd [[
+let g:sonokai_diagnostic_text_highlight=0
+let g:sonokai_diagnostic_virtual_text=0
+
+function! s:sonokai_custom() abort
+  hi! DiagnosticError guifg=Red     ctermbg=none
+  hi! DiagnosticWarn  guifg=Yellow  ctermbg=none
+  hi! DiagnosticInfo  guifg=#7cc6f4 ctermbg=none
+  hi! DiagnosticHint  guifg=grey ctermbg=none
+  hi! InlayHint    guifg=Red ctermbg=none
+endfunction
+
+augroup SonokaiCustom
+  autocmd!
+  autocmd ColorScheme sonokai call s:sonokai_custom()
+augroup END
+
+colorscheme sonokai
+]]
 
 -- 如果没有这个设置，每次打开文件时光标都将定位在第一行。
 -- 而加入了这个设置以后，你就可以恢复到上次关闭文件时光标所在的位置了。
