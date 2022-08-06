@@ -45,7 +45,6 @@ local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 require 'rust-tools'.setup {
   tools = {
     autoSetHints = false,
-    hover_with_actions = true,
     inlay_hints = {
       show_parameter_hints = false,
       parameter_hints_prefix = '// <-',
