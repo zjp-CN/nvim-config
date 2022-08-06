@@ -184,11 +184,6 @@ _G.packer_plugins = {
     path = "/root/.local/share/nvim/site/pack/packer/start/nerdcommenter",
     url = "https://github.com/preservim/nerdcommenter"
   },
-  ["nui.nvim"] = {
-    loaded = true,
-    path = "/root/.local/share/nvim/site/pack/packer/start/nui.nvim",
-    url = "https://github.com/MunifTanjim/nui.nvim"
-  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -233,12 +228,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/nvim-luapad",
     url = "https://github.com/rafcamlet/nvim-luapad"
-  },
-  ["nvim-regexplainer"] = {
-    config = { "\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17regexplainer\frequire\0" },
-    loaded = true,
-    path = "/root/.local/share/nvim/site/pack/packer/start/nvim-regexplainer",
-    url = "https://github.com/bennypowers/nvim-regexplainer"
   },
   ["nvim-scrollbar"] = {
     loaded = true,
@@ -358,10 +347,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-regexplainer
-time([[Config for nvim-regexplainer]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17regexplainer\frequire\0", "config", "nvim-regexplainer")
-time([[Config for nvim-regexplainer]], false)
 if should_profile then save_profiles() end
 
 end)

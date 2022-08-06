@@ -85,12 +85,6 @@ local packer = require 'packer'.startup(function(use)
 
   use 'Rykka/riv.vim'
 
-  -- Describe the regular expression under the cursor
-  use { 'bennypowers/nvim-regexplainer',
-    config = function() require 'regexplainer'.setup() end,
-    requires = { 'nvim-treesitter/nvim-treesitter', 'MunifTanjim/nui.nvim' }
-  }
-
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
   use 'rafcamlet/nvim-luapad'
