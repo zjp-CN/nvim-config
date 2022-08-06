@@ -21,6 +21,9 @@ set.timeoutlen = 500
 
 set.fillchars:append 'diff:╱'
 
+-- 禁用鼠标交互（如果不设置，默认为启用）
+set.mouse = ''
+
 -- colorscheme
 -- vim.cmd(':source ' .. vim.fn.stdpath 'config' .. '/lua/colorscheme.vim')
 -- vim.cmd 'colorscheme slate'
