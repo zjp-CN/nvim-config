@@ -11,6 +11,7 @@ local r = ls.restore_node
 local events = require("luasnip.util.events")
 local ai = require("luasnip.nodes.absolute_indexer")
 local fmt = require("luasnip.extras.fmt").fmt
+local extras = require("luasnip.extras")
 local m = require("luasnip.extras").m
 local l = require("luasnip.extras").l
 local postfix = require("luasnip.extras.postfix").postfix
@@ -38,7 +39,7 @@ local function simple_restore(args, _)
   return sn(nil, { i(1, args[1]), i(2, "user_text") })
 end
 
-local function simple_restore(args, _)
+local function simple_restore2(args, _)
   return sn(nil, { i(1, args[1]), r(2, "dyn", i(nil, "user_text")) })
 end
 
@@ -159,7 +160,7 @@ ls.add_snippets("all", {
   }),
   s("rest2", {
     i(1, "preset"), t { "", "" },
-    d(2, simple_restore, 1)
+    d(2, simple_restore2, 1)
   }),
   s("trig_ai", {
     i(1), c(2, {
@@ -179,4 +180,204 @@ ls.add_snippets("all", {
       t "sample_text"
     })
   }),
+
+  -- extras
+  s("extras1", {
+    i(1), t { "", "" }, m(1, "^ABC$", "A")
+  }),
+  s("extras2", {
+    i(1, "INPUT"), t { "", "" }, m(1, l._1:match(l._1:reverse()), "PALINDROME")
+  }),
+  s("extras3", {
+    i(1), t { "", "" }, i(2), t { "", "" },
+    m({ 1, 2 }, l._1:match("^" .. l._2 .. "$"), l._1:gsub("a", "e"))
+  }),
+  s("extras4", { i(1), t { "", "" }, extras.rep(1) }),
+  s("extras5", { extras.partial(os.date, "%Y") }),
+  s("extras6", { i(1, ""), t { "", "" }, extras.nonempty(1, "not empty!", "empty!") }),
+  s("extras7", { i(1), t { "", "" }, extras.dynamic_lambda(2, l._1 .. l._1, 1) }),
 })
+
+ls.add_snippets("all", {
+  -- important! fmt does not return a snippet, it returns a table of nodes.
+  s("example1", fmt("just an {iNode1}", {
+    iNode1 = i(1, "example")
+  })),
+  s("example2", fmt([[
+  if {} then
+    {}
+  end
+  ]], {
+    -- i(1) is at nodes[1], i(2) at nodes[2].
+    i(1, "not now"), i(2, "when")
+  })),
+  s("example3", fmt([[
+  if <> then
+    <>
+  end
+  ]], {
+    -- i(1) is at nodes[1], i(2) at nodes[2].
+    i(1, "not now"), i(2, "when")
+  }, {
+    delimiters = "<>"
+  })),
+})
+
+ls.config.setup {
+  load_ft_func =
+  -- Also load both lua and json when a markdown-file is opened,
+  -- javascript for html.
+  -- Other filetypes just load themselves.
+  require "luasnip.extras.filetype_functions".extend_load_ft {
+    markdown = { "lua", "json" },
+    html = { "javascript" }
+  }
+}
+
+ls.env_namespace("DYN", {
+  vars = { ONE = "1", TWO = { "1", "2" } },
+  multiline_vars = { "TWO" }
+})
+
+local function random_lang()
+  return ({ "LUA", "VIML", "VIML9" })[math.floor(math.random() / 2 + 1.5)]
+end
+
+ls.env_namespace("MY", { vars = { NAME = "LuaSnip", LANG = random_lang } })
+
+-- then you can use  $MY_NAME and $MY_LANG in your snippets
+
+ls.env_namespace("SYS", { vars = os.getenv, eager = { "HOME" } })
+
+-- then you can use  $SYS_HOME which was eagerly initialized but also $SYS_USER (or any other system environment var) in your snippets
+
+ls.env_namespace("POS", { init = function(pos) return { VAL = vim.inspect(pos) } end })
+
+-- then you can use  $POS_VAL in your snippets
+
+ls.add_snippets("all", {
+  ls.parser.parse_snippet({ trig = "lsp" }, "$1 is ${2|hard,easy,challenging|}"),
+  s("selected_text", f(function(args, snip)
+    local res, env = {}, snip.env
+    table.insert(res, "Selected Text (current line is " .. env.TM_LINE_NUMBER .. "):")
+    for _, ele in ipairs(env.SELECT_RAW) do table.insert(res, ele) end
+    return res
+  end, {})),
+
+  s("custom_env", d(1, function(args, parent)
+    local env = parent.snippet.env
+    return sn(nil, t {
+      "NAME: " .. env.MY_NAME,
+      "LANG: " .. env.MY_LANG,
+      "HOME: " .. env.SYS_HOME,
+      "USER: " .. env.SYS_USER,
+      "VAL: " .. env.POS_VAL
+    })
+  end, {})),
+
+  s("dyn_addsnip", d(1, function(args, parent)
+    return sn(nil, {
+      t(parent.snippet.env.DYN_ONE),
+      t "..",
+      t(table.concat(parent.snippet.env.DYN_TWO)),
+      t "..",
+      t(tostring(#parent.snippet.env.DYN_TWO)), -- This one behaves as a table
+      t "..",
+      t(parent.snippet.env.WTF_YEA), -- Unknow vars also work
+    })
+  end, {}))
+})
+
+vim.cmd [[
+vnoremap <c-v>a  "ac<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>
+inoremap <c-v>a  <cmd>lua require('luasnip.extras.otf').on_the_fly("a")<cr>
+]]
+
+require "luasnip".config.setup { store_selection_keys = "<Tab>" }
+local paths = "./luasnippets"
+require "luasnip.loaders.from_vscode".load { paths = paths }
+require "luasnip.loaders.from_snipmate".load { paths = paths }
+require "luasnip.loaders.from_lua".load { paths = paths }
+
+-- require("luasnip.loaders").edit_snippet_files {
+--   format = function(file, source_name)
+--     if source_name == "lua" then return nil
+--     else return file
+--         :gsub("/root/.config/nvim/luasnippets", "$LuaSnip")
+--     end
+--   end
+-- }
+-- require("luasnip.loaders").edit_snippet_files { edit = function(file) vim.cmd("vs|e " .. file) end }
+
+local ext_opts = {
+  -- these ext_opts are applied when the node is active (e.g. it has been
+  -- jumped into, and not out yet).
+  active =
+  -- this is the table actually passed to `nvim_buf_set_extmark`.
+  {
+    -- highlight the text inside the node red.
+    -- hl_group = "Error"
+    virt_text = { { "Active", "Error" } }
+  },
+  -- these ext_opts are applied when the node is not active, but
+  -- the snippet still is.
+  passive = {
+    -- add virtual text on the line of the node, behind all text.
+    virt_text = { { "virtual text!!", "WarningMsg" } }
+  },
+  -- and these are applied when both the node and the snippet are inactive.
+  snippet_passive = {}
+}
+
+ls.add_snippets("all", {
+  s("ext_opt", {
+    i(1, "text1", {
+      node_ext_opts = ext_opts
+    }),
+    t { "", "" },
+    i(2, "text2", {
+      node_ext_opts = ext_opts
+    })
+  }),
+
+  -- s({ trig = "doc(%d)", regTrig = true, }, {
+  --   f(function(args, snip)
+  --     return string.rep("repeatme ", tonumber(snip.captures[1]))
+  --   end, {})
+  -- }),
+  -- s({ trig = "doc(%d)", regTrig = true, docTrig = "2" }, {
+  --   f(function(args, snip)
+  --     return string.rep("repeatme ", tonumber(snip.captures[1]))
+  --   end, {})
+  -- }),
+  -- s({ trig = "doc(%d)", regTrig = true, docstring = "repeatmerepeatmerepeatme" }, {
+  --   f(function(args, snip)
+  --     return string.rep("repeatme ", tonumber(snip.captures[1]))
+  --   end, {})
+  -- }),
+
+})
+
+-- vim.api.nvim_create_autocmd("User", {
+--   pattern = "LuasnipInsertNodeEnter",
+--   callback = function()
+--     local node = require("luasnip").session.event_node
+--     print(table.concat(node:get_text(), "\n"))
+--   end
+-- })
+
+-- vim.api.nvim_create_autocmd("User", {
+--   pattern = "LuasnipPreExpand",
+--   callback = function()
+--     -- get event-parameters from `session`.
+--     local snippet = require("luasnip").session.event_node
+--     local expand_position =
+--     require("luasnip").session.event_args.expand_pos
+
+--     print(string.format("expanding snippet %s at %s:%s",
+--       table.concat(snippet:get_docstring(), "\n"),
+--       expand_position[1],
+--       expand_position[2]
+--     ))
+--   end
+-- })
