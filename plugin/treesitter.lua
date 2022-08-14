@@ -50,6 +50,8 @@ require 'nvim-treesitter.configs'.setup {
 
 -- TODO: 自定义
 vim.cmd [[
+  " 禁用自动折叠
+  set nofoldenable
   set foldmethod=expr
 
   " 第一行源代码 ........... 折叠行数 [折叠行数占总行数百分比] +--
