@@ -65,8 +65,8 @@ api.nvim_create_autocmd(
     group = group,
     callback = function()
       local row, col = unpack(api.nvim_buf_get_mark(0, "\""))
-      if { row, col } ~= { 0, 0 } then
-        api.nvim_win_set_cursor(0, { row, 0 })
+      if row <= vim.fn.line('$') then
+        api.nvim_win_set_cursor(0, { row, col })
       end
     end,
   }
