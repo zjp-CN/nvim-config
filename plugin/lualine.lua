@@ -47,5 +47,6 @@ require 'lualine'.setup {
       -- },
     },
     lualine_x = { 'encoding', 'filetype' },
+    lualine_z = { "vim.fn.line('.') .. '/' .. vim.fn.line('$') .. ':' .. vim.fn.col('.')", },
   }
 }
