@@ -22,7 +22,15 @@ local pfn = s("pfn", {
   t { "", "}", "" },
 })
 
+local tokio_main = [[
+#[tokio::main]
+async fn main() ${1:-> Result<${2:()}> }{
+  ${3:todo!()}
+}
+]]
+
 return {
   parse("pfn_", pfn_),
   pfn,
+  parse("tokio_main", tokio_main),
 }
