@@ -14,11 +14,15 @@ local packer = require 'packer'.startup(function(use)
 
   -- LSP
   use 'neovim/nvim-lspconfig'
-  use 'glepnir/lspsaga.nvim'
+  use { 'glepnir/lspsaga.nvim', branch = "version_2" }
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
+  use {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function() require("lsp_lines").setup() end,
+  }
 
   -- Completion
   use 'hrsh7th/nvim-cmp'

@@ -36,7 +36,11 @@ function! s:sonokai_custom() abort
   hi! DiagnosticWarn  guifg=Yellow  ctermbg=none
   hi! DiagnosticInfo  guifg=#7cc6f4 ctermbg=none
   hi! DiagnosticHint  guifg=grey ctermbg=none
-  hi! InlayHint    guifg=Red ctermbg=none
+  hi! link DiagnosticVirtualTextError DiagnosticError
+  hi! link DiagnosticVirtualTextWarn DiagnosticWarn
+  hi! link DiagnosticVirtualTextInfo DiagnosticInfo
+  hi! link DiagnosticVirtualTextHint DiagnosticHint
+  hi! InlayHint guifg=Red ctermbg=none
 endfunction
 
 augroup SonokaiCustom
