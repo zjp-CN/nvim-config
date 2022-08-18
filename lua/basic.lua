@@ -34,15 +34,7 @@ let g:sonokai_diagnostic_virtual_text=0
 let g:sonokai_disable_terminal_colors=1
 
 function! s:sonokai_custom() abort
-  hi! DiagnosticError guifg=Red     ctermbg=none
-  hi! DiagnosticWarn  guifg=Yellow  ctermbg=none
-  hi! DiagnosticInfo  guifg=#7cc6f4 ctermbg=none
-  hi! DiagnosticHint  guifg=grey ctermbg=none
-  hi! link DiagnosticVirtualTextError DiagnosticError
-  hi! link DiagnosticVirtualTextWarn DiagnosticWarn
-  hi! link DiagnosticVirtualTextInfo DiagnosticInfo
-  hi! link DiagnosticVirtualTextHint DiagnosticHint
-  hi! CocInlayHint    guifg=#88e0c4
+  exec 'source '. stdpath('config') . '/lua/sonokai_custom.vim'
 endfunction
 
 augroup SonokaiCustom

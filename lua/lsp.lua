@@ -35,7 +35,7 @@ local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 require 'rust-tools'.setup {
   tools = {
     inlay_hints = {
-      auto = true,
+      auto = false,
       show_parameter_hints = false,
       parameter_hints_prefix = '// <-',
       other_hints_prefix = '// ',
