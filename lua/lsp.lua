@@ -34,13 +34,12 @@ local codelldb_path = extension_path .. 'adapter/codelldb'
 local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 require 'rust-tools'.setup {
   tools = {
-    autoSetHints = false,
     inlay_hints = {
+      auto = true,
       show_parameter_hints = false,
       parameter_hints_prefix = '// <-',
       other_hints_prefix = '// ',
-      highlight = 'InlayHint',
-      auto = false,
+      highlight = 'CocInlayHint',
     },
   },
   server = {
@@ -54,8 +53,6 @@ require 'rust-tools'.setup {
     adapter = require 'rust-tools.dap'.get_codelldb_adapter(
       codelldb_path, liblldb_path)
   },
-  runnables = { use_telescope = true, },
-  debuggables = { use_telescope = true, },
 }
 
 return M

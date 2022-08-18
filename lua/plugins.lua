@@ -42,7 +42,7 @@ local packer = require 'packer'.startup(function(use)
 
   -- Rust
   use 'rust-lang/rust.vim'
-  use { 'simrat39/rust-tools.nvim', branch = 'modularize_and_inlay_rewrite' }
+  use 'simrat39/rust-tools.nvim'
   use 'Canop/nvim-bacon'
   use 'saecki/crates.nvim'
 

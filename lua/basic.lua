@@ -28,8 +28,10 @@ set.mouse = ''
 -- vim.cmd(':source ' .. vim.fn.stdpath 'config' .. '/lua/colorscheme.vim')
 -- vim.cmd 'colorscheme slate'
 vim.cmd [[
+set termguicolors
 let g:sonokai_diagnostic_text_highlight=0
 let g:sonokai_diagnostic_virtual_text=0
+let g:sonokai_disable_terminal_colors=1
 
 function! s:sonokai_custom() abort
   hi! DiagnosticError guifg=Red     ctermbg=none
@@ -40,7 +42,7 @@ function! s:sonokai_custom() abort
   hi! link DiagnosticVirtualTextWarn DiagnosticWarn
   hi! link DiagnosticVirtualTextInfo DiagnosticInfo
   hi! link DiagnosticVirtualTextHint DiagnosticHint
-  hi! InlayHint guifg=Red ctermbg=none
+  hi! CocInlayHint    guifg=#88e0c4
 endfunction
 
 augroup SonokaiCustom
