@@ -10,6 +10,7 @@ M.on_attach = function(_, bufnr)
   -- lua/keymap.lua
   doautocmd('User', { pattern = 'LSPKeybindings', group = keygroup })
   doautocmd('User', { pattern = 'LSPSageKeybindings', group = keygroup })
+  doautocmd('User', { pattern = 'LSPTelescopeKeybindings', group = keygroup })
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -35,8 +36,9 @@ local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 require 'rust-tools'.setup {
   tools = {
     inlay_hints = {
-      auto = false,
-      show_parameter_hints = false,
+      auto = true,
+      show_parameter_hints = true,
+      right_align = false,
       parameter_hints_prefix = '// <-',
       other_hints_prefix = '// ',
       highlight = 'CocInlayHint',
