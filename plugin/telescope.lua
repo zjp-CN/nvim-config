@@ -18,20 +18,20 @@ tele.load_extension 'ui-select'
 tele.load_extension 'file_browser'
 
 -- general keymap
-bind('n', ',l', ':Telescope live_grep')
-bind('n', ',g', ':Telescope grep_string')
-bind('n', ',f', ':Telescope find_files')
+bind('n', ',l', ':Telescope live_grep<CR>')
+bind('n', ',g', ':Telescope grep_string<CR>')
+bind('n', ',f', ':Telescope find_files<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
   function()
-    bind('n', ',d', ':Telescope diagnostics')
-    bind('n', ',D', ':Telescope lsp_document_symbols')
-    bind('n', ',S', ':Telescope lsp_workspace_symbols')
-    bind('n', ',s', ':Telescope lsp_dynamic_workspace_symbols')
-    bind('n', ',i', ':Telescope lsp_incoming_calls')
-    bind('n', ',o', ':Telescope lsp_outgoing_calls')
-    bind('n', ',t', ':Telescope lsp_type_definitions')
-    bind('n', ',T', ':Telescope lsp_implementations')
+    bind('n', ',d', ':Telescope diagnostics<CR>')
+    bind('n', ',D', ':Telescope lsp_document_symbols<CR>')
+    bind('n', ',S', ':Telescope lsp_workspace_symbols<CR>')
+    bind('n', ',s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
+    bind('n', ',i', ':Telescope lsp_incoming_calls<CR>')
+    bind('n', ',o', ':Telescope lsp_outgoing_calls<CR>')
+    bind('n', ',t', ':Telescope lsp_type_definitions<CR>')
+    bind('n', ',T', ':Telescope lsp_implementations<CR>')
   end
 )
