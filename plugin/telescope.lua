@@ -21,6 +21,9 @@ tele.load_extension 'file_browser'
 bind('n', ',l', ':Telescope live_grep<CR>')
 bind('n', ',g', ':Telescope grep_string<CR>')
 bind('n', ',f', ':Telescope find_files<CR>')
+bind('n', ',F', ':Telescope oldfiles<CR>')
+bind('n', ',h', ':Telescope highlights<CR>')
+bind('n', ',k', ':Telescope keymaps<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
