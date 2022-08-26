@@ -27,3 +27,9 @@ hi! link GitSignsDeleteLnInline DiffviewDiffDelete
 
 " Neogit
 hi! NeogitDiffContextHighlight guibg=#393838
+
+" git-conflict
+hi! GitCurrent  guifg=black guibg=#3E5042
+hi! GitIncoming guifg=black guibg=#1D213E
+
+hi! DiffText guifg=#740B00 guibg=#FFD885 gui=inverse
