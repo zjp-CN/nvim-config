@@ -5,14 +5,27 @@ inoremap <c-s> <cmd>lua require("luasnip.extras.select_choice")()<cr>
 snoremap <c-s> <cmd>lua require("luasnip.extras.select_choice")()<cr>
 ]]
 
-require "luasnip".config.setup { store_selection_keys = "<Tab>" }
+local ls = require 'luasnip'
+local extend_load_ft = require "luasnip.extras.filetype_functions".extend_load_ft
+local from_vscode = require 'luasnip.loaders.from_vscode'
+local from_snipmate = require 'luasnip.loaders.from_snipmate'
+local from_lua = require 'luasnip.loaders.from_lua'
+
+-- extend ft: avoid copying snippets from another ft
+local load_ft_func = extend_load_ft {
+  NeogitCommitMessage = { 'gitcommit' },
+}
+ls.config.setup { store_selection_keys = "<Tab>", load_ft_func = load_ft_func }
+
 local paths = "./luasnippets"
-require "luasnip.loaders.from_vscode".load { paths = paths }
-require "luasnip.loaders.from_snipmate".load { paths = paths }
-require "luasnip.loaders.from_lua".load { paths = paths }
+from_vscode.load { paths = paths }
+from_snipmate.load { paths = paths }
+from_lua.load { paths = paths }
 
 -- https://github.com/rafamadriz/friendly-snippets
-require "luasnip.loaders.from_vscode".load { paths = "/root/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-  exclude = { "all", "global" } }
+from_vscode.load {
+  paths = "/root/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+  exclude = { "all", "global" },
+}
 
 require 'keymap'.bind('n', '<space>s', ':lua require"luasnip.loaders".edit_snippet_files()<CR>')
