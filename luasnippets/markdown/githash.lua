@@ -36,7 +36,8 @@ local githash_main = s("githash_main",
     end
   end, {}))
 
-local githash_branch_fn = f(function(args)
+local hash_branch = f(function(args)
+  print(vim.inspect(args))
   local branch = args[1][1]
   if branch == '' then return '' end
   local hash = shell('git log --format="%h" -n 1 ' .. branch)
@@ -46,23 +47,44 @@ local githash_branch_fn = f(function(args)
     return '#' .. hash
   end
 end, { 1 })
-local githash_branch = s("githash_branch", {
-  i(1), githash_branch_fn
+local master_failed = s("master_failed", {
+  i(1, "master"), hash_branch
+})
+local master_ok = s("master_ok", {
+  i(1, "master"), f(function(args)
+    print(vim.inspect(args))
+    local branch = args[1][1]
+    if branch == '' then return '' end
+    local hash = shell('git log --format="%h" -n 1 ' .. branch)
+    if hash == '' then
+      return ''
+    else
+      return '#' .. hash
+    end
+  end, { 1 })
 })
 
 local branch_dyn = d(1, function()
-  local output  = shell 'git branch --format "%(refname:short)"'
+  local output = shell 'git branch --format "%(refname:short)"'
   local choices = {}
   for branch in output:gmatch("[^ ]+") do
     table.insert(choices, t(branch))
   end
   return sn(nil, c(1, choices))
 end, {})
-local branch = s("branch", branch_dyn)
-local branch_hash = s("branch_hash", {
-  branch_dyn, githash_branch_fn
-})
+local branch_failed = s("branch_failed", branch_dyn)
+local branch_ok = s("branch_ok", d(1, function()
+  local output = shell 'git branch --format "%(refname:short)"'
+  local choices = {}
+  for branch in output:gmatch("[^ ]+") do
+    table.insert(choices, t(branch))
+  end
+  return sn(nil, c(1, choices))
+end, {}))
+
+local branch_hash = s("branch_hash", { branch_dyn, hash_branch })
 
 return {
-  githash, githash_master, githash_main, githash_branch, branch, branch_hash,
+  githash, githash_master, githash_main, master_ok, branch_ok, branch_hash,
+  master_failed, branch_failed,
 }
