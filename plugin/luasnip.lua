@@ -6,16 +6,17 @@ snoremap <c-s> <cmd>lua require("luasnip.extras.select_choice")()<cr>
 ]]
 
 local ls = require 'luasnip'
-local extend_load_ft = require "luasnip.extras.filetype_functions".extend_load_ft
 local from_vscode = require 'luasnip.loaders.from_vscode'
 local from_snipmate = require 'luasnip.loaders.from_snipmate'
 local from_lua = require 'luasnip.loaders.from_lua'
 
--- extend ft: avoid copying snippets from another ft
-local load_ft_func = extend_load_ft {
-  NeogitCommitMessage = { 'gitcommit' },
-}
-ls.config.setup { store_selection_keys = "<Tab>", load_ft_func = load_ft_func }
+ls.setup({
+  ft_func = require("luasnip.extras.filetype_functions").from_pos_or_filetype,
+  load_ft_func = require("luasnip.extras.filetype_functions").extend_load_ft({
+    markdown = { "lua", "rust" }
+  })
+})
+ls.config.setup { store_selection_keys = "<Tab>" }
 
 local paths = "./luasnippets"
 from_vscode.load { paths = paths }
@@ -28,4 +29,8 @@ from_vscode.load {
   exclude = { "all", "global" },
 }
 
-require 'keymap'.bind('n', '<space>s', ':lua require"luasnip.loaders".edit_snippet_files()<CR>')
+-- extend ft: avoid copying snippets from another ft
+ls.filetype_extend("NeogitCommitMessage", { "gitcommit" })
+
+require 'keymap'.bind('n', '<space>s',
+  ':lua require"luasnip.loaders".edit_snippet_files{ edit = function(file) vim.cmd("vs | e " .. file) end }<CR>')
