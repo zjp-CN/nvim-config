@@ -38,7 +38,10 @@ local highlight = {
 
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { 'python', 'lua', 'rust', 'query' },
+  ensure_installed = {
+    'python', 'lua', 'rust', 'query', 'markdown', 'toml',
+    'css', 'html', 'bash', 'javascript', 'json', 'vim', 'c', 'cpp', 'cmake', 'llvm',
+  },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
