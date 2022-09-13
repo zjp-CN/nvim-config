@@ -14,7 +14,7 @@ local packer = require 'packer'.startup(function(use)
 
   -- LSP
   use 'neovim/nvim-lspconfig'
-  use { 'glepnir/lspsaga.nvim', branch = "version_2" }
+  use 'glepnir/lspsaga.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
@@ -23,6 +23,7 @@ local packer = require 'packer'.startup(function(use)
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function() require("lsp_lines").setup() end,
   }
+  -- use 'lvimuser/lsp-inlayhints.nvim'
 
   -- Completion
   use 'hrsh7th/nvim-cmp'
@@ -58,6 +59,7 @@ local packer = require 'packer'.startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use { 'akinsho/git-conflict.nvim', tag = "*", }
 
   -- Misc
   use 'folke/which-key.nvim'
@@ -69,6 +71,7 @@ local packer = require 'packer'.startup(function(use)
   use 'junegunn/vim-easy-align'
 
   use 'ldelossa/litee.nvim'
+  -- use '/root/.local/share/nvim/site/pack/packer/start/litee.nvim'
   use 'ldelossa/litee-calltree.nvim'
   use 'ldelossa/litee-symboltree.nvim'
   use 'ldelossa/litee-filetree.nvim'
@@ -92,6 +95,10 @@ local packer = require 'packer'.startup(function(use)
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
   use 'rafcamlet/nvim-luapad'
+
+  -- local
+  use '/rust/github/moonshine.nvim'
+  use '/rust/github/vim-tips-wiki'
 end)
 
 return packer
