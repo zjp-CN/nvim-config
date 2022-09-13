@@ -64,8 +64,8 @@ new_cmd('E', 'edit', { bang = true })
 
 -- 配置文件
 bind('n', '<leader>ec', function()
-  local path = vim.fn.stdpath('config') .. '/lua'
-  vim.api.nvim_command('split ' .. path)
+  local path = vim.fn.stdpath('config')
+  vim.api.nvim_command('vsplit ' .. path)
 end)
 bind('n', '<leader>sc', ':source %<cr>')
 
@@ -129,8 +129,6 @@ autocmd('User', {
   callback = function()
     bind('n', ';c', "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>")
     bind('n', ';l', ":Lspsaga show_line_diagnostics<CR>")
-    bind('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
-    bind('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
     bind('n', '<leader>a', ":Lspsaga code_action<CR>")
     bind('n', '<leader>rn', ":Lspsaga rename<CR>")
     bind('n', '<space>d', ":Lspsaga preview_definition<cr>")
