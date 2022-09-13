@@ -33,14 +33,14 @@ local highlight = {
   -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
   -- Using this option may slow down your editor, and you may see some duplicate highlights.
   -- Instead of true it can also be a list of languages
-  additional_vim_regex_highlighting = false,
+  additional_vim_regex_highlighting = { 'markdown', 'toml', 'vim' },
 }
 
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
-    'python', 'lua', 'rust', 'query', 'markdown', 'toml',
-    'css', 'html', 'bash', 'javascript', 'json', 'vim', 'c', 'cpp', 'cmake', 'llvm',
+    'python', 'lua', 'rust', 'query',
+    'css', 'html', 'bash', 'javascript', 'json', 'c', 'cpp', 'cmake', 'llvm',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
