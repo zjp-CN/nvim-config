@@ -44,6 +44,7 @@ local packer = require 'packer'.startup(function(use)
   -- Rust
   use 'rust-lang/rust.vim'
   use 'simrat39/rust-tools.nvim'
+  use 'simrat39/symbols-outline.nvim'
   use 'Canop/nvim-bacon'
   use 'saecki/crates.nvim'
 
@@ -69,12 +70,6 @@ local packer = require 'packer'.startup(function(use)
   use 'liuchengxu/vista.vim'
   use 'tpope/vim-surround'
   use 'junegunn/vim-easy-align'
-
-  use 'ldelossa/litee.nvim'
-  -- use '/root/.local/share/nvim/site/pack/packer/start/litee.nvim'
-  use 'ldelossa/litee-calltree.nvim'
-  use 'ldelossa/litee-symboltree.nvim'
-  use 'ldelossa/litee-filetree.nvim'
 
   use 'godlygeek/tabular'
   use 'plasticboy/vim-markdown'

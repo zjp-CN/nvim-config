@@ -110,17 +110,21 @@ autocmd('User', {
   group = augroup,
   callback = function()
     bind('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
+    bind('n', 'vgd', ':vs | lua vim.lsp.buf.definition()<CR>')
+    bind('n', 'vGD', ':sp | lua vim.lsp.buf.definition()<CR>')
     bind('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>')
     bind('n', '<leader>gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
 
-    bind('n', '<space>f', ":Telescope lsp_workspace_symbols<cr>")
+    -- bind('n', '<space>f', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>')
+    bind('n', '<space>f', ':SymbolsOutline<CR>') -- symbols-outline.nvim
+
     bind('n', '<C-s>', ":LspStop<cr> ")
     bind('n', '<M-s>', ":LspStart<cr> ")
   end
 })
 
 -- ========================================================================== --
--- ==                                Lspsaga                                  == --
+-- ==                                Lspsaga                               == --
 -- ========================================================================== --
 
 autocmd('User', {
@@ -131,7 +135,7 @@ autocmd('User', {
     bind('n', ';l', ":Lspsaga show_line_diagnostics<CR>")
     bind('n', '<leader>a', ":Lspsaga code_action<CR>")
     bind('n', '<leader>rn', ":Lspsaga rename<CR>")
-    bind('n', '<space>d', ":Lspsaga preview_definition<cr>")
+    bind('n', '<space>d', ":Lspsaga peek_definition<cr>")
     bind('n', 'K', ":Lspsaga hover_doc<CR>")
     bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
     bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
