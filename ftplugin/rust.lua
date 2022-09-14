@@ -5,6 +5,7 @@ local bind = require 'keymap'.bind
 g.rustfmt_autosave = 1
 
 vim.cmd [[
+set foldenable
 " quickfix
 compiler cargo
 " bacon
