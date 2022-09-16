@@ -200,6 +200,11 @@ _G.packer_plugins = {
     path = "/root/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
   ["nvim-dap"] = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/nvim-dap",
@@ -288,7 +293,7 @@ _G.packer_plugins = {
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
-    url = "https://github.com/simrat39/symbols-outline.nvim"
+    url = "/root/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
   },
   tabular = {
     loaded = true,
@@ -309,11 +314,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["vim-css-color"] = {
-    loaded = true,
-    path = "/root/.local/share/nvim/site/pack/packer/start/vim-css-color",
-    url = "https://github.com/ap/vim-css-color"
   },
   ["vim-easy-align"] = {
     loaded = true,
