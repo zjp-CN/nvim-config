@@ -73,7 +73,7 @@ local packer = require 'packer'.startup(function(use)
 
   use 'godlygeek/tabular'
   use 'plasticboy/vim-markdown'
-  use 'ap/vim-css-color'
+  use 'norcalli/nvim-colorizer.lua'
   use 'preservim/nerdcommenter'
   use 'dhruvasagar/vim-table-mode'
   -- use 'mg979/vim-visual-multi'
