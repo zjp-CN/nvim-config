@@ -23,6 +23,22 @@ set.fillchars:append 'diff:╱'
 
 -- 禁用鼠标交互（如果不设置，默认为启用 'nvi'）
 set.mouse = ''
+vim.cmd [[
+function! s:NetrwMouseOn()
+  set mouse=nv
+endfunction
+
+function! s:NetrwMouseOff()
+  set mouse=
+endfunction
+
+" enable mouse in netrw
+" src: https://vi.stackexchange.com/questions/29381/how-do-i-enable-mouse-in-netrw-only-terminal-vim
+au FileType netrw,help :call s:NetrwMouseOn()
+au FileType netrw,help au BufEnter <buffer> :call s:NetrwMouseOn() 
+au FileType netrw,help au BufLeave <buffer> :call s:NetrwMouseOff()
+au FileType netrw,help nmap <buffer> <LeftMouse> <LeftMouse> <CR>
+]]
 
 -- colorscheme
 -- vim.cmd(':source ' .. vim.fn.stdpath 'config' .. '/lua/colorscheme.vim')

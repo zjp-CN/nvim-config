@@ -1,19 +1,19 @@
 -- vim.opt.mouse = "nvi"
 -- vim.g.netrw_mousemaps = 1
 
--- src: https://vi.stackexchange.com/questions/29381/how-do-i-enable-mouse-in-netrw-only-terminal-vim
--- enable mouse in netrw
 vim.cmd [[
-function! s:NetrwMouseOn()
-  set mouse=n
+function! s:NetrwMapping()
+  " quit preview, `p` for preview
+  nmap <buffer> P <C-w>z
+  " toggle marking files the op comes from
+  nmap <buffer> <TAB> mf
+  " quit marks on current buffer
+  nmap <buffer> <S-TAB> mF
+  " quit marks on all files
+  nmap <buffer> <space><TAB> mu 
+  " toggle hidden files/dirs
+  nmap <buffer> . gh
 endfunction
 
-function! s:NetrwMouseOff()
-  set mouse=
-endfunction
-
-au FileType netrw :call s:NetrwMouseOn()
-au FileType netrw au BufEnter <buffer> :call s:NetrwMouseOn() 
-au FileType netrw au BufLeave <buffer> :call s:NetrwMouseOff()
-au FileType netrw nmap <buffer> <LeftMouse> <LeftMouse> <CR>
+au filetype netrw call s:NetrwMapping()
 ]]
