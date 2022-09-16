@@ -5,6 +5,6 @@ set.tabstop = 2
 set.shiftwidth = 2
 
 autocmd('BufWritePre', {
-  pattern = '*',
+  pattern = '*.lua',
   command = ':lua vim.lsp.buf.format()',
 })
