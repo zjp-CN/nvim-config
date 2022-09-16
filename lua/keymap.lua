@@ -98,8 +98,14 @@ bind('n', '<c-w>]', ':vertical resize +5<cr>')
 bind('n', '<c-w>-', ':resize -5<cr>')
 bind('n', '<c-w>+', ':resize +5<cr>')
 
+-- set
 bind('n', '<space>m', ':set mouse=nvi<cr>')
 bind('n', '<space>M', ':set mouse=<cr>')
+bind('n', '<space>w', ':set wrap!<cr>')
+
+-- Netrw
+bind('n', '<space>f', ':Lexplore!<cr>') -- pwd
+bind('n', '<space>F', ':Lexplore! %:p:h<cr>') -- 文件所在的目录
 
 -- ========================================================================== --
 -- ==                                 LSP                                  == --
@@ -118,8 +124,8 @@ autocmd('User', {
     bind('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>')
     bind('n', '<leader>gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
 
-    -- bind('n', '<space>f', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>')
-    bind('n', '<space>f', ':SymbolsOutline<CR>') -- symbols-outline.nvim
+    -- bind('n', '<space>t', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>')
+    bind('n', '<space>t', ':SymbolsOutline<CR>') -- symbols-outline.nvim
 
     bind('n', '<C-s>', ":LspStop<cr> ")
     bind('n', '<M-s>', ":LspStart<cr> ")

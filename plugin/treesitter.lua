@@ -20,9 +20,9 @@ local playground = {
 local incremental_selection = {
   enable = true,
   keymaps = {
-    init_selection = "gnn",
-    node_incremental = "gn",
-    node_decremental = "gm",
+    init_selection = "gm",
+    node_incremental = "gm",
+    node_decremental = "gM",
     scope_incremental = "gc",
   },
 }
