@@ -5,15 +5,21 @@ local bind = keymap.bind
 
 -- :h telescope.actions
 local mappings = {
-  i = {
+  i = { -- insert mode
     -- 上翻/下翻历史搜索记录：所有功能共享历史搜索记录
     ["<C-Down>"] = action.cycle_history_next,
     ["<C-Up>"] = action.cycle_history_prev,
   },
-  n = {
+  n = { -- normal mode
     ["t"] = action.toggle_all, -- 反选所有
     ["T"] = action.drop_all, -- 取消所有
     ["d"] = action.delete_buffer,
+    -- `<C-q>` clear + send all to quickfix
+    -- `<A-q>` clear + send the selected to quickfix
+    -- `a` add the selected to quickfix
+    -- `A` add all to quickfix
+    ["a"] = action.add_selected_to_qflist,
+    ["A"] = action.add_to_qflist,
   }
 }
 
@@ -41,8 +47,8 @@ bind('n', ',F', ':Telescope oldfiles<CR>')
 bind('n', ',h', ':Telescope highlights<CR>')
 bind('n', ',k', ':Telescope keymaps<CR>')
 bind('n', ',b', ':Telescope buffers<CR>')
-bind('n', ',q', ':Telescope buffers<CR>')
-bind('n', ',Q', ':Telescope buffers<CR>')
+bind('n', ',q', ':Telescope quickfix<CR>')
+bind('n', ',Q', ':Telescope quickfixhistory<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
