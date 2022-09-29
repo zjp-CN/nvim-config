@@ -22,6 +22,7 @@ bind('', '<F3>', ':noh<CR>')
 
 -- 触发行号 relative number: set number relativenumber
 bind('', '<leader>nb', ':set number! rnu!<CR>')
+bind('', '<leader>NB', ':set number!<CR>')
 
 -- 转换大小写
 bind('n', '<leader>u', 'vgu')
@@ -149,7 +150,7 @@ autocmd('User', {
     bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
     bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
     bind('n', 'gr', ":Lspsaga lsp_finder<CR>")
-    bind('v', '<leader>a', ':<C-U>Lspsaga range_code_action<CR>')
+    bind('v', '<leader>a', ':<C-U>Lspsaga code_action<CR>')
   end
 })
 
