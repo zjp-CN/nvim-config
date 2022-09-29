@@ -14,10 +14,17 @@ local rust_ignore = s("rust_ignore", {
   i(0),
 })
 
+local function dt()
+  return os.date('%Y-%m-%d %H:%M:%S', os.time()) .. ' +0800'
+end
+
+local datetimezone = s("datetimezone", f(dt, {}, {}))
+
 local img_sized = '<img src="${1}" alt="${2}" width="${3}"/>'
 
 return {
   parse("footnote", footnote),
   rust_ignore,
   parse("img_sized", img_sized),
+  datetimezone,
 }
