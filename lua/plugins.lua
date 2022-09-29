@@ -88,6 +88,10 @@ local packer = require 'packer'.startup(function(use)
 
   use 'Rykka/riv.vim'
 
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
+
+
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
   use 'rafcamlet/nvim-luapad'
