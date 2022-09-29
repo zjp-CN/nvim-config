@@ -28,6 +28,7 @@ tele.setup {
     layout_strategy = 'vertical',
     layout_config = { vertical = { width = 0.95, height = 0.95, prompt_position = 'top' } },
     mappings = mappings,
+    history = { path = vim.fn.stdpath 'data' .. '/telescope_history.sqlite3', limit = 100, } -- telescope-smart-history.nvim
   },
   extensions = {
     ['ui-select'] = {
@@ -36,10 +37,8 @@ tele.setup {
     }
   },
 }
-tele.load_extension 'ui-select'
-tele.load_extension 'file_browser'
 
--- general keymap
+-- general keymap: builtin
 bind('n', ',l', ':Telescope live_grep<CR>')
 bind('n', ',g', ':Telescope grep_string<CR>')
 bind('n', ',f', ':Telescope find_files<CR>')
@@ -49,6 +48,10 @@ bind('n', ',k', ':Telescope keymaps<CR>')
 bind('n', ',b', ':Telescope buffers<CR>')
 bind('n', ',q', ':Telescope quickfix<CR>')
 bind('n', ',Q', ':Telescope quickfixhistory<CR>')
+
+-- need extra plugins
+bind('n', ',C', ':Telescope frecency<CR>')
+bind('n', ',c', ':Telescope frecency workspace=CWD<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
