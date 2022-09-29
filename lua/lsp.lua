@@ -1,3 +1,8 @@
+-- run `nvim --cmd ":let g:no_lsp=1"` to disable lsp
+if vim.g.no_lsp then
+  return {}
+end
+
 local M = {}
 local nvim_lsp = require 'lspconfig'
 M.capabilities = require 'cmp_nvim_lsp'.update_capabilities(vim.lsp.protocol.make_client_capabilities())
