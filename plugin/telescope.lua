@@ -41,6 +41,8 @@ bind('n', ',F', ':Telescope oldfiles<CR>')
 bind('n', ',h', ':Telescope highlights<CR>')
 bind('n', ',k', ':Telescope keymaps<CR>')
 bind('n', ',b', ':Telescope buffers<CR>')
+bind('n', ',q', ':Telescope buffers<CR>')
+bind('n', ',Q', ':Telescope buffers<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
