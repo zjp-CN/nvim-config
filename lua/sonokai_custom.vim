@@ -10,8 +10,18 @@ hi! link DiagnosticVirtualTextInfo  DiagnosticInfo
 hi! link DiagnosticVirtualTextHint  DiagnosticHint
 
 hi! CocInlayHint guifg=#2C2648 guibg=#617974 gui=inverse
-hi! TSString     guifg=#9F8B69
-hi! TSFuncMacro  guifg=#9E90C5
+hi! Search       guibg=#FFF093
+
+" Treesitter
+hi! TSString      guifg=#9F8B69
+hi! TSFuncMacro   guifg=#9E90C5
+" Symtols-tree
+hi! SymTSType     guifg=#2A5A9B gui=inverse
+hi! SymTSMethod   guifg=#2A5A9B gui=inverse
+hi! SymTSField    guifg=#617974
+hi! SymTSFunction guifg=#2A5A9B
+hi! SymInterface  guifg=#AA4439 gui=inverse
+hi! SymObj        guifg=#AA4439
 
 " https://paletton.com/#uid=7040V0kL8pLtPDIHlvtORkLT4e+
 hi! link                 DiffDelete    DiffviewDiffDelete
