@@ -3,7 +3,7 @@ local bind = require 'keymap'.bind
 local autocmd = vim.api.nvim_create_autocmd
 
 -- rust.vim 是内置的
-g.rustfmt_autosave = 1
+-- g.rustfmt_autosave = 1
 
 vim.cmd [[
 set foldenable
