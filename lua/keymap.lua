@@ -105,8 +105,8 @@ bind('n', '<space>M', ':set mouse=<cr>')
 bind('n', '<space>w', ':set wrap!<cr>')
 
 -- Netrw
-bind('n', '<space>f', ':Lexplore!<cr>') -- pwd
-bind('n', '<space>F', ':Lexplore! %:p:h<cr>') -- 文件所在的目录
+-- bind('n', '<space>f', ':Lexplore!<cr>') -- pwd
+-- bind('n', '<space>F', ':Lexplore! %:p:h<cr>') -- 文件所在的目录
 
 -- ========================================================================== --
 -- ==                                 LSP                                  == --

@@ -32,8 +32,8 @@ function! s:NetrwMouseOff()
   set mouse=
 endfunction
 
-let g:netrw_keepdir = 0
-let g:netrw_liststyle=3
+let g:netrw_keepdir = 1
+" let g:netrw_liststyle=3
 
 " enable mouse in netrw
 " src: https://vi.stackexchange.com/questions/29381/how-do-i-enable-mouse-in-netrw-only-terminal-vim
