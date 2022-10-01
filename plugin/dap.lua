@@ -45,11 +45,11 @@ bind('n', '<leader>dt', "<Cmd>lua require'dapui'.toggle()<CR>")
 
 -- Requests the debugee to step into a function or method if possible.
 -- If it cannot step into a function or method it behaves like `dap.step_over()`.
-bind('n', '<space>i', "<Cmd>lua require'dap'.step_into()<CR>")
+bind('n', ']i', "<Cmd>lua require'dap'.step_into()<CR>")
 -- step_next: Requests the debugee to run again for one step.
-bind('n', '<space>n', "<Cmd>lua require'dap'.step_over()<CR>")
+bind('n', ']n', "<Cmd>lua require'dap'.step_over()<CR>")
 -- finish: Requests the debugee to step out of a function or method if possible.
-bind('n', '<space>o', "<Cmd>lua require'dap'.step_out()<CR>")
+bind('n', ']o', "<Cmd>lua require'dap'.step_out()<CR>")
 
 -- nvim-dap-ui
 -- For a one time expression evaluation, you can call a hover window to show a value
