@@ -25,15 +25,15 @@ hi! SymObj        guifg=#AA4439
 
 " https://paletton.com/#uid=7040V0kL8pLtPDIHlvtORkLT4e+
 hi! link                 DiffDelete    DiffviewDiffDelete
-hi! GitSignsAddVirtLn    guifg=#009B22 guibg=white gui=inverse
-hi! GitSignsChangeVirtLn guifg=#08298B guibg=white gui=inverse
-hi! GitSignsDeleteVirtLn guifg=#740B00 guibg=white gui=inverse
+hi! GitSignsAddVirtLn    guibg=#009B22
+hi! GitSignsChangeVirtLn guibg=#08298B
+hi! GitSignsDeleteVirtLn guibg=gray guifg=white
 " word_diff
 hi! GitSignsAddInline    guifg=white guibg=#2B803E
 hi! GitSignsChangeInline guifg=white guibg=#2F4073
 hi! GitSignsDeleteInline guifg=white guibg=#AA4439
 " toggle_deleted
-hi! link GitSignsDeleteLnInline DiffviewDiffDelete
+hi! GitSignsDeleteLnInline guibg=#740B00
 
 " Neogit
 hi! NeogitDiffContextHighlight guibg=#393838
