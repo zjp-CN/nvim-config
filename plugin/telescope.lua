@@ -31,10 +31,8 @@ tele.setup {
     history = { path = vim.fn.stdpath 'data' .. '/telescope_history.sqlite3', limit = 100, } -- telescope-smart-history.nvim
   },
   extensions = {
-    ['ui-select'] = {
-      require 'telescope.themes'.get_dropdown {},
-      file_browser = { theme = 'ivy', hijack_netrw = true, },
-    }
+    ['ui-select'] = { require 'telescope.themes'.get_dropdown {}, },
+    -- file_browser = { theme = 'ivy', hijack_netrw = true, },
   },
 }
 
@@ -46,12 +44,15 @@ bind('n', ',F', ':Telescope oldfiles<CR>')
 bind('n', ',h', ':Telescope highlights<CR>')
 bind('n', ',k', ':Telescope keymaps<CR>')
 bind('n', ',b', ':Telescope buffers<CR>')
+bind('n', ',B', ':Telescope current_buffer_fuzzy_find<CR>')
 bind('n', ',q', ':Telescope quickfix<CR>')
 bind('n', ',Q', ':Telescope quickfixhistory<CR>')
 
 -- need extra plugins
 bind('n', ',C', ':Telescope frecency<CR>')
 bind('n', ',c', ':Telescope frecency workspace=CWD<CR>')
+bind('n', '<space>f', ':Telescope file_browser<CR>')
+bind('n', '<space>F', ':lua require"telescope".extensions.file_browser.file_browser{path=vim.fn.expand"%:p:h"}<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
