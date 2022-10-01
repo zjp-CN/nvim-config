@@ -54,7 +54,7 @@ require 'rust-tools'.setup {
     flags = { debounce_text_changes = 150, },
     capabilities = M.capabilities,
     settings = { ['rust-analyzer'] = rust.user_ra_config, },
-    standalone = true,
+    standalone = false, -- :RustStartStandaloneServerForBuffer for manually enabling
   },
   dap = {
     adapter = require 'rust-tools.dap'.get_codelldb_adapter(
