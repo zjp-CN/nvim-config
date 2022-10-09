@@ -28,7 +28,6 @@ require 'nvim-gps'.setup {
     }
   },
 }
-local gps = require 'nvim-gps'
 
 require 'lualine'.setup {
   options = { icons_enabled = false, theme = 'nord' },
@@ -39,7 +38,6 @@ require 'lualine'.setup {
     lualine_c = {
       'diagnostics',
       { 'filename', path = 1 },
-      { gps.get_location, cond = gps.is_available },
       -- { function() return vim.fn['nvim_treesitter#statusline']() end },
       -- { 'lsp_progress',
       --   display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' } },

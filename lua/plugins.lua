@@ -21,6 +21,7 @@ local packer = require 'packer'.startup(function(use)
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function() require("lsp_lines").setup() end,
   }
+  use 'ray-x/lsp_signature.nvim'
   -- use 'lvimuser/lsp-inlayhints.nvim'
 
   -- telescope
@@ -51,7 +52,7 @@ local packer = require 'packer'.startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/cmp-nvim-lsp-signature-help'
+  -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
 
   -- luasnip
   use 'L3MON4D3/LuaSnip'
@@ -99,7 +100,7 @@ local packer = require 'packer'.startup(function(use)
   use 'azabiong/vim-highlighter'
 
   use 'j-hui/fidget.nvim'
-  use 'SmiteshP/nvim-gps'
+  -- use 'SmiteshP/nvim-gps'
   use 'nvim-lualine/lualine.nvim'
   use 'arkav/lualine-lsp-progress'
 

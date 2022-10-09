@@ -20,11 +20,11 @@ cmp.setup {
   }),
   -- Installed sources
   sources = {
-    { name = 'nvim_lsp_signature_help' },
+    -- { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
-    { name = 'buffer', max_item_count = 20, keyword_length = 3,
+    { name = 'buffer', max_item_count = 15, keyword_length = 3,
       option = {
         get_bufnrs = function() return vim.api.nvim_list_bufs() end, -- search words in all buffers
         keyword_pattern = [[\k\+]], -- use the iskeyword option for recognizing words
@@ -34,6 +34,7 @@ cmp.setup {
     -- { name = 'vsnip' },
     -- { name = 'crates' },
   },
+  preselect = cmp.PreselectMode.None,
 }
 
 

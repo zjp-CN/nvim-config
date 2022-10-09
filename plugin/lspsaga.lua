@@ -9,4 +9,5 @@ saga.init_lsp_saga {
   },
   code_action_keys = { quit = "<Esc>", exec = "<CR>" },
   rename_action_quit = '<Esc>',
+  symbol_in_winbar = { enable = false }, -- set winbar=%## %*%#LspSagaWinbarFile#lsp_signature.lua%*
 }
