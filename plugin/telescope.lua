@@ -4,11 +4,13 @@ local keymap = require 'keymap'
 local bind = keymap.bind
 
 -- :h telescope.actions
+-- to_fuzzy_refine 的用法是先 exact search，然后对其结果 fuzzy search
 local mappings = {
   i = { -- insert mode
     -- 上翻/下翻历史搜索记录：所有功能共享历史搜索记录
     ["<C-Down>"] = action.cycle_history_next,
     ["<C-Up>"] = action.cycle_history_prev,
+    ["<C-f>"] = action.to_fuzzy_refine, -- fuzzy search in live_grep
   },
   n = { -- normal mode
     ["t"] = action.toggle_all, -- 反选所有
@@ -20,6 +22,7 @@ local mappings = {
     -- `A` add all to quickfix
     ["a"] = action.add_selected_to_qflist,
     ["A"] = action.add_to_qflist,
+    ["<C-f>"] = action.to_fuzzy_refine, -- fuzzy search in live_grep
   }
 }
 
@@ -42,6 +45,7 @@ bind('n', ',g', ':Telescope grep_string<CR>')
 bind('n', ',f', ':Telescope find_files<CR>')
 bind('n', ',F', ':Telescope oldfiles<CR>')
 bind('n', ',h', ':Telescope highlights<CR>')
+bind('n', ',H', ':Telescope help_tags<CR>')
 bind('n', ',k', ':Telescope keymaps<CR>')
 bind('n', ',b', ':Telescope buffers<CR>')
 bind('n', ',B', ':Telescope current_buffer_fuzzy_find<CR>')
@@ -59,8 +63,8 @@ keymap.autocmd('LSPTelescopeKeybindings',
   function()
     bind('n', ',d', ':Telescope diagnostics<CR>')
     bind('n', ',D', ':Telescope lsp_document_symbols<CR>')
-    bind('n', ',S', ':Telescope lsp_workspace_symbols<CR>')
-    bind('n', ',s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
+    bind('n', ',s', ':Telescope lsp_workspace_symbols<CR>')
+    -- bind('n', ',S', ':Telescope lsp_dynamic_workspace_symbols<CR>')
     bind('n', ',i', ':Telescope lsp_incoming_calls<CR>')
     bind('n', ',o', ':Telescope lsp_outgoing_calls<CR>')
     bind('n', ',t', ':Telescope lsp_type_definitions<CR>')
