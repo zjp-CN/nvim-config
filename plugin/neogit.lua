@@ -3,4 +3,4 @@ require 'neogit'.setup {
 }
 
 local bind = require 'keymap'.bind
-bind('n', '<space>N', ':Neogit<CR>')
+bind('n', '<space>n', ':Neogit<CR>')
