@@ -9,7 +9,7 @@ require "symbols-outline".setup {
     Package = { icon = "Pack", hl = "TSNamespace" },
     Class = { icon = "Class", hl = "SymTSType" },
     Method = { icon = "ƒ", hl = "SymTSMethod" },
-    Property = { icon = "Property", hl = "SymTSMethod" },
+    Property = { icon = "Property", hl = "SymTSField" },
     Field = { icon = "Field", hl = "SymTSField" },
     Constructor = { icon = "Constructor", hl = "TSConstructor" },
     Enum = { icon = "Enum", hl = "SymTSType" },
