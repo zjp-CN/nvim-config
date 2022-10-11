@@ -22,9 +22,25 @@ local datetimezone = s("datetimezone", f(dt, {}, {}))
 
 local img_sized = '<img src="${1}" alt="${2}" width="${3}"/>'
 
+local twinc = [[
+<h3 id="new-$1">
+    <a href="#new-$1">
+        <span class="icon-text">
+            <span class="icon">
+                <i class="fa-solid fa-book"></i>
+            </span>
+            <span>$1</span>
+        </span>
+    </a>
+</h3>
+
+$0
+]]
+
 return {
   parse("footnote", footnote),
   rust_ignore,
   parse("img_sized", img_sized),
   datetimezone,
+  parse("twinc", twinc),
 }
