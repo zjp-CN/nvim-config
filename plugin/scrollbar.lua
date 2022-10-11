@@ -1,4 +1,5 @@
 require "scrollbar".setup {
+  show = false,
   handle = {
     text = " ",
   },
