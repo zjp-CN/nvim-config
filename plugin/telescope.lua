@@ -1,5 +1,6 @@
 local tele = require 'telescope'
 local action = require 'telescope.actions'
+local layout = require "telescope.actions.layout"
 local keymap = require 'keymap'
 local bind = keymap.bind
 
@@ -20,16 +21,21 @@ local mappings = {
     -- `<A-q>` clear + send the selected to quickfix
     -- `a` add the selected to quickfix
     -- `A` add all to quickfix
-    ["a"] = action.add_selected_to_qflist,
-    ["A"] = action.add_to_qflist,
+    ["M-a"] = action.add_selected_to_qflist,
+    ["C-A"] = action.add_to_qflist,
+    ["l"] = layout.cycle_layout_next,
+    ["p"] = layout.toggle_preview,
     ["<C-f>"] = action.to_fuzzy_refine, -- fuzzy search in live_grep
   }
 }
 
 tele.setup {
   defaults = {
-    layout_strategy = 'vertical',
-    layout_config = { vertical = { width = 0.95, height = 0.95, prompt_position = 'top' } },
+    layout_strategy = 'horizontal',
+    layout_config = {
+      vertical = { width = 0.99, height = 0.95, prompt_position = 'top' },
+      horizontal = { width = 0.99, height = 0.95, prompt_position = 'bottom', preview_cutoff = 10 },
+    },
     mappings = mappings,
     history = { path = vim.fn.stdpath 'data' .. '/telescope_history.sqlite3', limit = 100, } -- telescope-smart-history.nvim
   },
@@ -51,6 +57,7 @@ bind('n', ',b', ':Telescope buffers<CR>')
 bind('n', ',B', ':Telescope current_buffer_fuzzy_find<CR>')
 bind('n', ',q', ':Telescope quickfix<CR>')
 bind('n', ',Q', ':Telescope quickfixhistory<CR>')
+bind('n', ',x', ':Telescope commands<CR>')
 
 -- need extra plugins
 bind('n', ',C', ':Telescope frecency<CR>')
