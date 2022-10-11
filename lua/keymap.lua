@@ -111,6 +111,9 @@ bind('n', '<space>w', ':set wrap!<cr>')
 -- quickfix
 bind('n', '<space>c', ':copen<cr>')
 
+-- project
+bind('n', '<space>S', ':mksession! | echom "Session saved!"<cr>')
+
 -- ========================================================================== --
 -- ==                                 LSP                                  == --
 -- ========================================================================== --
@@ -140,6 +143,8 @@ autocmd('User', {
 -- ==                                Lspsaga                               == --
 -- ========================================================================== --
 
+bind('n', '[t', ":Lspsaga open_floaterm<CR>")
+bind('n', ']t', ":Lspsaga close_floaterm<CR>")
 autocmd('User', {
   pattern = 'LSPSageKeybindings',
   group = augroup,
