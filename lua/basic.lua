@@ -21,6 +21,11 @@ set.timeoutlen = 500
 
 set.fillchars:append 'diff:╱'
 
+
+vim.api.nvim_create_autocmd('BufReadPre', {
+  command = ':if filereadable("Session.vim") | mksession! | echomsg "Session saved" | endif',
+})
+
 -- 禁用鼠标交互（如果不设置，默认为启用 'nvi'）
 set.mouse = ''
 vim.cmd [[
