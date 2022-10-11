@@ -1,4 +1,3 @@
-local g = vim.g
 local bind = require 'keymap'.bind
 local autocmd = vim.api.nvim_create_autocmd
 
