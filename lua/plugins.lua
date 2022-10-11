@@ -100,7 +100,6 @@ local packer = require 'packer'.startup(function(use)
   use 'azabiong/vim-highlighter'
 
   use 'j-hui/fidget.nvim'
-  -- use 'SmiteshP/nvim-gps'
   use 'nvim-lualine/lualine.nvim'
   use 'arkav/lualine-lsp-progress'
 

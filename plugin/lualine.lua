@@ -9,26 +9,6 @@ local function diff_source()
   end
 end
 
-require 'nvim-gps'.setup {
-  disable_icons = false,
-  separator = ' ‣ ',
-  icons = {
-    ["class-name"] = 'class: ',
-    ["function-name"] = 'fn: ',
-    ["method-name"] = 'fn: ',
-    ["container-name"] = '{}: ',
-    ["tag-name"] = 'tag: ',
-  },
-  languages = {
-    rust = {
-      icons = {
-        ["object-name"] = 'o: ',
-        ["class-name"] = 'ty: ',
-      }
-    }
-  },
-}
-
 require 'lualine'.setup {
   options = { icons_enabled = false, theme = 'nord' },
   sections = {
