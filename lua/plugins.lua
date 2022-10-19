@@ -108,6 +108,7 @@ local packer = require 'packer'.startup(function(use)
   use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
   use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
 
+  use 'numToStr/FTerm.nvim'
 
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now

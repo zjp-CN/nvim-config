@@ -143,8 +143,6 @@ autocmd('User', {
 -- ==                                Lspsaga                               == --
 -- ========================================================================== --
 
-bind('n', '[t', ":Lspsaga open_floaterm<CR>")
-bind('n', ']t', ":Lspsaga close_floaterm<CR>")
 autocmd('User', {
   pattern = 'LSPSageKeybindings',
   group = augroup,
