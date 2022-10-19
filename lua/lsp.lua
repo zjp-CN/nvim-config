@@ -5,7 +5,7 @@ end
 
 local M = {}
 local nvim_lsp = require 'lspconfig'
-M.capabilities = require 'cmp_nvim_lsp'.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+M.capabilities = require 'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- 回调
 M.on_attach = function(_, bufnr)
