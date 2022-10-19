@@ -10,6 +10,7 @@ hi! link DiagnosticVirtualTextInfo  DiagnosticInfo
 hi! link DiagnosticVirtualTextHint  DiagnosticHint
 
 hi! CocInlayHint guifg=#2C2648 guibg=#617974 gui=inverse
+hi! MatchParen   guifg=white   guibg=grey
 hi! Search       guibg=#FFF093
 
 " Treesitter
