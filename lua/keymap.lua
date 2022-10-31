@@ -121,6 +121,8 @@ bind('n', '<space>S', ':mksession! | echom "Session saved!"<cr>')
 local augroup = vim.api.nvim_create_augroup('mapping_cmds', { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
 
+bind('n', '<space>t', ':AerialToggle<CR>') -- symbols outline: aerial
+
 autocmd('User', {
   pattern = 'LSPKeybindings',
   group = augroup,
@@ -132,7 +134,7 @@ autocmd('User', {
     bind('n', '<leader>gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
 
     -- bind('n', '<space>t', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>')
-    bind('n', '<space>t', ':SymbolsOutline<CR>') -- symbols-outline.nvim
+    -- bind('n', '<space>t', ':SymbolsOutline<CR>') -- symbols-outline.nvim
 
     bind('n', '<C-s>', ":LspStop<cr> ")
     bind('n', '<M-s>', ":LspStart<cr> ")

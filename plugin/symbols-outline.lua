@@ -1,4 +1,4 @@
-require "symbols-outline".setup {
+local setup = {
   -- highlight_hovered_item = false,
   fold_markers = { '▶', '▽' },
   width = 35,
@@ -17,7 +17,7 @@ require "symbols-outline".setup {
     Function = { icon = "Fn", hl = "SymTSFunction" },
     Variable = { icon = "Var", hl = "TSConstant" },
     Constant = { icon = "Const", hl = "TSConstant" },
-    String = { icon = "String", hl = "TSString" },
+    String = { icon = "String", hl = "SymTSString" },
     Number = { icon = "#", hl = "TSNumber" },
     Boolean = { icon = "Bool", hl = "TSBoolean" },
     Array = { icon = "[]", hl = "TSConstant" },
@@ -28,7 +28,7 @@ require "symbols-outline".setup {
     Struct = { icon = "Struct", hl = "SymTSType" },
     Event = { icon = "Event", hl = "SymTSType" },
     Operator = { icon = "Op", hl = "TSOperator" },
-    TypeParameter = { icon = "T", hl = "TSParameter" }
+    TypeParameter = { icon = "T", hl = "SymTSParameter" }
   },
   keymaps = { -- These keymaps can be a string or a table for multiple keys
     close = { "<Esc>", "q" },
@@ -45,3 +45,4 @@ require "symbols-outline".setup {
     fold_reset = "R",
   },
 }
+-- require "symbols-outline".setup(setup)

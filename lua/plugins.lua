@@ -63,7 +63,8 @@ local packer = require 'packer'.startup(function(use)
   use 'rust-lang/rust.vim'
   use 'simrat39/rust-tools.nvim'
   -- use 'simrat39/symbols-outline.nvim'
-  use '/root/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim'
+  -- use '/root/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim'
+  use 'stevearc/aerial.nvim'
   use 'Canop/nvim-bacon'
   use 'saecki/crates.nvim'
 

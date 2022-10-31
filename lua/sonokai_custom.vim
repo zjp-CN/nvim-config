@@ -14,16 +14,19 @@ hi! MatchParen   guifg=white   guibg=grey
 hi! Search       guibg=#FFF093
 
 " Treesitter
-hi! TSString      guifg=#FFA599
-hi! TSFuncMacro   guifg=#D0503F
-hi! TSParameter   guifg=#7BCE91
+hi! TSString      guifg=#9F8B69
+hi! TSFuncMacro   guifg=#9E90C5
 " Symtols-tree
 hi! SymTSType     guibg=#066820 guifg=white
 hi! SymTSMethod   guifg=#D0A23F gui=inverse
-hi! SymTSFunction guifg=#D0A23F
+hi! SymTSFunction guifg=#FFF093
 hi! SymTSField    guifg=#4DB368
 hi! SymInterface  guibg=#740B00 guifg=white
 hi! SymObj        guibg=#740B00 guifg=white 
+hi! SymTSString   guifg=#FFA599
+hi! SymTSParameter   guifg=#7BCE91
+" aerial
+hi! AerialLine guibg=#005141
 
 " https://paletton.com/#uid=7040V0kL8pLtPDIHlvtORkLT4e+
 hi! link                 DiffDelete    DiffviewDiffDelete
