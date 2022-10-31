@@ -121,8 +121,6 @@ bind('n', '<space>S', ':mksession! | echom "Session saved!"<cr>')
 local augroup = vim.api.nvim_create_augroup('mapping_cmds', { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
 
-bind('n', '<space>t', ':AerialToggle<CR>') -- symbols outline: aerial
-
 autocmd('User', {
   pattern = 'LSPKeybindings',
   group = augroup,

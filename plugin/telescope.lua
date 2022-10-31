@@ -4,6 +4,12 @@ local layout = require "telescope.actions.layout"
 local keymap = require 'keymap'
 local bind = keymap.bind
 
+tele.load_extension 'aerial'
+tele.load_extension 'ui-select'
+tele.load_extension 'file_browser'
+tele.load_extension 'frecency'
+tele.load_extension 'smart_history'
+
 -- :h telescope.actions
 -- to_fuzzy_refine 的用法是先 exact search，然后对其结果 fuzzy search
 local mappings = {
@@ -42,6 +48,14 @@ tele.setup {
   extensions = {
     ['ui-select'] = { require 'telescope.themes'.get_dropdown {}, },
     -- file_browser = { theme = 'ivy', hijack_netrw = true, },
+    aerial = {
+      -- Display symbols as <root>.<parent>.<symbol>
+      show_nesting = {
+        ['_'] = false, -- This key will be the default
+        json = true, -- You can set the option for specific filetypes
+        yaml = true,
+      }
+    }
   },
 }
 

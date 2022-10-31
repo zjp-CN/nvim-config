@@ -25,23 +25,11 @@ local packer = require 'packer'.startup(function(use)
   -- use 'lvimuser/lsp-inlayhints.nvim'
 
   -- telescope
-  use { 'nvim-telescope/telescope-ui-select.nvim',
-    config = function() require 'telescope'.load_extension 'ui-select' end
-  }
-  use { 'nvim-telescope/telescope-file-browser.nvim',
-    config = function() require 'telescope'.load_extension 'file_browser' end
-  }
+  use 'nvim-telescope/telescope-ui-select.nvim'
+  use 'nvim-telescope/telescope-file-browser.nvim'
   use 'kkharji/sqlite.lua'
-  use {
-    'nvim-telescope/telescope-frecency.nvim',
-    config = function() require 'telescope'.load_extension 'frecency' end,
-    requires = { 'kkharji/sqlite.lua' }
-  }
-  use {
-    'nvim-telescope/telescope-smart-history.nvim',
-    config = function() require 'telescope'.load_extension 'smart_history' end,
-    requires = { 'kkharji/sqlite.lua' }
-  }
+  use { 'nvim-telescope/telescope-frecency.nvim', requires = { 'kkharji/sqlite.lua' } }
+  use { 'nvim-telescope/telescope-smart-history.nvim', requires = { 'kkharji/sqlite.lua' } }
 
   -- Completion
   use 'hrsh7th/nvim-cmp'
