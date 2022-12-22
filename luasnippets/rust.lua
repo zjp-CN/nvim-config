@@ -1,3 +1,9 @@
+local aoc = [[
+#[aoc]
+pub mod tests {
+$1
+}
+]]
 -- local pfn_ = [[
 -- ${1|,pub ,pub(super) ,pub(crate) |}fn ${2:name}(${3})${5: -> ${6:Type}} {
 --     ${7:unimplemented!();}
@@ -34,4 +40,6 @@
 --   pfn,
 --   parse("tokio_main", tokio_main),
 -- }
-return {}
+return {
+  parse("aoc", aoc),
+}
