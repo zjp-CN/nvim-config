@@ -1,6 +1,6 @@
 require 'aerial'.setup {
   layout = {
-    default_direction = "float",
+    -- default_direction = "float",
     placement = "edge",
     min_width = { 40, 0.4 },
   },
