@@ -22,6 +22,8 @@ local datetimezone = s("datetimezone", f(dt, {}, {}))
 
 local img_sized = '<img src="${1}" alt="${2}" width="${3}"/>'
 
+local a_tag = '<a name="${1:tag}"></a>'
+
 local twin_new = [[
 <h3 id="new-$1">
     <a href="#new-$1">
@@ -65,4 +67,5 @@ return {
   datetimezone,
   parse("twin-new", twin_new),
   parse("twin-update", twin_update),
+  parse("a_tag", a_tag),
 }
