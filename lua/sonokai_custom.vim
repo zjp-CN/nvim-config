@@ -16,6 +16,7 @@ hi! Search       guibg=#FFF093
 " Treesitter
 hi! TSString      guifg=#9F8B69
 hi! TSFuncMacro   guifg=#9E90C5
+hi! TSAttribute   guifg=#9E90C5
 " Symtols-tree
 hi! SymTSType     guibg=#066820 guifg=white
 hi! SymTSMethod   guifg=#D0A23F gui=inverse
