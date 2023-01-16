@@ -39,7 +39,7 @@ local highlight = {
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
-    'python', 'lua', 'rust', 'query',
+    'python', 'lua', 'rust', 'query', 'markdown',
     'css', 'html', 'bash', 'javascript', 'json', 'c', 'cpp', 'cmake', 'llvm',
   },
 
