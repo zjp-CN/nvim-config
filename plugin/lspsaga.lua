@@ -18,7 +18,7 @@ local colors = {
 }
 
 local new = {
-  ui = {
+  ui               = {
     -- currently only round theme
     theme = 'round',
     -- border type can be single,double,rounded,solid,shadow.
@@ -73,30 +73,27 @@ local new = {
     },
   },
   symbol_in_winbar = { enable = false },
-  code_action = {
+  code_action      = {
     num_shortcut = true,
     keys = {
       -- string |table type
-      quit = 'q',
+      quit = { '<Esc>', 'q' },
       exec = '<CR>',
     },
   },
-  lightbulb = { -- code_action hint
+  lightbulb        = { -- code_action hint
     enable = true,
     enable_in_insert = false,
     sign = true,
     sign_priority = 40,
     virtual_text = false,
   },
-  preview = {
-    lines_above = 0,
-    lines_below = 1,
-  },
-  scroll_preview = {
-    scroll_down = '<C-f>',
-    scroll_up = '<C-b>',
-  },
-  request_timeout = 2000,
+  preview          = { lines_above = 0, lines_below = 1, },
+  scroll_preview   = { scroll_down = '<C-f>', scroll_up = '<C-b>', },
+  request_timeout  = 10000,
+  rename           = { quit = '<Esc>', },
+  outline          = { keys = { quit = { '<Esc>', 'q' } }, },
+  callhierarchy    = { keys = { quit = { '<Esc>', 'q' } }, },
 }
 
 saga.setup(new)

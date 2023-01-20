@@ -155,7 +155,8 @@ autocmd('User', {
     bind('n', 'K', ":Lspsaga hover_doc<CR>")
     bind('n', '[d', ":Lspsaga diagnostic_jump_prev<CR>")
     bind('n', ']d', ":Lspsaga diagnostic_jump_next<CR>")
-    bind('n', 'gr', ":Lspsaga lsp_finder<CR>")
+    -- bind('n', 'gr', ":Lspsaga lsp_finder<CR>")
+    bind('n', 'gr', ":Telescope lsp_references<CR>")
     bind('v', '<leader>a', ':<C-U>Lspsaga code_action<CR>')
   end
 })
