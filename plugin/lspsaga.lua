@@ -22,7 +22,7 @@ local new = {
     -- currently only round theme
     theme = 'round',
     -- border type can be single,double,rounded,solid,shadow.
-    border = 'solid',
+    border = 'single',
     winblend = 0,
     expand = '',
     collapse = '',
