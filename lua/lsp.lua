@@ -21,7 +21,7 @@ M.on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup {
   settings = {
     Lua = {
       runtime = { version = 'LuaJIT', },
