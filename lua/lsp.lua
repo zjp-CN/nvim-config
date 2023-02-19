@@ -55,6 +55,13 @@ require 'rust-tools'.setup {
     capabilities = M.capabilities,
     settings = { ['rust-analyzer'] = rust.user_ra_config, },
     standalone = false, -- :RustStartStandaloneServerForBuffer for manually enabling
+    -- handlers = {
+    --   ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    --     vim.lsp.diagnostic.on_publish_diagnostics, {
+    --     -- Disable a feature
+    --     update_in_insert = true,
+    --   })
+    -- }
   },
   dap = {
     adapter = require 'rust-tools.dap'.get_codelldb_adapter(
