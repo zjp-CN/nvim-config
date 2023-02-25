@@ -63,7 +63,7 @@ tele.setup {
 bind('n', ',l', ':Telescope live_grep<CR>')
 bind('n', ',g', ':Telescope grep_string<CR>')
 bind('n', ',f', ':Telescope find_files<CR>')
-bind('n', ',F', ':Telescope oldfiles<CR>')
+bind('n', ',F', ':Telescope find_files no_ignore=true<CR>')
 bind('n', ',h', ':Telescope highlights<CR>')
 bind('n', ',H', ':Telescope help_tags<CR>')
 bind('n', ',k', ':Telescope keymaps<CR>')
@@ -78,6 +78,9 @@ bind('n', ',C', ':Telescope frecency<CR>')
 bind('n', ',c', ':Telescope frecency workspace=CWD<CR>')
 bind('n', '<space>f', ':Telescope file_browser<CR>')
 bind('n', '<space>F', ':lua require"telescope".extensions.file_browser.file_browser{path=vim.fn.expand"%:p:h"}<CR>')
+bind('n', ';f', ':Telescope file_browser respect_gitignore=false<CR>')
+bind('n', ';F',
+  ':lua require"telescope".extensions.file_browser.file_browser{path=vim.fn.expand"%:p:h", respect_gitignore=false}<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',

@@ -4,10 +4,9 @@
     替换 command! WQ wq
     :'<,'>s/\vcommand! (.{-}) (.*)/new_cmd('\1', '\2', { bang = true })
 --]]
-
-local set     = vim.opt
-local new_cmd = vim.api.nvim_create_user_command
-local bind    = function(mode, key, result)
+local set       = vim.opt
+local new_cmd   = vim.api.nvim_create_user_command
+local bind      = function(mode, key, result)
   vim.keymap.set(mode, key, result, { silent = true })
 end
 
@@ -147,8 +146,6 @@ autocmd('User', {
   pattern = 'LSPSageKeybindings',
   group = augroup,
   callback = function()
-    bind('n', ';c', "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>")
-    bind('n', ';l', ":Lspsaga show_line_diagnostics<CR>")
     bind('n', '<leader>a', ":Lspsaga code_action<CR>")
     bind('n', '<leader>rn', ":Lspsaga rename<CR>")
     bind('n', '<space>d', ":Lspsaga peek_definition<cr>")
