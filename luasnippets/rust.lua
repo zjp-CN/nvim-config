@@ -1,7 +1,7 @@
 local aoc = [[
 #[aoc]
 pub mod tests {
-$1
+    $1
 }
 ]]
 -- local pfn_ = [[
@@ -28,18 +28,21 @@ $1
 --   t { "", "}", "" },
 -- })
 
--- local tokio_main = [[
--- #[tokio::main]
--- async fn main() ${1:-> Result<${2:()}> }{
---   ${3:todo!()}
--- }
--- ]]
+local tokio_main = [[
+#[tokio::main]
+async fn main() {
+    ${0}
+}
+]]
 
--- return {
---   parse("pfn_", pfn_),
---   pfn,
---   parse("tokio_main", tokio_main),
--- }
+local async_fn = [[
+async fn ${1:name}() {
+    ${0}
+}
+]]
+
 return {
   parse("aoc", aoc),
+  parse("tokio_main", tokio_main),
+  parse("async_fn", async_fn),
 }
