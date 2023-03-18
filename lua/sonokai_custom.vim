@@ -49,3 +49,12 @@ hi! GitCurrent  guifg=black guibg=#3E5042
 hi! GitIncoming guifg=black guibg=#1D213E
 
 hi! DiffText guifg=#740B00 guibg=#FFD885 gui=inverse
+
+" === lspsaga ===
+hi! SagaBorder guibg=None
+hi! SagaNormal guifg=White guibg=None
+hi! SagaCount guifg=#4DB368 
+hi! SagaExpand guifg=#4DB368 guibg=#08298B
+hi! CodeActionNumber guifg=#4DB368
+hi! ActionPreviewTitle guifg=#EA4439 guibg=None
+hi! TitleString guifg=#EA4439 guibg=None

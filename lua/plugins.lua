@@ -15,11 +15,14 @@ local packer = require 'packer'.startup(function(use)
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'glepnir/lspsaga.nvim'
+  use { 'nvim-tree/nvim-web-devicons',
+    config = function() require 'nvim-web-devicons'.setup {} end
+  }
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
   use {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function() require("lsp_lines").setup() end,
+    config = function() require("lsp_lines").setup {} end,
   }
   use 'ray-x/lsp_signature.nvim'
   -- use 'lvimuser/lsp-inlayhints.nvim'
@@ -100,6 +103,7 @@ local packer = require 'packer'.startup(function(use)
   use 'numToStr/FTerm.nvim'
   use 'folke/todo-comments.nvim'
   use 'folke/trouble.nvim'
+  use 'olimorris/persisted.nvim'
 
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
