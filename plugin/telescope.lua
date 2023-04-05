@@ -9,6 +9,7 @@ tele.load_extension 'ui-select'
 tele.load_extension 'file_browser'
 tele.load_extension 'frecency'
 tele.load_extension 'smart_history'
+tele.load_extension 'persisted'
 
 -- :h telescope.actions
 -- to_fuzzy_refine 的用法是先 exact search，然后对其结果 fuzzy search
@@ -81,11 +82,12 @@ bind('n', '<space>F', ':lua require"telescope".extensions.file_browser.file_brow
 bind('n', ';f', ':Telescope file_browser respect_gitignore=false<CR>')
 bind('n', ';F',
   ':lua require"telescope".extensions.file_browser.file_browser{path=vim.fn.expand"%:p:h", respect_gitignore=false}<CR>')
+bind('n', '<space>S', ':Telescope persisted<CR>')
 
 -- LSP only keymap
 keymap.autocmd('LSPTelescopeKeybindings',
   function()
-    bind('n', ',d', ':Telescope diagnostics<CR>')
+    bind('n', ',d', ':Telescope diagnostics layout_strategy=vertical<CR>')
     bind('n', ',D', ':Telescope lsp_document_symbols<CR>')
     bind('n', ',s', ':Telescope lsp_workspace_symbols<CR>')
     -- bind('n', ',S', ':Telescope lsp_dynamic_workspace_symbols<CR>')
