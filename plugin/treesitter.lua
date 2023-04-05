@@ -36,10 +36,16 @@ local highlight = {
   additional_vim_regex_highlighting = { 'markdown', 'toml', 'vim' },
 }
 
+local query_linter = {
+  enable = true,
+  use_virtual_text = true,
+  lint_events = { "BufWrite", "CursorHold" },
+}
+
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
-    'python', 'lua', 'rust', 'query', 'markdown', 'markdown_inline',
+    'python', 'lua', 'rust', 'query', 'markdown', 'markdown_inline', 'sql', 'r',
     'css', 'html', 'bash', 'javascript', 'json', 'c', 'cpp', 'cmake', 'llvm',
   },
 
@@ -49,6 +55,7 @@ require 'nvim-treesitter.configs'.setup {
   highlight = highlight,
   playground = playground,
   incremental_selection = incremental_selection,
+  query_linter = query_linter,
 }
 
 -- TODO: 自定义
