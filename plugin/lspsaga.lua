@@ -35,7 +35,7 @@ local new = {
   },
   symbol_in_winbar = { enable = false },
   code_action      = {
-    num_shortcut = true,
+    num_shortcut = false,
     keys = {
       -- string |table type
       quit = { '<Esc>', 'q' },

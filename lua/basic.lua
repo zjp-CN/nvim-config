@@ -22,8 +22,8 @@ set.timeoutlen = 500
 set.fillchars:append 'diff:╱'
 
 set.scrolloff = 6
-set.nu = true
-set.relativenumber = true
+set.nu = false
+set.relativenumber = false
 
 -- vim.api.nvim_create_autocmd('BufReadPre', {
 --   command = ':if filereadable("Session.vim") | mksession! | echomsg "Session saved" | endif',
