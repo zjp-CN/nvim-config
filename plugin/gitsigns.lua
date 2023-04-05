@@ -19,25 +19,25 @@ gs.setup {
     end
 
     -- Navigation
-    map('n', ']c', function()
+    map('n', ']x', function()
       if vim.wo.diff then return ']c' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
     end, { expr = true })
 
-    map('n', '[c', function()
+    map('n', '[x', function()
       if vim.wo.diff then return '[c' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
     end, { expr = true })
 
     -- Actions
-    map({ 'n', 'v' }, ']hs', ':Gitsigns stage_hunk<CR>')
-    map({ 'n', 'v' }, ']hr', ':Gitsigns reset_hunk<CR>')
-    map('n', ']hS', gs.stage_buffer)
-    map('n', ']hu', gs.undo_stage_hunk)
-    map('n', ']hR', gs.reset_buffer)
-    map('n', ']hp', gs.preview_hunk)
+    -- map({ 'n', 'v' }, ']hs', ':Gitsigns stage_hunk<CR>')
+    -- map({ 'n', 'v' }, ']hr', ':Gitsigns reset_hunk<CR>')
+    -- map('n', ']hS', gs.stage_buffer)
+    -- map('n', ']hu', gs.undo_stage_hunk)
+    -- map('n', ']hR', gs.reset_buffer)
+    -- map('n', ']hp', gs.preview_hunk)
     map('n', ']hb', function() gs.blame_line { full = true } end)
     map('n', ']hd', gs.diffthis)
     map('n', ']hD', function() gs.diffthis('~') end)
