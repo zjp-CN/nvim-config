@@ -21,8 +21,9 @@ local packer = require 'packer'.startup(function(use)
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
   use {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function() require("lsp_lines").setup {} end,
+    "ErichDonGubler/lsp_lines.nvim",
+    -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function() require("lsp_lines").setup() end,
   }
   use 'ray-x/lsp_signature.nvim'
   -- use 'lvimuser/lsp-inlayhints.nvim'
@@ -109,9 +110,7 @@ local packer = require 'packer'.startup(function(use)
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
   use 'rafcamlet/nvim-luapad'
 
-  -- local
-  use '/rust/github/moonshine.nvim'
-  use '/rust/github/vim-tips-wiki'
+
 end)
 
 return packer

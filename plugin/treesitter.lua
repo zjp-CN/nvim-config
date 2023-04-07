@@ -1,3 +1,9 @@
+
+-- require("nvim-treesitter.install").command_extra_args = {
+--       curl = { "--proxy", "http://localhost:7890" },
+-- }
+require("nvim-treesitter.install").prefer_git = true
+
 local playground = {
   enable = true,
   disable = {},

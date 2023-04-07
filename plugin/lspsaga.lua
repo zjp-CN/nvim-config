@@ -17,6 +17,7 @@ local colors = {
   black = '#1c1c19',
 }
 
+
 local new = {
   ui               = {
     -- currently only round theme
