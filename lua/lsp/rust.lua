@@ -2,8 +2,14 @@ local M = {}
 M.ra_json = 'rust-analyzer.json'
 if M.user_ra_config then return M end
 
+local is_windows = jit.os == 'Windows'
+local function path_norm(path)
+  return is_windows and path:gsub("/", "\\") or path
+end
+
 -- 解析 Json 配置文件
 M.json_file = function(path)
+  local path = path_norm(path)
   local file = io.open(path, 'rb')
   if not file then return nil end
   local content = file:read('*a')
@@ -49,13 +55,13 @@ if user_ra_config_override then
   M.user_ra_config = user_ra_config_override
 else
   -- 如果项目目录中有 `.rust-analyzer.json` 或 `rust-analyzer.json` 文件，则优先使用（合并 nvim 下的配置）
-  local config_home = os.getenv('XDG_CONFIG_HOME') or (os.getenv('HOME') .. '/.config') or "../../"
+  local config_home = vim.fn.stdpath 'config' or "../../"
   M.user_ra_config = M.json_file(config_home .. '/nvim/' .. M.ra_json) or {}
   local user_ra_config = M.json_file('.' .. M.ra_json) or M.json_file(M.ra_json) or {}
   for key, value in pairs(user_ra_config) do
     M.user_ra_config[key] = value
   end
 end
--- print(vim.inspect(M.user_ra_config))
+print(vim.inspect(M.user_ra_config))
 
 return M
