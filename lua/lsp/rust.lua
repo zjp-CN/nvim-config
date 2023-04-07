@@ -62,6 +62,6 @@ else
     M.user_ra_config[key] = value
   end
 end
-print(vim.inspect(M.user_ra_config))
+-- print(vim.inspect(M.user_ra_config))
 
 return M

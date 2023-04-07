@@ -1,5 +1,5 @@
-
--- run `nvim --cmd ":let g:no_lsp=1"` to disable lsp
+-- 1. run `nvim --cmd ":let g:no_lsp=1"` to disable lsp
+-- 2. disabled for lua files (use `:LspStar` to enable)
 if vim.g.no_lsp then
   return {}
 end
