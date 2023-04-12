@@ -59,3 +59,6 @@ hi! SagaExpand guifg=#4DB368 guibg=#08298B
 hi! CodeActionNumber guifg=#4DB368
 hi! ActionPreviewTitle guifg=#EA4439 guibg=None
 hi! TitleString guifg=#EA4439 guibg=None
+
+" === clever-f ===
+hi! CleverFChar gui=inverse guibg=red
