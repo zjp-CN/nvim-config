@@ -35,8 +35,20 @@ async fn main() {
 }
 ]]
 
-local async_fn = [[
-async fn ${1:name}() {
+local afn = [[
+async fn ${1:name}($2) {
+    ${0}
+}
+]]
+
+local pfn = [[
+pub fn ${1:name}($2) {
+    ${0}
+}
+]]
+
+local pafn = [[
+pub fn async ${1:name}($2) {
     ${0}
 }
 ]]
@@ -44,5 +56,7 @@ async fn ${1:name}() {
 return {
   parse("aoc", aoc),
   parse("tokio_main", tokio_main),
-  parse("async_fn", async_fn),
+  parse("afn", afn),
+  parse("pfn", pfn),
+  parse("pafn", pafn),
 }
