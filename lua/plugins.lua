@@ -33,6 +33,7 @@ local packer = require 'packer'.startup(function(use)
   use 'kkharji/sqlite.lua'
   use { 'nvim-telescope/telescope-frecency.nvim', requires = { 'kkharji/sqlite.lua' } }
   use { 'nvim-telescope/telescope-smart-history.nvim', requires = { 'kkharji/sqlite.lua' } }
+  use 'xiyaowong/telescope-emoji.nvim'
 
   -- Completion
   use 'hrsh7th/nvim-cmp'
@@ -110,8 +111,8 @@ local packer = require 'packer'.startup(function(use)
   use 'rafcamlet/nvim-luapad'
 
   -- local
-  use '/rust/github/moonshine.nvim'
-  use '/rust/github/vim-tips-wiki'
+  -- use '/rust/github/moonshine.nvim'
+  -- use '/rust/github/vim-tips-wiki'
 end)
 
 return packer

@@ -10,6 +10,7 @@ tele.load_extension 'file_browser'
 tele.load_extension 'frecency'
 tele.load_extension 'smart_history'
 tele.load_extension 'persisted'
+tele.load_extension 'emoji'
 
 -- :h telescope.actions
 -- to_fuzzy_refine 的用法是先 exact search，然后对其结果 fuzzy search
