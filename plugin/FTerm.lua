@@ -4,6 +4,8 @@ require 'FTerm'.setup {
     height = 0.9,
     width = 0.9,
   },
+  -- windows 上需要使用 powershell
+  cmd = 'powershell'
 }
 
 local bind = require 'keymap'.bind
