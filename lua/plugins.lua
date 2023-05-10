@@ -105,6 +105,7 @@ local packer = require 'packer'.startup(function(use)
   use 'folke/todo-comments.nvim'
   use 'folke/trouble.nvim'
   use 'olimorris/persisted.nvim'
+  use 'jbyuki/venn.nvim' -- ascii drawing
 
   -- TODO
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now

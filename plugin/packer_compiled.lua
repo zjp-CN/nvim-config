@@ -363,6 +363,11 @@ _G.packer_plugins = {
     path = "/root/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
+  ["venn.nvim"] = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/venn.nvim",
+    url = "https://github.com/jbyuki/venn.nvim"
+  },
   ["vim-easy-align"] = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/vim-easy-align",
