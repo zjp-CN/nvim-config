@@ -61,4 +61,4 @@ hi! ActionPreviewTitle guifg=#EA4439 guibg=None
 hi! TitleString guifg=#EA4439 guibg=None
 
 " === clever-f ===
-hi! CleverFChar gui=inverse guibg=red
+hi! CleverFChar guibg=#FFD885 guifg=red
