@@ -56,12 +56,13 @@ if user_ra_config_override then
 else
   -- 如果项目目录中有 `.rust-analyzer.json` 或 `rust-analyzer.json` 文件，则优先使用（合并 nvim 下的配置）
   local config_home = vim.fn.stdpath 'config' or "../../"
-  M.user_ra_config = M.json_file(config_home .. '/nvim/' .. M.ra_json) or {}
+  M.user_ra_config = M.json_file(config_home .. (is_windows and '/' or '/nvim/') .. M.ra_json) or {}
   local user_ra_config = M.json_file('.' .. M.ra_json) or M.json_file(M.ra_json) or {}
   for key, value in pairs(user_ra_config) do
     M.user_ra_config[key] = value
   end
 end
+-- print(path_norm(vim.fn.stdpath 'config' .. (is_windows and '/' or '/nvim/') .. M.ra_json))
 -- print(vim.inspect(M.user_ra_config))
 
 return M

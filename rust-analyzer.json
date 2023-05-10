@@ -1,6 +1,6 @@
 {
-    "checkOnSave": {
-        "enable": true,
+    "checkOnSave": true,
+    "check": {
         "command": "clippy"
     },
     "workspace": {
