@@ -4,8 +4,8 @@ require 'FTerm'.setup {
     height = 0.9,
     width = 0.9,
   },
-  -- windows 上需要使用 powershell
-  cmd = 'powershell'
+  -- windows 上需要使用 powershell 或者 nu
+  cmd = {'E:\\tools\\nu\\nu.exe'},
 }
 
 local bind = require 'keymap'.bind

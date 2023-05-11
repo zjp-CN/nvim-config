@@ -29,6 +29,9 @@ set.relativenumber = false
 --   command = ':if filereadable("Session.vim") | mksession! | echomsg "Session saved" | endif',
 -- })
 
+-- use nu on windows
+set.shell = 'nu'
+
 -- 禁用鼠标交互（如果不设置，默认为启用 'nvi'）
 set.mouse = ''
 vim.cmd [[
