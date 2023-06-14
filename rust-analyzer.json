@@ -1,7 +1,7 @@
 {
     "checkOnSave": true,
     "check": {
-        "command": "clippy"
+        "command": "check"
     },
     "workspace": {
         "symbol": {

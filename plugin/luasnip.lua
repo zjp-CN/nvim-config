@@ -25,7 +25,7 @@ from_lua.load { paths = paths }
 
 -- https://github.com/rafamadriz/friendly-snippets
 from_vscode.load {
-  paths = "/root/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+  paths = "C:\\Users\\Administrator\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\friendly-snippets",
   exclude = { "all", "global" },
 }
 

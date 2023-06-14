@@ -29,8 +29,9 @@ set.relativenumber = false
 --   command = ':if filereadable("Session.vim") | mksession! | echomsg "Session saved" | endif',
 -- })
 
--- use nu on windows
-set.shell = 'nu'
+-- use nu on windows, but many plugins may still depends on cmd
+-- so use `:e term://nu` to open the nu shell instead
+set.shell = 'cmd'
 
 -- 禁用鼠标交互（如果不设置，默认为启用 'nvi'）
 set.mouse = ''
