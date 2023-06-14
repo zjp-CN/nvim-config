@@ -50,6 +50,7 @@ local packer = require 'packer'.startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
+  use { 'danymat/neogen', requires = 'nvim-treesitter/nvim-treesitter' }
 
   -- Rust
   use 'rust-lang/rust.vim'
@@ -92,7 +93,7 @@ local packer = require 'packer'.startup(function(use)
   use 'rhysd/clever-f.vim'
   use 'azabiong/vim-highlighter'
 
-  use 'j-hui/fidget.nvim'
+  use { 'j-hui/fidget.nvim', tag = 'legacy' } -- the plugin is rewriting
   use 'nvim-lualine/lualine.nvim'
   use 'arkav/lualine-lsp-progress'
 
