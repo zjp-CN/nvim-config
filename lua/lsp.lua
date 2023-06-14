@@ -63,4 +63,37 @@ require 'rust-tools'.setup {
   },
 }
 
+-- npm i -g vscode-langservers-extracted
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.deepcopy(M.capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- html lsp
+nvim_lsp.html.setup { capabilities = capabilities, on_attach = M.on_attach}
+-- css lsp
+nvim_lsp.cssls.setup { capabilities = capabilities, on_attach = M.on_attach}
+-- json lsp
+nvim_lsp.jsonls.setup { capabilities = capabilities, on_attach = M.on_attach}
+-- typescript / javascript lsp: not support format on save, doc hovering etc
+-- nvim_lsp.eslint.setup({
+--   --- ...
+--   on_attach = function(client, bufnr)
+--     M.on_attach()
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       buffer = bufnr,
+--       command = "EslintFixAll",
+--     })
+--   end,
+--   capabilities = capabilities,
+-- })
+-- typescript / javascript lsp: npm install -g svelte-language-server
+nvim_lsp.tsserver.setup {}
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.html', '*.css', '*.js', '*.ts', '*.json' },
+  command = ':lua vim.lsp.buf.format()',
+})
+
+
+-- https://github.com/artempyanykh/marksman
+nvim_lsp.marksman.setup {}
+
 return M
