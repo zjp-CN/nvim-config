@@ -1,4 +1,5 @@
 local cmp = require 'cmp'
+local neogen = require('neogen')
 
 cmp.setup {
   -- Enable LSP snippets
@@ -24,10 +25,13 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
-    { name = 'buffer', max_item_count = 15, keyword_length = 3,
+    {
+      name = 'buffer',
+      max_item_count = 15,
+      keyword_length = 3,
       option = {
         get_bufnrs = function() return vim.api.nvim_list_bufs() end, -- search words in all buffers
-        keyword_pattern = [[\k\+]], -- use the iskeyword option for recognizing words
+        keyword_pattern = [[\k\+]],                                  -- use the iskeyword option for recognizing words
       }
     },
     { name = 'luasnip' },
@@ -36,8 +40,6 @@ cmp.setup {
   },
   preselect = cmp.PreselectMode.None,
 }
-
-
 
 -- cmp-cmdline 在底部命令栏支持补全提示
 -- require 'cmp'.setup.cmdline('/', {
@@ -54,7 +56,7 @@ vim.opt.iskeyword = vim.opt.iskeyword + '-'
 vim.cmd [[
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately
 " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
 " -1 for jumping backwards.
 inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 

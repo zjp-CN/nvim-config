@@ -27,7 +27,7 @@ nvim_lsp.lua_ls.setup {
     Lua = {
       runtime = { version = 'LuaJIT', },
       diagnostics = { globals = { 'vim' }, },
-      workspace = { library = vim.api.nvim_get_runtime_file('', true), },
+      workspace = { library = vim.api.nvim_get_runtime_file('', true), checkThirdParty = false, },
       telemetry = { enable = false, },
     },
   },
@@ -68,11 +68,11 @@ require 'rust-tools'.setup {
 local capabilities = vim.deepcopy(M.capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- html lsp
-nvim_lsp.html.setup { capabilities = capabilities, on_attach = M.on_attach}
+nvim_lsp.html.setup { capabilities = capabilities, on_attach = M.on_attach }
 -- css lsp
-nvim_lsp.cssls.setup { capabilities = capabilities, on_attach = M.on_attach}
+nvim_lsp.cssls.setup { capabilities = capabilities, on_attach = M.on_attach }
 -- json lsp
-nvim_lsp.jsonls.setup { capabilities = capabilities, on_attach = M.on_attach}
+nvim_lsp.jsonls.setup { capabilities = capabilities, on_attach = M.on_attach }
 -- typescript / javascript lsp: not support format on save, doc hovering etc
 -- nvim_lsp.eslint.setup({
 --   --- ...
