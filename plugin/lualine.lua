@@ -9,13 +9,6 @@ local function diff_source()
   end
 end
 
-local current_signature = function(width)
-  if not pcall(require, 'lsp_signature') then return end
-  local sig = require("lsp_signature").status_line(width)
-  local sep = (sig.label ~= '' and ' || ') or ''
-  return sig.hint .. sep .. sig.label
-end
-
 require 'lualine'.setup {
   options = { icons_enabled = false, theme = 'nord' },
   sections = {
@@ -24,15 +17,17 @@ require 'lualine'.setup {
     },
     lualine_c = {
       'diagnostics',
-      { 'filename',                                  path = 1 },
-      -- { function() return vim.fn['nvim_treesitter#statusline']() end },
-      -- { 'lsp_progress',
-      --   display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' } },
-      --   timer = { progress_enddelay = 2000, spinner = 1000, lsp_client_name_enddelay = 2500 }
-      -- },
-      { function() return current_signature(nil) end },
+      { 'filename', path = 1 },
     },
-    lualine_x = { 'encoding', 'filetype' },
+    lualine_x = {
+      'encoding',
+      'filetype',
+      {
+        'fileformat',
+        icons_enabled = true,
+        symbols = { unix = 'LF', dos = 'CRLF', mac = 'CR', },
+      },
+    },
     lualine_z = { "vim.fn.line('.') .. '/' .. vim.fn.line('$') .. ':' .. vim.fn.col('.')", },
   }
 }

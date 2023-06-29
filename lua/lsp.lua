@@ -86,7 +86,7 @@ nvim_lsp.jsonls.setup { capabilities = capabilities, on_attach = M.on_attach }
 --   capabilities = capabilities,
 -- })
 -- typescript / javascript lsp: npm install -g svelte-language-server
-nvim_lsp.tsserver.setup {}
+nvim_lsp.tsserver.setup { capabilities = capabilities, on_attach = M.on_attach }
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = { '*.html', '*.css', '*.js', '*.ts', '*.json' },
   command = ':lua vim.lsp.buf.format()',
