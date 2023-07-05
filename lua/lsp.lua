@@ -92,8 +92,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   command = ':lua vim.lsp.buf.format()',
 })
 
-
 -- https://github.com/artempyanykh/marksman
-nvim_lsp.marksman.setup {}
+-- nvim_lsp.marksman.setup {}
 
 return M
