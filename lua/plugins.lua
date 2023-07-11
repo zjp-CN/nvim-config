@@ -111,6 +111,7 @@ local packer = require 'packer'.startup(function(use)
   use 'kevinhwang91/nvim-ufo' -- fold: Not configured for now
   use 'rafcamlet/nvim-luapad'
 
+  use 'zhenyangze/vim-bitoai'
 
 end)
 
