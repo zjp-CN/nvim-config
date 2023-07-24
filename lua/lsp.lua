@@ -20,19 +20,6 @@ M.on_attach = function(_, bufnr)
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- inlay_hints
-  vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
-  vim.api.nvim_create_autocmd("InsertEnter", {
-    buffer = bufnr,
-    callback = function() vim.lsp.inlay_hint(bufnr, true) end,
-    group = "lsp_augroup",
-  })
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    buffer = bufnr,
-    callback = function() vim.lsp.inlay_hint(bufnr, false) end,
-    group = "lsp_augroup",
-  })
 end
 
 nvim_lsp.lua_ls.setup {

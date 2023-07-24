@@ -135,6 +135,7 @@ autocmd('User', {
 
     bind('n', '<C-s>', ":LspStop<cr> ")
     bind('n', '<M-s>', ":LspStart<cr> ")
+    bind('n', '<space>i', "<cmd>lua vim.lsp.inlay_hint(0)<cr>")
   end
 })
 
