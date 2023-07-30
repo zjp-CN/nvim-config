@@ -60,5 +60,8 @@ hi! CodeActionNumber guifg=#4DB368
 hi! ActionPreviewTitle guifg=#EA4439 guibg=None
 hi! TitleString guifg=#EA4439 guibg=None
 
+" === clever-f ===
+hi! CleverFChar guibg=#FFD885 guifg=red
+
 " inlay hint
 hi! LspInlayHint guibg=grey28 guifg=grey60
