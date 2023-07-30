@@ -56,8 +56,6 @@ au FileType netrw,help nmap <buffer> <LeftMouse> <LeftMouse> <CR>
 ]]
 
 -- colorscheme
--- vim.cmd(':source ' .. vim.fn.stdpath 'config' .. '/lua/colorscheme.vim')
--- vim.cmd 'colorscheme slate'
 vim.cmd [[
 set termguicolors
 let g:sonokai_diagnostic_text_highlight=0
@@ -65,7 +63,7 @@ let g:sonokai_diagnostic_virtual_text=0
 let g:sonokai_disable_terminal_colors=1
 
 function! s:sonokai_custom() abort
-  exec 'source '. stdpath('config') . '/lua/sonokai_custom.vim'
+  exec 'source '. stdpath('config') . '/lua/sonokai.vim'
 endfunction
 
 augroup SonokaiCustom
