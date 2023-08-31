@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
     opts = {
       ui = {
         windows = {
