@@ -1,3 +1,10 @@
+-- :h lspconfig-global-defaults (override global defaults for all servers)
+-- Don't autostart when opening a file, manually call `:LspStart` instead.
+local lspconfig = require("lspconfig")
+lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+  autostart = false,
+})
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -6,10 +13,13 @@ return {
       ui = {
         windows = {
           default_options = {
-            -- make border rounded
-            border = "rounded",
+            border = "rounded", -- make border rounded
           },
         },
+      },
+      servers = {
+        ["rust_analyzer"] = {},
+        ["lua_ls"] = {},
       },
     },
   },
@@ -17,8 +27,7 @@ return {
     "folke/noice.nvim",
     opts = {
       presets = {
-        -- add a border to hover docs and signature help
-        lsp_doc_border = true,
+        lsp_doc_border = true, -- add a border to hover docs and signature help
       },
     },
   },
