@@ -6,6 +6,7 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
 })
 
 return {
+  -- basic config
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
@@ -23,12 +24,37 @@ return {
       },
     },
   },
+  -- ui
   {
     "folke/noice.nvim",
     opts = {
       presets = {
         lsp_doc_border = true, -- add a border to hover docs and signature help
       },
+    },
+  },
+  -- sidebar symbol tree
+  {
+    "stevearc/aerial.nvim",
+    opts = {
+      layout = {
+        -- default_direction = "float",
+        placement = "edge",
+        min_width = { 40, 0.4 },
+      },
+      nerd_font = false,
+      close_on_select = true,
+      show_guides = true,
+      float = {
+        relative = "win",
+        min_height = { 8, 0.5 },
+      },
+      backends = { "lsp", "treesitter", "markdown", "man" },
+      filter_kind = false,
+    },
+    keys = {
+      { "<space>t", "<cmd>AerialToggle<cr>", desc = "toggle aerial (sidebar symbol tree)" },
+      { "<space>T", "<cmd>Telescope aerial<cr>", desc = "open aerial in Telescope" },
     },
   },
 }
