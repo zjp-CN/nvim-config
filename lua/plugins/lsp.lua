@@ -1,9 +1,11 @@
 -- :h lspconfig-global-defaults (override global defaults for all servers)
 -- Don't autostart when opening a file, manually call `:LspStart` instead.
-local lspconfig = require("lspconfig")
-lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-  autostart = false,
-})
+-- But this snippet increase startup time by 30ms (up to 10% of total startup time),
+-- so write it in config for each lsp to save startup time.
+-- local lspconfig = require("lspconfig")
+-- lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+--   autostart = false,
+-- })
 
 return {
   -- basic config
@@ -19,11 +21,12 @@ return {
         },
       },
       servers = {
-        ["rust_analyzer"] = {},
-        ["lua_ls"] = {},
+        ["rust_analyzer"] = { autostart = false },
+        ["lua_ls"] = { autostart = false },
       },
     },
   },
+
   -- ui
   {
     "folke/noice.nvim",
@@ -36,6 +39,7 @@ return {
   -- sidebar symbol tree
   {
     "stevearc/aerial.nvim",
+    -- event = { "VeryLazy" },
     opts = {
       layout = {
         -- default_direction = "float",
