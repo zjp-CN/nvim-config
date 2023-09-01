@@ -26,7 +26,6 @@ return {
       },
     },
   },
-
   -- ui
   {
     "folke/noice.nvim",
@@ -39,7 +38,6 @@ return {
   -- sidebar symbol tree
   {
     "stevearc/aerial.nvim",
-    -- event = { "VeryLazy" },
     opts = {
       layout = {
         -- default_direction = "float",
