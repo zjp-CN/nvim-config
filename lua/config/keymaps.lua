@@ -36,6 +36,8 @@ bind("t", "<m-i>", "<cmd>close<cr>", "close (but not quit) float terminal")
 -- lsp
 bind("n", "<space>i", "<cmd>lua vim.lsp.inlay_hint(0)<cr>", "toggle inlay hint in current buffer")
 
--- forbid ;/, from flash.nvim in normal mode
-bind("n", ";", "<nop>", "open Telescope")
-bind("n", ",", "<nop>", "open Telescope")
+-- don't use ;/, from flash.nvim in normal mode
+vim.cmd([[
+  nunmap ;
+  nunmap ,
+]])
