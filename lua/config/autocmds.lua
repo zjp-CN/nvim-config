@@ -2,8 +2,13 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
-local opt = vim.opt
+-- load files after/ dir alphabetically
+-- local dir = require("plenary.scandir").scan_dir("lua/after")
+-- for i = 1, #dir do
+--   require(dir[i]:gsub("\\", "/"):gsub("lua/", ""):gsub("/", "."):gsub(".lua$", ""))
+-- end
 
+local opt = vim.opt
 -- trailing spaces are shown as ⋅
 opt.listchars:append("trail:⋅")
 
