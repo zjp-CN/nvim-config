@@ -12,7 +12,7 @@ bind("n", "<leader>nb", "<cmd>set number! rnu!<CR>", "toggle the visibility of (
 bind("n", "<leader>NB", "<cmd>set rnu!<CR>", "toggle between relativenumber and sequence number")
 
 -- ### buffer switching
-bind("n", "<leader>dd", "<cmd>bd<CR>", "close buffer")
+bind("n", "<leader>dd", "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", "close buffer")
 
 -- ### buffer editting
 -- case switching
