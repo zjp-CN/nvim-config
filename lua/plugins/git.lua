@@ -24,4 +24,9 @@ return {
       },
     },
   },
+  {
+    "akinsho/git-conflict.nvim",
+    cmd = "GitConflictListQf",
+    opts = {},
+  },
 }
