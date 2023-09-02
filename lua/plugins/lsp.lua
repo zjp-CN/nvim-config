@@ -21,7 +21,7 @@ return {
         },
       },
       servers = {
-        ["rust_analyzer"] = { autostart = false },
+        -- ["rust_analyzer"] = { autostart = false },
         ["lua_ls"] = { autostart = false },
       },
     },
