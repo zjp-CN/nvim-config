@@ -23,8 +23,8 @@ vim.cmd([[
   " comments in most languages
   hi! Comment guifg=#00A000
   " but not for git
-  hi! gitcommitComment guifg=grey80
-  hi! gitignoreComment guifg=grey80
-  hi! gitrebaseComment guifg=grey80
-  hi! gitrebaseMergeComment guifg=grey80
+  hi! gitcommitComment guifg=grey45
+  hi! gitignoreComment guifg=grey45
+  hi! gitrebaseComment guifg=grey45
+  hi! gitrebaseMergeComment guifg=grey45
 ]])
