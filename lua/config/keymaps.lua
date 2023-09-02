@@ -6,13 +6,13 @@ local bind = function(mode, key, cmd, desc)
   vim.keymap.set(mode, key, cmd, { silent = true, desc = desc })
 end
 
-bind("", "<F3>", ":noh<CR>", "no highlight after searching")
+bind("", "<F3>", "<cmd>noh<CR>", "no highlight after searching")
 
-bind("n", "<leader>nb", ":set number! rnu!<CR>", "toggle the visibility of (relative) number")
-bind("n", "<leader>NB", ":set rnu!<CR>", "toggle between relativenumber and sequence number")
+bind("n", "<leader>nb", "<cmd>set number! rnu!<CR>", "toggle the visibility of (relative) number")
+bind("n", "<leader>NB", "<cmd>set rnu!<CR>", "toggle between relativenumber and sequence number")
 
 -- ### buffer switching
-bind("n", "<leader>dd", ":bd<CR>", "close buffer")
+bind("n", "<leader>dd", "<cmd>bd<CR>", "close buffer")
 
 -- ### buffer editting
 -- case switching
@@ -23,8 +23,8 @@ bind("v", "<leader>U", "gU", "switch to uppercase under (selected) cursor")
 -- clear and enter
 bind("n", "<leader>da", "ggVGDI", "clear the content in current buffer and enter")
 -- empty line
-bind("n", "[<space>", ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[", "add an empty line before the current line")
-bind("n", "]<space>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", "add an empty line after the current line")
+bind("n", "[<space>", "<cmd>put! =repeat(nr2char(10), v:count1)<cr>'[", "add an empty line before the current line")
+bind("n", "]<space>", "<cmd>put =repeat(nr2char(10), v:count1)<cr>", "add an empty line after the current line")
 
 -- floating terminal
 local lazyterm = function()
