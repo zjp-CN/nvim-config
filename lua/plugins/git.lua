@@ -12,4 +12,16 @@ return {
       { "<space>n", "<cmd>Neogit<cr>", "open Neogit" },
     },
   },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    opts = {
+      use_icons = false,
+      enhanced_diff_hl = true,
+      default_args = {
+        DiffviewOpen = { "--untracked-files=no" },
+        DiffviewFileHistory = { "--base=LOCAL" },
+      },
+    },
+  },
 }
