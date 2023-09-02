@@ -58,4 +58,7 @@ return {
       },
     },
   },
+  -- color plugins
+  { "NvChad/nvim-colorizer.lua", event = { "BufReadPost", "BufNewFile" }, opts = {} },
+  { "ziontee113/color-picker.nvim", cmd = { "PickColor", "PickColorInsert" }, opts = {} },
 }
