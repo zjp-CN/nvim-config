@@ -18,7 +18,7 @@ return {
   {
     "dhruvasagar/vim-table-mode",
     cmd = "TableModeToggle",
-    keys = "<leader>tm",
+    keys = { { "<leader>tm", desc = "toggle table mode" } },
     config = function()
       -- regiter key group info for whichkey
       require("which-key").register({
