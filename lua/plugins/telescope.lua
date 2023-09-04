@@ -27,4 +27,24 @@ return {
       tele.load_extension("file_browser")
     end,
   },
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    dependencies = {
+      {
+        "kkharji/sqlite.lua",
+        config = function()
+          if jit.os == "Windows" then
+            vim.g.sqlite_clib_path = "E://Programming//sqlite3//sqlite3.dll"
+          end
+        end,
+      },
+    },
+    keys = {
+      { ",c", "<cmd>Telescope frecency workspace=CWD<cr>", desc = "select file from root dir via frecency" },
+      { ",C", "<cmd>Telescope frecency<cr>", desc = "select file via frecency" },
+    },
+    config = function()
+      tele.load_extension("frecency")
+    end,
+  },
 }
