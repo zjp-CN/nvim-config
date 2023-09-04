@@ -1,6 +1,29 @@
-local tele = require("telescope")
+local on_windows = jit.os == "Windows"
+local smart_history = on_windows
+    and { history = { path = vim.fn.stdpath("data") .. "/telescope_history.sqlite3", limit = 100 } }
+  or {}
 
 return {
+  -- classify histories in Telescope
+  {
+    "nvim-telescope/telescope-smart-history.nvim",
+    dependencies = {
+      { "kkharji/sqlite.lua" },
+      {
+        "nvim-telescope/telescope.nvim",
+        opts = { defaults = smart_history },
+      },
+    },
+    cmd = "Telescope", -- there is a bug to start this plugin by run Telescope cmd
+    keys = {
+      { ",t", "<cmd>Telescope<cr>", desc = "start Telescope" },
+      { ";t", "<cmd>Telescope<cr>", desc = "start Telescope" },
+    },
+    config = function()
+      require("telescope").load_extension("smart_history")
+    end,
+  },
+  -- alternative to neotree, but always works
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
@@ -24,16 +47,17 @@ return {
       },
     },
     config = function()
-      tele.load_extension("file_browser")
+      require("telescope").load_extension("file_browser")
     end,
   },
+  -- file history for selection & read
   {
     "nvim-telescope/telescope-frecency.nvim",
     dependencies = {
       {
         "kkharji/sqlite.lua",
         config = function()
-          if jit.os == "Windows" then
+          if on_windows then
             vim.g.sqlite_clib_path = "E://Programming//sqlite3//sqlite3.dll"
           end
         end,
@@ -44,7 +68,7 @@ return {
       { ",C", "<cmd>Telescope frecency<cr>", desc = "select file via frecency" },
     },
     config = function()
-      tele.load_extension("frecency")
+      require("telescope").load_extension("frecency")
     end,
   },
 }
