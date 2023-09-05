@@ -4,6 +4,25 @@ local smart_history = on_windows
   or {}
 
 return {
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      -- general keymap: builtin
+      { ",t", "<cmd>Telescope<cr>" },
+      { ",l", "<cmd>Telescope live_grep<cr>" },
+      { ",g", "<cmd>Telescope grep_string<cr>" },
+      { ",f", "<cmd>Telescope find_files<cr>" },
+      { ",F", "<cmd>Telescope find_files no_ignore=true<cr>" },
+      { ",h", "<cmd>Telescope highlights<cr>" },
+      { ",,", "<cmd>Telescope help_tags<cr>" },
+      { ",k", "<cmd>Telescope keymaps<cr>" },
+      { ",b", "<cmd>Telescope buffers<cr>" },
+      { ",B", "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
+      { ",q", "<cmd>Telescope quickfix<cr>" },
+      { ",Q", "<cmd>Telescope quickfixhistory<cr>" },
+      { ",x", "<cmd>Telescope commands<cr>" },
+    },
+  },
   -- classify histories in Telescope
   {
     "nvim-telescope/telescope-smart-history.nvim",
