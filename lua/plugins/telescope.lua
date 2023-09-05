@@ -21,6 +21,20 @@ return {
       { ",q", "<cmd>Telescope quickfix<cr>" },
       { ",Q", "<cmd>Telescope quickfixhistory<cr>" },
       { ",x", "<cmd>Telescope commands<cr>" },
+
+      -- lsp keymaps
+      { ",d", "<cmd>Telescope diagnostics layout_strategy=vertical<cr>", desc = "(lsp) Telescope diagnostics" },
+      { ",D", "<cmd>Telescope lsp_document_symbols<cr>", desc = "(lsp) Telescope lsp_document_symbols" },
+      { ",s", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "(lsp) Telescope lsp_workspace_symbols" },
+      {
+        ",S",
+        "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+        desc = "(lsp) Telescope lsp_dynamic_workspace_symbols",
+      },
+      { ",i", "<cmd>Telescope lsp_incoming_calls<cr>", desc = "(lsp) Telescope lsp_incoming_calls" },
+      { ",o", "<cmd>Telescope lsp_outgoing_calls<cr>", desc = "(lsp) Telescope lsp_outgoing_calls" },
+      { ",T", "<cmd>Telescope lsp_type_definitions<cr>", desc = "(lsp) Telescope lsp_type_definitions" },
+      { ",I", "<cmd>Telescope lsp_implementations<cr>", desc = "(lsp) Telescope lsp_implementations" },
     },
   },
   -- dependency for plugins
