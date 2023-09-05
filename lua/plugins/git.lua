@@ -9,7 +9,7 @@ return {
       console_timeout = 10000,
     },
     keys = {
-      { "<space>n", "<cmd>Neogit<cr>", "open Neogit" },
+      { "<space>n", "<cmd>Neogit<cr>", desc = "open Neogit" },
     },
   },
   {
