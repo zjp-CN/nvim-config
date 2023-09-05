@@ -23,6 +23,15 @@ return {
       { ",x", "<cmd>Telescope commands<cr>" },
     },
   },
+  -- dependency for plugins
+  {
+    "kkharji/sqlite.lua",
+    config = function()
+      if on_windows then
+        vim.g.sqlite_clib_path = "E://Programming//sqlite3//sqlite3.dll"
+      end
+    end,
+  },
   -- classify histories in Telescope
   {
     "nvim-telescope/telescope-smart-history.nvim",
@@ -33,11 +42,7 @@ return {
         opts = { defaults = smart_history },
       },
     },
-    cmd = "Telescope", -- there is a bug to start this plugin by run Telescope cmd
-    keys = {
-      { ",t", "<cmd>Telescope<cr>", desc = "start Telescope" },
-      { ";t", "<cmd>Telescope<cr>", desc = "start Telescope" },
-    },
+    ft = "TelescopePrompt",
     config = function()
       require("telescope").load_extension("smart_history")
     end,
@@ -72,16 +77,7 @@ return {
   -- file history for selection & read
   {
     "nvim-telescope/telescope-frecency.nvim",
-    dependencies = {
-      {
-        "kkharji/sqlite.lua",
-        config = function()
-          if on_windows then
-            vim.g.sqlite_clib_path = "E://Programming//sqlite3//sqlite3.dll"
-          end
-        end,
-      },
-    },
+    dependencies = { "kkharji/sqlite.lua" },
     keys = {
       { ",c", "<cmd>Telescope frecency workspace=CWD<cr>", desc = "select file from root dir via frecency" },
       { ",C", "<cmd>Telescope frecency<cr>", desc = "select file via frecency" },
