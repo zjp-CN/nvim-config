@@ -36,6 +36,31 @@ return {
       { ",T", "<cmd>Telescope lsp_type_definitions<cr>", desc = "(lsp) Telescope lsp_type_definitions" },
       { ",I", "<cmd>Telescope lsp_implementations<cr>", desc = "(lsp) Telescope lsp_implementations" },
     },
+    opts = function(_, opts)
+      local action = require("telescope.actions")
+      local layout = require("telescope.actions.layout")
+      local mappings = opts.defaults.mappings
+      -- insert mode
+      mappings.i = vim.tbl_extend("force", mappings.i, {
+        ["<C-f>"] = action.to_fuzzy_refine, -- fuzzy search in live_grep
+      })
+      -- normal mode
+      mappings.n = vim.tbl_extend("force", mappings.n, {
+        ["t"] = action.toggle_all,
+        ["T"] = action.drop_all,
+        ["d"] = action.delete_buffer,
+        -- `<C-q>` clear + send all to quickfix
+        -- `<A-q>` clear + send the selected to quickfix
+        -- `a` add the selected to quickfix
+        -- `A` add all to quickfix
+        ["M-a"] = action.add_selected_to_qflist,
+        ["C-A"] = action.add_to_qflist,
+        ["l"] = layout.cycle_layout_next,
+        ["p"] = layout.toggle_preview,
+        ["<C-f>"] = action.to_fuzzy_refine, -- fuzzy search in live_grep
+      })
+      return opts
+    end,
   },
   -- dependency for plugins
   {
