@@ -28,7 +28,7 @@ bind("n", "]<space>", "<cmd>put =repeat(nr2char(10), v:count1)<cr>", "add an emp
 
 -- floating terminal
 local lazyterm = function()
-  require("lazyvim.util").float_term(nil, { border = "single" })
+  require("lazyvim.util").terminal.open(nil, { border = "single" })
 end
 bind("n", "<m-i>", lazyterm, "open float terminal")
 bind("t", "<m-i>", "<cmd>close<cr>", "close (but not quit) float terminal")
