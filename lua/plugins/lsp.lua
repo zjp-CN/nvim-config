@@ -22,6 +22,7 @@ return {
       },
       servers = {
         -- ["rust_analyzer"] = { autostart = false },
+        ["taplo"] = { autostart = false },
         ["lua_ls"] = { autostart = false },
       },
     },
