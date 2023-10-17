@@ -45,7 +45,7 @@ return {
       { "<leader>ba", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='all'" },
     },
     opts = function(_, opts)
-      for i, item in ipairs(opts.sources) do
+      for _, item in ipairs(opts.sources) do
         for key, value in pairs(item) do
           if key == "name" and value == "buffer" then
             item["option"] = {
@@ -73,7 +73,7 @@ return {
                 for _, buf in ipairs(api.nvim_list_bufs()) do
                   if
                     (
-                      cmp_get_bufnrs == "buflisted" and api.nvim_buf_get_option(buf, "buflisted")
+                      cmp_get_bufnrs == "buflisted" and api.nvim_get_option_value("buflisted", { buf = buf })
                       or cmp_get_bufnrs == "all"
                     )
                     and api.nvim_buf_is_loaded(buf)
