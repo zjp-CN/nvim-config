@@ -11,6 +11,10 @@ return {
           node_decremental = "<bs>",
         },
       },
+      ensure_installed = {
+        "rust",
+        "sql",
+      },
     },
   },
 }
