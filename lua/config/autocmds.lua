@@ -27,3 +27,5 @@ vim.cmd([[
   hi! gitrebaseComment guifg=grey45
   hi! gitrebaseMergeComment guifg=grey45
 ]])
+
+vim.api.nvim_create_augroup("lazyvim_wrap_spell", { clear = true })
