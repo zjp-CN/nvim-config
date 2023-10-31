@@ -93,4 +93,14 @@ return {
       return opts
     end,
   },
+  {
+    "stevearc/conform.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      opts = { ensure_installed = { "sql-formatter" } },
+    },
+    opts = {
+      formatters_by_ft = { sql = { "sql_formatter" } },
+    },
+  },
 }
