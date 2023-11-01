@@ -37,6 +37,14 @@ return {
       { ",I", "<cmd>Telescope lsp_implementations<cr>", desc = "(lsp) Telescope lsp_implementations" },
     },
     opts = function(_, opts)
+      -- ## layout
+      opts.defaults.layout_strategy = "vertical"
+      opts.defaults.layout_config = {
+        vertical = { width = 0.99, height = 0.95, prompt_position = "top" },
+        horizontal = { width = 0.99, height = 0.95, prompt_position = "bottom", preview_cutoff = 10 },
+      }
+
+      -- ## keymapping
       local action = require("telescope.actions")
       local layout = require("telescope.actions.layout")
       local mappings = opts.defaults.mappings
