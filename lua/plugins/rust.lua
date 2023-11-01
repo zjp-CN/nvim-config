@@ -4,6 +4,11 @@ return {
     keys = {
       { "<F2>", "<cmd>RustHoverActions<cr>", desc = "RustHoverActions" },
     },
+    opts = {
+      tools = {
+        inlay_hints = { auto = false },
+      },
+    },
   },
   {
     "Saecki/crates.nvim",
