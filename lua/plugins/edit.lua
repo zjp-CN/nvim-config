@@ -1,6 +1,12 @@
 -- default to use listed buffers as a source for nvim-cmp
 vim.g.cmp_get_bufnrs = "buflisted"
 
+local function sql_formatter_config()
+  local json = "/lua/plugins/sql_formatter.json"
+  local path = (jit.os == "Linux") and json or json:gsub("/", "\\")
+  return vim.fn.stdpath("config") .. path
+end
+
 return {
   {
     "junegunn/vim-easy-align",
@@ -101,6 +107,11 @@ return {
     },
     opts = {
       formatters_by_ft = { sql = { "sql_formatter" } },
+      formatters = {
+        sql_formatter = {
+          prepend_args = { "--config", sql_formatter_config() },
+        },
+      },
     },
   },
 }
