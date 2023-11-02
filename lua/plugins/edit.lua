@@ -106,7 +106,10 @@ return {
       opts = { ensure_installed = { "sql-formatter" } },
     },
     opts = {
-      formatters_by_ft = { sql = { "sql_formatter" } },
+      formatters_by_ft = {
+        sql = { "sql_formatter" },
+        rust = { "rustfmt" },
+      },
       formatters = {
         sql_formatter = {
           prepend_args = { "--config", sql_formatter_config() },
