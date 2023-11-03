@@ -9,7 +9,22 @@ local function diff_source()
   end
 end
 
+local enable_fancy_ui = false
+
 return {
+  { "catppuccin/nvim", enabled = false }, -- colorscheme
+  { "folke/noice.nvim", enabled = enable_fancy_ui },
+  {
+    "rcarriga/nvim-notify",
+    enabled = enable_fancy_ui,
+    ---@class notify.Config
+    opts = {
+      -- top_down = false, -- the position can only be top/bottom for now
+      render = "compact",
+      stages = "static",
+    },
+  },
+
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
@@ -20,15 +35,6 @@ return {
           ["C"] = "close_all_subnodes",
         },
       },
-    },
-  },
-  {
-    "rcarriga/nvim-notify",
-    ---@class notify.Config
-    opts = {
-      -- top_down = false, -- the position can only be top/bottom for now
-      render = "compact",
-      stages = "static",
     },
   },
   {
