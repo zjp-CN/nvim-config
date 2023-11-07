@@ -2,6 +2,7 @@ local on_windows = jit.os == "Windows"
 local smart_history = on_windows
     and { history = { path = vim.fn.stdpath("data") .. "/telescope_history.sqlite3", limit = 100 } }
   or {}
+local sep = on_windows and "\\" or "/"
 
 -- Declare the module
 local telescopePickers = {}
@@ -28,12 +29,19 @@ function telescopePickers.getPathAndTail(fileName, len)
     display = { shorten = { len = 1, exclude = { 1, -2, -1 } } }
   end
   -- display = len and { shorten = { len = 1, exclude = { 1, -1 } } } or { "shorten" }
-  local pathToDisplay = telescopeUtilities.transform_path({
-    path_display = display,
-  }, pathWithoutTail)
 
+  local pathToDisplay = telescopeUtilities.transform_path(
+    {
+      path_display = display,
+    },
+    -- 盘符在 getcwd(0) 中和 transform_path 中为大写，但有时
+    -- 比如 *_workspace_symbols 为小写（导致原本可以缩短的路径变得难看），因此统一成大写
+    on_windows and pathWithoutTail:gsub("^%l", string.upper) or pathWithoutTail
+  )
+
+  local parent = pathToDisplay == "" and "." or pathToDisplay
   -- Return as Tuple
-  return bufferNameTail, pathToDisplay
+  return bufferNameTail, parent .. sep
 end
 
 local kind_icons = {
@@ -131,25 +139,28 @@ function telescopePickers.prettyWorkspaceSymbols(localOptions)
     })
 
     originalEntryTable.display = function(entry)
-      local tail, _ = telescopePickers.getPathAndTail(entry.filename)
+      local tail, parent = telescopePickers.getPathAndTail(entry.filename)
       local tailForDisplay = tail .. " "
-      local pathToDisplay = telescopeUtilities.transform_path({
-        path_display = { shorten = { num = 2, exclude = { -2, -1 } }, "truncate" },
-      }, entry.value.filename)
 
       return displayer({
         string.format("%s", kind_icons[(entry.symbol_type:lower():gsub("^%l", string.upper))]),
         { entry.symbol_type:lower(), "TelescopeResultsVariable" },
         { entry.symbol_name, "TelescopeResultsConstant" },
         tailForDisplay,
-        { pathToDisplay, "TelescopeResultsComment" },
+        { parent, "TelescopeResultsComment" },
       })
     end
 
     return originalEntryTable
   end
+  return options
+end
 
-  require("telescope.builtin").lsp_dynamic_workspace_symbols(options)
+function telescopePickers.lsp_dynamic_workspace_symbols()
+  require("telescope.builtin").lsp_dynamic_workspace_symbols(telescopePickers.prettyWorkspaceSymbols())
+end
+function telescopePickers.lsp_workspace_symbols()
+  require("telescope.builtin").lsp_workspace_symbols(telescopePickers.prettyWorkspaceSymbols())
 end
 
 function telescopePickers.prettyBuffersPicker(localOptions)
@@ -230,15 +241,18 @@ function telescopePickers.longPath(gen)
   return options
 end
 
-local gen_from_buffer = telescopeMakeEntryModule.gen_from_quickfix
+local gen_from_quickfix = telescopeMakeEntryModule.gen_from_quickfix
 function telescopePickers.lsp_incoming_calls()
-  require("telescope.builtin").lsp_incoming_calls(telescopePickers.longPath(gen_from_buffer))
+  require("telescope.builtin").lsp_incoming_calls(telescopePickers.longPath(gen_from_quickfix))
 end
 function telescopePickers.lsp_outgoing_calls()
-  require("telescope.builtin").lsp_outgoing_calls(telescopePickers.longPath(gen_from_buffer))
+  require("telescope.builtin").lsp_outgoing_calls(telescopePickers.longPath(gen_from_quickfix))
 end
 function telescopePickers.lsp_references()
-  require("telescope.builtin").lsp_references(telescopePickers.longPath(gen_from_buffer))
+  require("telescope.builtin").lsp_references(telescopePickers.longPath(gen_from_quickfix))
+end
+function telescopePickers.lsp_implementations()
+  require("telescope.builtin").lsp_implementations(telescopePickers.longPath(gen_from_quickfix))
 end
 
 local gen_from_vimgrep = telescopeMakeEntryModule.gen_from_vimgrep
@@ -251,9 +265,19 @@ end
 
 return {
   {
+    "neovim/nvim-lspconfig",
+    init = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      -- disable a keymap
+      keys[#keys + 1] = { "gr", false }
+      keys[#keys + 1] = { "gI", false }
+    end,
+  },
+  {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { ",r", telescopePickers.lsp_references },
+      { "gr", telescopePickers.lsp_references },
+      { "gI", telescopePickers.lsp_implementations },
       -- general keymap: builtin
       { ",t", "<cmd>Telescope<cr>" },
       -- { ",l", "<cmd>Telescope live_grep<cr>" },
@@ -278,12 +302,13 @@ return {
       { ",D", telescopePickers.prettyDocumentSymbols, desc = "(lsp) Telescope lsp_document_symbols" },
       {
         ",S",
-        "<cmd>Telescope lsp_workspace_symbols<cr>",
+        telescopePickers.lsp_workspace_symbols,
+        -- "<cmd>Telescope lsp_workspace_symbols<cr>",
         desc = "(lsp) Telescope lsp_workspace_symbols (in current workspace)",
       },
       {
         ",s",
-        telescopePickers.prettyWorkspaceSymbols,
+        telescopePickers.lsp_dynamic_workspace_symbols,
         -- "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
         desc = "(lsp) Telescope lsp_dynamic_workspace_symbols (in all workspaces)",
       },
@@ -291,8 +316,6 @@ return {
       { ",i", telescopePickers.lsp_incoming_calls, desc = "(lsp) Telescope lsp_incoming_calls" },
       -- { ",o", "<cmd>Telescope lsp_outgoing_calls<cr>", desc = "(lsp) Telescope lsp_outgoing_calls" },
       { ",o", telescopePickers.lsp_outgoing_calls, desc = "(lsp) Telescope lsp_outgoing_calls" },
-      { ",T", "<cmd>Telescope lsp_type_definitions<cr>", desc = "(lsp) Telescope lsp_type_definitions" },
-      { ",I", "<cmd>Telescope lsp_implementations<cr>", desc = "(lsp) Telescope lsp_implementations" },
     },
     opts = function(_, opts)
       -- opts.defaults.path_display = { shorten = { len = 1, exclude = { 1, -1 } } }
