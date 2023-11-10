@@ -36,7 +36,7 @@ function telescopePickers.getPathAndTail(fileName, len)
     },
     -- 盘符在 getcwd(0) 中和 transform_path 中为大写，但有时
     -- 比如 *_workspace_symbols 为小写（导致原本可以缩短的路径变得难看），因此统一成大写
-    on_windows and pathWithoutTail:gsub("^%l", string.upper) or pathWithoutTail
+    on_windows and pathWithoutTail:gsub("^%l:", string.upper) or pathWithoutTail
   )
 
   local parent = pathToDisplay == "" and "." or pathToDisplay
