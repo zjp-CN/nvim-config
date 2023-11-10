@@ -108,7 +108,7 @@ return {
     opts = {
       formatters_by_ft = {
         sql = { "sql_formatter" },
-        rust = { "rustfmt" },
+        -- rust = { "rustfmt" },
       },
       formatters = {
         sql_formatter = {
