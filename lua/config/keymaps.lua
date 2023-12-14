@@ -34,7 +34,7 @@ bind("n", "<m-i>", lazyterm, "open float terminal")
 bind("t", "<m-i>", "<cmd>close<cr>", "close (but not quit) float terminal")
 
 -- lsp
-bind("n", "<space>i", "<cmd>lua vim.lsp.inlay_hint(0)<cr>", "toggle inlay hint in current buffer")
+bind("n", "<space>i", "<cmd>lua vim.lsp.inlay_hint.enable()<cr>", "toggle inlay hint in current buffer")
 
 -- don't use ;/, from flash.nvim in normal mode
 vim.cmd([[
