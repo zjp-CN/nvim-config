@@ -7,6 +7,8 @@ local function sql_formatter_config()
   return vim.fn.stdpath("config") .. path
 end
 
+local snippet_path = vim.fn.stdpath("config") .. "/snippets"
+
 return {
   {
     "junegunn/vim-easy-align",
@@ -123,5 +125,35 @@ return {
       default = { replace = { cmd = "oxi" } },
     },
   },
+  -- disable friendly-snippets
+  { "rafamadriz/friendly-snippets", enabled = false },
+  -- better editing and creation of snippets (based on LuaSnip)
+  {
+    "chrisgrieser/nvim-scissors",
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load({ paths = { snippet_path } })
+      end,
+    },
+    keys = {
+      {
+        "<space>e",
+        function()
+          require("scissors").editSnippet()
+        end,
+        desc = "edit snippet",
+      },
+      {
+        "<space>a",
+        function()
+          require("scissors").addNewSnippet()
+        end,
+        mode = { "n", "x" },
+        desc = "add snippet",
+      },
+    },
+    event = "VeryLazy",
+    opts = { snippetDir = snippet_path },
+  },
 }
-
