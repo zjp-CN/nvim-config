@@ -154,6 +154,23 @@ return {
       },
     },
     event = "VeryLazy",
-    opts = { snippetDir = snippet_path },
+    opts = {
+      snippetDir = snippet_path,
+      editSnippetPopup = {
+        height = 0.5, -- relative to the window, number between 0 and 1
+        width = 0.5,
+        border = "rounded",
+        keymaps = {
+          cancel = "q",
+          saveChanges = "<CR>", -- alternatively, can also use `:w`
+          goBackToSearch = "<BS>",
+          deleteSnippet = "<C-d>",
+          duplicateSnippet = "<C-y>",
+          openInFile = "<C-f>",
+          insertNextToken = "<C-n>", -- insert & normal mode
+          jumpBetweenBodyAndPrefix = "<C-a>", -- insert & normal mode
+        },
+      },
+    },
   },
 }
