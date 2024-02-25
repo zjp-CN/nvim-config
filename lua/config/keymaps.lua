@@ -41,3 +41,14 @@ vim.cmd([[
   nunmap ;
   nunmap ,
 ]])
+
+-- accidental write buffer commands in capital case
+vim.api.nvim_create_user_command("Wa", "wa", {
+  desc = "Alias for :wa (write all buffers)",
+})
+vim.api.nvim_create_user_command("WA", "wa", {
+  desc = "Alias for :wa (write all buffers)",
+})
+vim.api.nvim_create_user_command("W", "w", {
+  desc = "Alias for :w (write current buffer)",
+})
