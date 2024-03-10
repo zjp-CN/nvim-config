@@ -173,4 +173,44 @@ return {
       },
     },
   },
+  {
+    "jbyuki/venn.nvim",
+    cmd = "VBox",
+    keys = {
+      {
+        "<space>v",
+        function()
+          local venn_enabled = vim.inspect(vim.b.venn_enabled)
+          if venn_enabled == "nil" then
+            vim.b.venn_enabled = true
+            vim.cmd([[setlocal ve=all]])
+            -- draw a line
+            vim.api.nvim_buf_set_keymap(0, "n", "<down>", "<C-v>j:VBox<CR>", { noremap = true })
+            vim.api.nvim_buf_set_keymap(0, "n", "<up>", "<C-v>k:VBox<CR>", { noremap = true })
+            vim.api.nvim_buf_set_keymap(0, "n", "<right>", "<C-v>l:VBox<CR>", { noremap = true })
+            vim.api.nvim_buf_set_keymap(0, "n", "<left>", "<C-v>h:VBox<CR>", { noremap = true })
+            vim.api.nvim_buf_set_keymap(
+              0,
+              "n",
+              "f",
+              "i <C-c>vy100pVy50pggg0<cmd>mapclear <buffer> | unlet b:venn_enabled<cr>",
+              { noremap = true, desc = "Fill the buffer with 100*50 empty chars and disable venn" }
+            )
+            -- draw a box
+            vim.api.nvim_buf_set_keymap(0, "v", "b", ":VBox<CR>", { noremap = true })
+            print("Venn plotting starts.")
+          else
+            vim.cmd([[setlocal ve=]])
+            vim.cmd([[mapclear <buffer>]])
+            vim.b.venn_enabled = nil
+            print("Venn plotting stops.")
+          end
+        end,
+        mode = { "n" },
+        desc = "Toggle venn plotting",
+      },
+      { "<space>b", ":VBox<cr>", mode = "v", desc = "Plot a Box on selected content" },
+    },
+    event = "VeryLazy",
+  },
 }
