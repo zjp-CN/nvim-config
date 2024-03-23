@@ -55,12 +55,48 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local compare = require("cmp").config.compare
+      ---@type cmp.ComparatorFunction[]
       opts.sorting.comparators = {
-        compare.exact,
-        compare.offset,
-        compare.sort_text,
-        compare.length,
-        compare.order,
+        ---@param entry1 cmp.Entry
+        ---@param entry2 cmp.Entry
+        function(entry1, entry2)
+          if entry1.source.name == "nvim_lsp" and entry2.source.name == "nvim_lsp" then
+            local score1 = tonumber(entry1.completion_item.sortText, 16)
+            local score2 = tonumber(entry2.completion_item.sortText, 16)
+
+            -- logging: need to remove this
+            io.open("completion.log", "a+"):write(
+              string.format(
+                "%s~ (%s) & %s~ (%s)\n",
+                entry1.completion_item.label,
+                score1,
+                entry2.completion_item.label,
+                score2
+              )
+            )
+
+            if score1 and score2 then
+              if score1 < score2 then
+                return true
+              elseif score1 > score2 then
+                return false
+              else
+                local diff = vim.stricmp(entry1.completion_item.label, entry2.completion_item.label)
+                if diff < 0 then
+                  return true
+                elseif diff > 0 then
+                  return false
+                end
+              end
+            end
+          end
+          return nil
+        end,
+        -- compare.exact,
+        -- compare.sort_text,
+        -- compare.length,
+        -- compare.order,
+        -- compare.offset,
       }
 
       for _, item in ipairs(opts.sources) do
