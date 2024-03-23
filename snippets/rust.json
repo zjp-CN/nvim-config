@@ -1,1 +1,1 @@
-{"tmp-debug":{"body":["impl Debug for ${1:Strut} {","    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {","        let mut base = f.debug_struct(\"${1}\");","        base.field(\"id\", &self.id);","        skip_fmt!(base, self . ${0});","        base.finish()","    }","}"],"prefix":"tmp-debug"}}
+{"pfn":{"prefix":"pfn","body":["pub fn $1() {","    $0","}"]},"format":{"prefix":"format","body":["$1.format::<Kind>(buf);","$0"]}}
