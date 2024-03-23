@@ -52,7 +52,17 @@ return {
       { "<leader>b2", "<cmd>let g:cmp_get_bufnrs='buflisted'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='buflisted'" },
       { "<leader>ba", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='all'" },
     },
+    ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
+      local compare = require("cmp").config.compare
+      opts.sorting.comparators = {
+        compare.exact,
+        compare.offset,
+        compare.sort_text,
+        compare.length,
+        compare.order,
+      }
+
       for _, item in ipairs(opts.sources) do
         for key, value in pairs(item) do
           if key == "name" and value == "buffer" then
