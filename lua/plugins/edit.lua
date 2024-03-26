@@ -60,33 +60,60 @@ return {
         ---@param entry1 cmp.Entry
         ---@param entry2 cmp.Entry
         function(entry1, entry2)
-          if entry1.source.name == "nvim_lsp" and entry2.source.name == "nvim_lsp" then
-            local score1 = tonumber(entry1.completion_item.sortText, 16)
-            local score2 = tonumber(entry2.completion_item.sortText, 16)
+          ---@type vim.lsp.Client | any
+          local source1 = entry1.source
+          ---@type vim.lsp.Client | any
+          local source2 = entry2.source
+          if source1.name ~= "nvim_lsp" and source2.name ~= "nvim_lsp" then
+            return nil
+          end
 
-            -- logging: need to remove this
-            io.open("completion.log", "a+"):write(
-              string.format(
-                "%s~ (%s) & %s~ (%s)\n",
-                entry1.completion_item.label,
-                score1,
-                entry2.completion_item.label,
-                score2
-              )
-            )
+          ---@type vim.lsp.ClientConfig
+          local client1 = source1.client
+          ---@type vim.lsp.ClientConfig
+          local client2 = source1.client
+          if client1 and client2 and client1.name ~= "rust-analyzer" and client2.name ~= "rust-analyzer" then
+            return nil
+          end
 
-            if score1 and score2 then
-              if score1 < score2 then
+          -- local score1 = tonumber(entry1.completion_item.sortText, 16)
+          -- local score2 = tonumber(entry2.completion_item.sortText, 16)
+          -- RA emits hex string in ffff... form, no need to convert it to integer
+          local score1 = entry1.completion_item.sortText
+          local score2 = entry2.completion_item.sortText
+
+          local label1 = entry1.completion_item.label
+          local label2 = entry2.completion_item.label
+
+          -- logging: need to remove this
+          -- io.open("completion.log", "a+"):write(string.format("\n%s vs %s\n", label1, label2))
+          -- io.open("completion.log", "a+"):write(
+          --   string.format(
+          --     "label1: %s\n\tsortText1: %s\n\ttags: %s\n\tkind: %s\n"
+          --       .. "label2: %s\n\tsortText2: %s\n\ttags: %s\n\tkind: %s"
+          --       .. "\n\n",
+          --     label1,
+          --     score1,
+          --     entry1.completion_item.tags,
+          --     entry1.completion_item.kind,
+          --     label2,
+          --     score2,
+          --     entry2.completion_item.tags,
+          --     entry2.completion_item.kind
+          --   )
+          -- )
+
+          if score1 and score2 then
+            if score1 < score2 then
+              return true
+            elseif score1 > score2 then
+              return false
+            else
+              local diff = vim.stricmp(label1, label2)
+              if diff < 0 then
                 return true
-              elseif score1 > score2 then
+              elseif diff > 0 then
                 return false
-              else
-                local diff = vim.stricmp(entry1.completion_item.label, entry2.completion_item.label)
-                if diff < 0 then
-                  return true
-                elseif diff > 0 then
-                  return false
-                end
               end
             end
           end
@@ -95,7 +122,7 @@ return {
         -- compare.exact,
         -- compare.sort_text,
         -- compare.length,
-        -- compare.order,
+        compare.order,
         -- compare.offset,
       }
 
