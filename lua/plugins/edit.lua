@@ -127,12 +127,7 @@ return {
               for _, to_be_import in ipairs(data.imports) do
                 -- can be crate name or module name
                 local name = to_be_import.full_import_path:match("%w+")
-                -- filter out unwanted name but not for macro
-                -- macro shares function kind in lsp spec
-                if
-                  vim.tbl_contains(ra_unwanted_auto_import_crates, name)
-                  and to_be_import.imported_name:sub(-1) ~= "!"
-                then
+                if vim.tbl_contains(ra_unwanted_auto_import_crates, name) then
                   return false
                 end
               end
