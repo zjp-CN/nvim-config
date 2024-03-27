@@ -9,6 +9,44 @@ end
 
 local snippet_path = vim.fn.stdpath("config") .. "/snippets"
 
+-- change buffers source in nvim-cmp
+local get_bufnrs = function()
+  local cmp_get_bufnrs = vim.g.cmp_get_bufnrs
+  local api = vim.api
+  local bufs = {}
+
+  --  current buffer
+  if cmp_get_bufnrs == "current_buf" then
+    table.insert(bufs, api.nvim_get_current_buf())
+    return bufs
+  end
+
+  -- buffers in current tab including unlisted ones like help
+  if cmp_get_bufnrs == "current_tab" then
+    for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
+      table.insert(bufs, api.nvim_win_get_buf(win))
+    end
+    return bufs
+  end
+
+  -- all active/listed non-empty buffers
+  -- or all buffers including hidden/unlisted ones (like help/terminal)
+  for _, buf in ipairs(api.nvim_list_bufs()) do
+    if
+      (
+        cmp_get_bufnrs == "buflisted" and api.nvim_get_option_value("buflisted", { buf = buf })
+        or cmp_get_bufnrs == "all"
+      )
+      and api.nvim_buf_is_loaded(buf)
+      and api.nvim_buf_line_count(buf) > 0
+    then
+      table.insert(bufs, buf)
+    end
+  end
+
+  return bufs
+end
+
 return {
   {
     "junegunn/vim-easy-align",
@@ -54,120 +92,52 @@ return {
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      local compare = require("cmp").config.compare
-      ---@type cmp.ComparatorFunction[]
-      opts.sorting.comparators = {
-        ---@param entry1 cmp.Entry
-        ---@param entry2 cmp.Entry
-        function(entry1, entry2)
-          ---@type vim.lsp.Client | any
-          local source1 = entry1.source
-          ---@type vim.lsp.Client | any
-          local source2 = entry2.source
-          if source1.name ~= "nvim_lsp" and source2.name ~= "nvim_lsp" then
-            return nil
-          end
-
-          ---@type vim.lsp.ClientConfig
-          local client1 = source1.client
-          ---@type vim.lsp.ClientConfig
-          local client2 = source1.client
-          if client1 and client2 and client1.name ~= "rust-analyzer" and client2.name ~= "rust-analyzer" then
-            return nil
-          end
-
-          -- local score1 = tonumber(entry1.completion_item.sortText, 16)
-          -- local score2 = tonumber(entry2.completion_item.sortText, 16)
-          -- RA emits hex string in ffff... form, no need to convert it to integer
-          local score1 = entry1.completion_item.sortText
-          local score2 = entry2.completion_item.sortText
-
-          local label1 = entry1.completion_item.label
-          local label2 = entry2.completion_item.label
-
-          -- logging: need to remove this
-          -- io.open("completion.log", "a+"):write(string.format("\n%s vs %s\n", label1, label2))
-          -- io.open("completion.log", "a+"):write(
-          --   string.format(
-          --     "label1: %s\n\tsortText1: %s\n\ttags: %s\n\tkind: %s\n"
-          --       .. "label2: %s\n\tsortText2: %s\n\ttags: %s\n\tkind: %s"
-          --       .. "\n\n",
-          --     label1,
-          --     score1,
-          --     entry1.completion_item.tags,
-          --     entry1.completion_item.kind,
-          --     label2,
-          --     score2,
-          --     entry2.completion_item.tags,
-          --     entry2.completion_item.kind
-          --   )
-          -- )
-
-          if score1 and score2 then
-            if score1 < score2 then
-              return true
-            elseif score1 > score2 then
-              return false
-            else
-              local diff = vim.stricmp(label1, label2)
-              if diff < 0 then
-                return true
-              elseif diff > 0 then
-                return false
-              end
-            end
-          end
-          return nil
-        end,
-        -- compare.exact,
-        -- compare.sort_text,
-        -- compare.length,
-        compare.order,
-        -- compare.offset,
-      }
+      local ra_unwanted_auto_import_crates = { "owo-colors", "ratatui" }
 
       for _, item in ipairs(opts.sources) do
-        for key, value in pairs(item) do
-          if key == "name" and value == "buffer" then
-            item["option"] = {
-              get_bufnrs = function()
-                local cmp_get_bufnrs = vim.g.cmp_get_bufnrs
-                local api = vim.api
-                local bufs = {}
+        if item.name == "buffer" then
+          item.option = vim.tbl_deep_extend("keep", { get_bufnrs = get_bufnrs }, item.option or {})
+        end
 
-                --  current buffer
-                if cmp_get_bufnrs == "current_buf" then
-                  table.insert(bufs, api.nvim_get_current_buf())
-                  return bufs
+        if item.name == "nvim_lsp" then
+          ---@param entry cmp.Entry
+          ---@param ctx cmp.Context
+          item.entry_filter = function(entry, ctx)
+            if ctx.filetype == "rust" then
+              -- local com = require("completion")
+              -- com.data:push(string.format("%s", vim.inspect(entry.completion_item)))
+
+              ---@class RACompletionImport
+              ---@field full_import_path string
+              ---@field imported_name string
+
+              ---@class RACompletionResolveData
+              ---@field imports RACompletionImport[]
+              ---@field position lsp.TextDocumentPositionParams
+
+              ---@alias RAData RACompletionResolveData | nil
+
+              ---@type RAData
+              local data = entry.completion_item.data
+
+              -- only filter out imported methods
+              if data == nil or #data.imports == 0 or entry:get_kind() ~= 2 then
+                return true
+              end
+              for _, to_be_import in ipairs(data.imports) do
+                -- can be crate name or module name
+                local name = to_be_import.full_import_path:match("%w+")
+                -- filter out unwanted name but not for macro
+                -- macro shares function kind in lsp spec
+                if
+                  vim.tbl_contains(ra_unwanted_auto_import_crates, name)
+                  and to_be_import.imported_name:sub(-1) ~= "!"
+                then
+                  return false
                 end
-
-                -- buffers in current tab including unlisted ones like help
-                if cmp_get_bufnrs == "current_tab" then
-                  for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
-                    table.insert(bufs, api.nvim_win_get_buf(win))
-                  end
-                  return bufs
-                end
-
-                -- all active/listed non-empty buffers
-                -- or all buffers including hidden/unlisted ones (like help/terminal)
-                for _, buf in ipairs(api.nvim_list_bufs()) do
-                  if
-                    (
-                      cmp_get_bufnrs == "buflisted" and api.nvim_get_option_value("buflisted", { buf = buf })
-                      or cmp_get_bufnrs == "all"
-                    )
-                    and api.nvim_buf_is_loaded(buf)
-                    and api.nvim_buf_line_count(buf) > 0
-                  then
-                    table.insert(bufs, buf)
-                  end
-                end
-
-                return bufs
-              end,
-            }
-            return opts
+              end
+            end
+            return true
           end
         end
       end
