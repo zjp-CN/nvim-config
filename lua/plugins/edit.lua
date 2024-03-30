@@ -104,19 +104,12 @@ return {
 
       local cmp_rs = require("cmp_lsp_rs").comparators
       opts.sorting.comparators = {
-        -- rust_cmp,
-        -- compare.kind,
-        -- compare.recently_used,
-        -- cmp_rs.sort_by_kind,
         cmp_rs.rust_in_scope_inherent_with_kind,
         -- cmp_rs.rust_in_scope_inherent_import_with_kind,
         -- cmp_rs.rust_in_scope_or_inherent_first,
         cmp_rs.sort_by_label_but_underscore_last,
-        -- ---@param e1 cmp.Entry
-        -- ---@param e2 cmp.Entry
-        -- function(e1, e2)
-        --   return e1.completion_item.label < e2.completion_item.label
-        -- end,
+        -- compare.recently_used,
+        -- compare.kind,
         -- compare.sort_text,
       }
 
@@ -130,8 +123,6 @@ return {
           ---@param ctx cmp.Context
           item.entry_filter = function(entry, ctx)
             if ctx.filetype == "rust" then
-              -- local com = require("completion")
-
               ---@type RAData
               local data = entry.completion_item.data
 
@@ -139,19 +130,6 @@ return {
               if data == nil or #data.imports == 0 or entry:get_kind() ~= 2 then
                 return true
               end
-
-              -- local c = entry.completion_item
-              -- ---@type LabelInfo
-              -- local label_info = {
-              --   label = c.label,
-              --   kind = c.kind or 1,
-              --   data = {
-              --     uri = data.position.textDocument.uri,
-              --     full_import_path = data.imports[1].full_import_path or "",
-              --     imported_name = data.imports[1].imported_name or "",
-              --   },
-              -- }
-              -- com.data:push(label_info)
 
               for _, to_be_import in ipairs(data.imports) do
                 -- can be crate name or module name
