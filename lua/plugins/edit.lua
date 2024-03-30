@@ -90,9 +90,35 @@ return {
       { "<leader>b2", "<cmd>let g:cmp_get_bufnrs='buflisted'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='buflisted'" },
       { "<leader>ba", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='all'" },
     },
+    dependencies = {
+      { dir = "/rust/github/nvim-cmp-lsp-rs", opts = {} },
+    },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local ra_unwanted_auto_import_crates = { "owo-colors", "ratatui" }
+      -- local compare = require("cmp").config.compare
+      local cmp = require("cmp")
+
+      -- disable auto select: always select first candidate instead
+      opts.preselect = cmp.PreselectMode.None
+
+      local cmp_rs = require("cmp_lsp_rs").comparators
+      opts.sorting.comparators = {
+        -- rust_cmp,
+        -- compare.kind,
+        -- compare.recently_used,
+        -- cmp_rs.sort_by_kind,
+        cmp_rs.rust_in_scope_inherent_with_kind,
+        -- cmp_rs.rust_in_scope_inherent_import_with_kind,
+        -- cmp_rs.rust_in_scope_or_inherent_first,
+        cmp_rs.sort_by_label_but_underscore_last,
+        -- ---@param e1 cmp.Entry
+        -- ---@param e2 cmp.Entry
+        -- function(e1, e2)
+        --   return e1.completion_item.label < e2.completion_item.label
+        -- end,
+        -- compare.sort_text,
+      }
 
       for _, item in ipairs(opts.sources) do
         if item.name == "buffer" then
@@ -105,17 +131,6 @@ return {
           item.entry_filter = function(entry, ctx)
             if ctx.filetype == "rust" then
               -- local com = require("completion")
-              -- com.data:push(string.format("%s", vim.inspect(entry.completion_item)))
-
-              ---@class RACompletionImport
-              ---@field full_import_path string
-              ---@field imported_name string
-
-              ---@class RACompletionResolveData
-              ---@field imports RACompletionImport[]
-              ---@field position lsp.TextDocumentPositionParams
-
-              ---@alias RAData RACompletionResolveData | nil
 
               ---@type RAData
               local data = entry.completion_item.data
@@ -124,6 +139,20 @@ return {
               if data == nil or #data.imports == 0 or entry:get_kind() ~= 2 then
                 return true
               end
+
+              -- local c = entry.completion_item
+              -- ---@type LabelInfo
+              -- local label_info = {
+              --   label = c.label,
+              --   kind = c.kind or 1,
+              --   data = {
+              --     uri = data.position.textDocument.uri,
+              --     full_import_path = data.imports[1].full_import_path or "",
+              --     imported_name = data.imports[1].imported_name or "",
+              --   },
+              -- }
+              -- com.data:push(label_info)
+
               for _, to_be_import in ipairs(data.imports) do
                 -- can be crate name or module name
                 local name = to_be_import.full_import_path:match("%w+")
