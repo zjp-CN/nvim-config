@@ -1,6 +1,18 @@
 -- default to use listed buffers as a source for nvim-cmp
 vim.g.cmp_get_bufnrs = "buflisted"
 
+local function entry_filter(e, c)
+  return require("cmp_lsp_rs").filter_out.rust_entry_filter(e, c)
+end
+
+local function inscope_inherent_import(e1, e2)
+  return require("cmp_lsp_rs").comparators.inscope_inherent_import(e1, e2)
+end
+
+local function sort_by_label_but_underscore_last(e1, e2)
+  return require("cmp_lsp_rs").comparators.sort_by_label_but_underscore_last(e1, e2)
+end
+
 local function sql_formatter_config()
   local json = "/lua/plugins/sql_formatter.json"
   local path = (jit.os == "Linux") and json or json:gsub("/", "\\")
@@ -93,40 +105,57 @@ return {
     dependencies = {
       { dir = "/rust/github/nvim-cmp-lsp-rs", opts = {} },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      -- local compare = require("cmp").config.compare
-
-      -- disable auto select: always select first candidate instead
-      opts.preselect = cmp.PreselectMode.None
-
-      opts.view = vim.tbl_deep_extend("keep", opts.view or {}, {
-        docs = { auto_open = false },
-      })
-
-      local cmp_rs = require("cmp_lsp_rs")
-      local comparators = cmp_rs.comparators
-
-      opts.sorting.comparators = {
-        -- compare.kind,
-        -- comparators.inherent_import_inscope,
-        -- comparators.inscope_inherent,
-        comparators.inscope_inherent_import,
-        comparators.sort_by_label_but_underscore_last,
-        -- compare.recently_used,
-        -- compare.sort_text,
-      }
-
-      for _, source in ipairs(opts.sources) do
-        if source.name == "buffer" then
-          source.option = vim.tbl_deep_extend("keep", { get_bufnrs = get_bufnrs }, source.option or {})
-        end
-
-        cmp_rs.filter_out.entry_filter(source)
-      end
-      return opts
-    end,
+    ---@type cmp.ConfigSchema
+    opts = {
+      ---@type cmp.SourceConfig[]
+      sources = {
+        {
+          name = "nvim_lsp",
+          entry_filter = entry_filter,
+        },
+      },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          inscope_inherent_import,
+          sort_by_label_but_underscore_last,
+        },
+      },
+    },
+    ----param opts cmp.ConfigSchema
+    -- opts = function(_, opts)
+    --   local cmp = require("cmp")
+    --   -- local compare = require("cmp").config.compare
+    --
+    --   -- disable auto select: always select first candidate instead
+    --   opts.preselect = cmp.PreselectMode.None
+    --
+    --   opts.view = vim.tbl_deep_extend("keep", opts.view or {}, {
+    --     docs = { auto_open = false },
+    --   })
+    --
+    --   local cmp_rs = require("cmp_lsp_rs")
+    --   local comparators = cmp_rs.comparators
+    --
+    --   opts.sorting.comparators = {
+    --     -- compare.kind,
+    --     -- comparators.inherent_import_inscope,
+    --     -- comparators.inscope_inherent,
+    --     comparators.inscope_inherent_import,
+    --     comparators.sort_by_label_but_underscore_last,
+    --     -- compare.recently_used,
+    --     -- compare.sort_text,
+    --   }
+    --
+    --   for _, source in ipairs(opts.sources) do
+    --     if source.name == "buffer" then
+    --       source.option = vim.tbl_deep_extend("keep", { get_bufnrs = get_bufnrs }, source.option or {})
+    --     end
+    --
+    --     cmp_rs.filter_out.entry_filter(source)
+    --   end
+    --   return opts
+    -- end,
   },
   {
     "stevearc/conform.nvim",
