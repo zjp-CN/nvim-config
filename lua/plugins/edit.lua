@@ -95,53 +95,35 @@ return {
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      local ra_unwanted_auto_import_crates = { "owo-colors", "ratatui" }
-      -- local compare = require("cmp").config.compare
       local cmp = require("cmp")
+      -- local compare = require("cmp").config.compare
 
       -- disable auto select: always select first candidate instead
       opts.preselect = cmp.PreselectMode.None
 
-      local cmp_rs = require("cmp_lsp_rs").comparators
+      opts.view = vim.tbl_deep_extend("keep", opts.view or {}, {
+        docs = { auto_open = false },
+      })
+
+      local cmp_rs = require("cmp_lsp_rs")
+      local comparators = cmp_rs.comparators
+
       opts.sorting.comparators = {
-        cmp_rs.rust_in_scope_inherent_with_kind,
-        -- cmp_rs.rust_in_scope_inherent_import_with_kind,
-        -- cmp_rs.rust_in_scope_or_inherent_first,
-        cmp_rs.sort_by_label_but_underscore_last,
-        -- compare.recently_used,
         -- compare.kind,
+        -- comparators.inherent_import_inscope,
+        -- comparators.inscope_inherent,
+        comparators.inscope_inherent_import,
+        comparators.sort_by_label_but_underscore_last,
+        -- compare.recently_used,
         -- compare.sort_text,
       }
 
-      for _, item in ipairs(opts.sources) do
-        if item.name == "buffer" then
-          item.option = vim.tbl_deep_extend("keep", { get_bufnrs = get_bufnrs }, item.option or {})
+      for _, source in ipairs(opts.sources) do
+        if source.name == "buffer" then
+          source.option = vim.tbl_deep_extend("keep", { get_bufnrs = get_bufnrs }, source.option or {})
         end
 
-        if item.name == "nvim_lsp" then
-          ---@param entry cmp.Entry
-          ---@param ctx cmp.Context
-          item.entry_filter = function(entry, ctx)
-            if ctx.filetype == "rust" then
-              ---@type RAData
-              local data = entry.completion_item.data
-
-              -- only filter out imported methods
-              if data == nil or #data.imports == 0 or entry:get_kind() ~= 2 then
-                return true
-              end
-
-              for _, to_be_import in ipairs(data.imports) do
-                -- can be crate name or module name
-                local name = to_be_import.full_import_path:match("%w+")
-                if vim.tbl_contains(ra_unwanted_auto_import_crates, name) then
-                  return false
-                end
-              end
-            end
-            return true
-          end
-        end
+        cmp_rs.filter_out.entry_filter(source)
       end
       return opts
     end,
