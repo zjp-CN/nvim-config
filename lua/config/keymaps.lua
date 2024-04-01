@@ -52,3 +52,10 @@ vim.api.nvim_create_user_command("WA", "wa", {
 vim.api.nvim_create_user_command("W", "w", {
   desc = "Alias for :w (write current buffer)",
 })
+
+-- https://github.com/lukas-reineke/indent-blankline.nvim/issues/745
+bind("n", "<leader>u<tab>", function()
+  require("ibl").setup_buffer(0, {
+    enabled = not require("ibl.config").get_config(0).enabled,
+  })
+end, "Toggle fancy indent UI on current buffer")
