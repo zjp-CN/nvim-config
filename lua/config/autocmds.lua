@@ -50,7 +50,7 @@ vim.api.nvim_create_augroup("lazyvim_wrap_spell", { clear = true })
 -- })
 -- nvim_create_autocmd
 
-require("cmp_lsp_rs").log.register()
+-- require("cmp_lsp_rs").log.register()
 
 -- vim.api.nvim_create_autocmd({ "User" }, {
 --   pattern = "CmpReady",
