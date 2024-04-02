@@ -46,6 +46,9 @@ vim.cmd([[
 vim.api.nvim_create_user_command("Wa", "wa", {
   desc = "Alias for :wa (write all buffers)",
 })
+vim.api.nvim_create_user_command("Wq", "wq", {
+  desc = "Alias for :wq (write and quit)",
+})
 vim.api.nvim_create_user_command("WA", "wa", {
   desc = "Alias for :wa (write all buffers)",
 })
