@@ -1,15 +1,10 @@
 return {
-  -- {
-  --   "simrat39/rust-tools.nvim",
-  --   keys = {
-  --     { "<F2>", "<cmd>RustHoverActions<cr>", desc = "RustHoverActions" },
-  --   },
-  --   opts = {
-  --     tools = {
-  --       inlay_hints = { auto = false },
-  --     },
-  --   },
-  -- },
+  {
+    "mrcjkb/rustaceanvim",
+    keys = {
+      { "<F2>", "<cmd>RustLsp hover actions<cr>", desc = "RustHoverActions" },
+    },
+  },
   {
     "Saecki/crates.nvim",
     keys = {
