@@ -11,6 +11,7 @@ return {
     keys = {
       { "<space>n", "<cmd>Neogit<cr>", desc = "open Neogit" },
     },
+    branch = "nightly",
   },
   {
     "sindrets/diffview.nvim",
