@@ -103,7 +103,7 @@ return {
       { "<leader>b1", "<cmd>let g:cmp_get_bufnrs='current_tab'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='current_tab'" },
       { "<leader>b2", "<cmd>let g:cmp_get_bufnrs='buflisted'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='buflisted'" },
       { "<leader>ba", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='all'" },
-      -- { "<leader>bc", "<cmd>lua require'cmp_lsp_rs'.combo()<cr>", desc = "(nvim-cmp) switch comparators" },
+      { "<leader>bc", "<cmd>lua require'cmp_lsp_rs'.combo()<cr>", desc = "(nvim-cmp) switch comparators" },
     },
     -- ---@type cmp.ConfigSchema
     -- opts = {
@@ -130,9 +130,9 @@ return {
       -- disable auto select: always select first candidate instead
       opts.preselect = cmp.PreselectMode.None
 
-      opts.view = vim.tbl_deep_extend("keep", opts.view or {}, {
-        docs = { auto_open = false },
-      })
+      -- opts.view = vim.tbl_deep_extend("keep", opts.view or {}, {
+      --   docs = { auto_open = false },
+      -- })
 
       local cmp_rs = require("cmp_lsp_rs")
       local comparators = cmp_rs.comparators
