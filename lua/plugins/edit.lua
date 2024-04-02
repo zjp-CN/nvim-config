@@ -105,23 +105,6 @@ return {
       { "<leader>ba", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='all'" },
       { "<leader>bc", "<cmd>lua require'cmp_lsp_rs'.combo()<cr>", desc = "(nvim-cmp) switch comparators" },
     },
-    -- ---@type cmp.ConfigSchema
-    -- opts = {
-    --   ---@type cmp.SourceConfig[]
-    --   sources = {
-    --     {
-    --       name = "nvim_lsp",
-    --       entry_filter = entry_filter,
-    --     },
-    --   },
-    --   sorting = {
-    --     priority_weight = 2,
-    --     comparators = {
-    --       inscope_inherent_import,
-    --       sort_by_label_but_underscore_last,
-    --     },
-    --   },
-    -- },
     --@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
