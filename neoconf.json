@@ -5,6 +5,7 @@
       "rust-analyzer.check.extraArgs": [
         "--no-deps"
       ],
+      "rust-analyzer.hover.show.structFields": 10,
       "rust-analyzer.checkOnSave": true
     }
   }

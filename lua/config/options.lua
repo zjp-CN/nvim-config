@@ -5,11 +5,3 @@
 -- exchange default leader/localleader set by lazyvim
 vim.g.mapleader = [[\]]
 vim.g.localleader = [[<space>]]
-
-vim.g.rustaceanvim = {
-  ---@type RustaceanToolsOpts
-  tools = {
-    test_executor = "termopen", -- default to a popup and hinder --nocapture arg
-    -- enable_nextest = false, -- default is true
-  },
-}
