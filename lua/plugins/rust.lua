@@ -13,12 +13,8 @@ return {
       server = {
         default_settings = {
           ["rust-analyzer"] = {
-            ---@type _.lspconfig.settings.rust_analyzer.Hover
-            hover = {
-              show = {
-                structFields = 20,
-              },
-            },
+            hover = { show = { structFields = 20 } },
+            -- checkOnSave = false,
           },
         },
       },
