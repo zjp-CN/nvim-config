@@ -21,9 +21,44 @@ return {
         },
       },
       servers = {
-        -- ["rust_analyzer"] = { autostart = false },
+        -- ["rust_analyzer"] = { autostart = false }, -- rustaceanvim doesn't use lspconfig
         ["taplo"] = { autostart = false },
         ["lua_ls"] = { autostart = true },
+
+        tsserver = {
+          init_options = {
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vim.fn.getcwd() .. "/node_modules/@vue/typescript-plugin",
+                languages = { "javascript", "typescript", "vue" },
+              },
+            },
+          },
+          filetypes = {
+            "javascript",
+            "typescript",
+            "vue",
+          },
+        },
+        -- volar = {
+        --   -- filetypes = { "vue", "javascript", "typescript", "typescriptreact", "javascriptreact" },
+        --   init_options = {
+        --     vue = {
+        --       hybridMode = false,
+        --     },
+        --     -- typescript = {
+        --     --   tsdk = vim.fn.getcwd() .. "node_modules/typescript/lib",
+        --     -- },
+        --   },
+        -- },
+      },
+      format = {
+        ---@param client lsp.Client
+        filter = function(client)
+          -- skip formatting due to some bug
+          return client.name ~= "tsserver" or client.name ~= "volar"
+        end,
       },
     },
   },
