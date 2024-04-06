@@ -108,7 +108,7 @@ return {
     --@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
-      -- local compare = require("cmp").config.compare
+      local compare = require("cmp").config.compare
 
       -- disable auto select: always select first candidate instead
       opts.preselect = cmp.PreselectMode.None
@@ -124,6 +124,7 @@ return {
         -- compare.kind,
         -- comparators.inherent_import_inscope,
         -- comparators.inscope_inherent,
+        compare.score,
         comparators.inscope_inherent_import,
         comparators.sort_by_label_but_underscore_last,
         -- compare.recently_used,
