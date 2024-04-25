@@ -1,1 +1,1 @@
-{"details":{"body":["<details>","","<summary>$1<\/summary>","","$0","","<\/details>"],"prefix":"details"}}
+{"text":{"prefix":"text","body":["```text","$1","```"]},"BLOG-HEAD":{"prefix":"BLOG-HEAD","body":["---","title: $1","date: 2023-11-10 23:00:00 +0800","description: $2","categories: [$3]","tags: [$4]","---","","$0"]},"details":{"prefix":"details","body":["<details>","","<summary>$1<\/summary>","","$0","","<\/details>"]}}
