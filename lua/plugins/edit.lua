@@ -150,12 +150,12 @@ return {
     opts = {
       formatters_by_ft = {
         sql = { "sql_formatter" },
+        sh = { "shfmt" },
         -- rust = { "rustfmt" },
       },
       formatters = {
-        sql_formatter = {
-          prepend_args = { "--config", sql_formatter_config() },
-        },
+        sql_formatter = { prepend_args = { "--config", sql_formatter_config() } },
+        shfmt = { prepend_args = { "-i", "2" } },
       },
     },
   },
