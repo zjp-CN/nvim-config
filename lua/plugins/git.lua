@@ -16,14 +16,24 @@ return {
   {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-    opts = {
-      use_icons = false,
-      enhanced_diff_hl = true,
-      default_args = {
-        DiffviewOpen = { "--untracked-files=no" },
-        DiffviewFileHistory = { "--base=LOCAL" },
-      },
-    },
+    config = function()
+      local opts = require("diffview.config").defaults
+      opts = vim.tbl_extend("force", opts, {
+        -- use_icons = false,
+        enhanced_diff_hl = true,
+        default_args = {
+          DiffviewOpen = { "--untracked-files=no" },
+          DiffviewFileHistory = { "--base=LOCAL" },
+        },
+      })
+      for _, key in ipairs(opts.keymaps.view) do
+        key[2] = string.gsub(key[2], "<leader>c", "<leader>g", 1)
+      end
+      for _, key in ipairs(opts.keymaps.file_panel) do
+        key[2] = string.gsub(key[2], "<leader>c", "<leader>g", 1)
+      end
+      require("diffview").setup(opts)
+    end,
   },
   {
     "akinsho/git-conflict.nvim",
