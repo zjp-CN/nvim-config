@@ -142,30 +142,6 @@ return {
       return opts
     end,
   },
-  -- {
-  --   "williamboman/mason-lspconfig.nvim",
-  --   opts = {
-  --     ensure_installed = {},
-  --     automatic_installation = { exclude = { "rust_analyzer" } },
-  --   },
-  -- },
-  {
-    "neovim/nvim-lspconfig",
-    opts = function(_, opts)
-      if opts.servers then
-        if opts.servers.rust_analyzer then
-          opts.servers.rust_analyzer = nil
-          -- vim.notify("rm opts.servers.rust_analyzer from nvim-lspconfig")
-        end
-      end
-      if opts.setup then
-        if opts.setup.rust_analyzer then
-          opts.setup.rust_analyzer = nil
-          -- vim.notify("rm opts.setup.rust_analyzer from nvim-lspconfig")
-        end
-      end
-    end,
-  },
   {
     "stevearc/conform.nvim",
     dependencies = {
