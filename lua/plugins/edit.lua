@@ -69,6 +69,7 @@ return {
     cmd = "TableModeToggle",
     keys = { { "<leader>tm", desc = "toggle table mode" } },
     config = function()
+      vim.g.table_mode_corner = "|"
       -- regiter key group info for whichkey
       require("which-key").register({
         t = {
