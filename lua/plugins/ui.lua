@@ -12,7 +12,8 @@ end
 local enable_fancy_ui = false
 
 return {
-  { "catppuccin/nvim", enabled = false }, -- colorscheme
+  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
+  -- { "catppuccin/nvim", enabled = true, name = "catppuccin", priority = 1000, opts = {} }, -- colorscheme
   { "folke/noice.nvim", enabled = enable_fancy_ui },
   {
     "rcarriga/nvim-notify",
