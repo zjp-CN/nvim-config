@@ -6,7 +6,6 @@ return {
       { "<space><space>", "<cmd>RustLsp flyCheck<cr>", ft = "rust", desc = "Rust Fly Check" },
     },
     opts = {
-      ---@type RustaceanToolsOpts
       tools = {
         test_executor = "termopen", -- default to a popup and hinder --nocapture arg
         -- enable_nextest = false, -- default is true
@@ -14,6 +13,9 @@ return {
       server = {
         default_settings = {
           ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = false,
+            },
             hover = { show = { structFields = 20 } },
             -- checkOnSave = false,
           },
