@@ -209,8 +209,8 @@ return {
           deleteSnippet = "<C-d>",
           duplicateSnippet = "<C-y>",
           openInFile = "<C-f>",
-          insertNextToken = "<C-n>", -- insert & normal mode
-          jumpBetweenBodyAndPrefix = "<C-a>", -- insert & normal mode
+          insertNextPlaceholder = "<C-n>", -- insert & normal mode
+          -- jumpBetweenBodyAndPrefix = "<C-a>", -- insert & normal mode
         },
       },
     },
