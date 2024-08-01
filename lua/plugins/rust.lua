@@ -8,7 +8,7 @@ return {
     opts = {
       tools = {
         test_executor = "termopen", -- default to a popup and hinder --nocapture arg
-        -- enable_nextest = false, -- default is true
+        enable_nextest = false, -- default is true
       },
       server = {
         default_settings = {
