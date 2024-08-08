@@ -125,11 +125,12 @@ return {
         -- compare.kind,
         -- comparators.inherent_import_inscope,
         -- comparators.inscope_inherent,
+        compare.recently_used,
         compare.exact,
         compare.score,
-        comparators.inscope_inherent_import,
+        comparators.inherent_import_inscope,
+        -- comparators.inscope_inherent_import,
         comparators.sort_by_label_but_underscore_last,
-        -- compare.recently_used,
         -- compare.sort_text,
       }
 
