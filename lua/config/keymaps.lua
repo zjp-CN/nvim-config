@@ -34,9 +34,11 @@ bind("n", "<m-i>", lazyterm, "open float terminal")
 bind("t", "<m-i>", "<cmd>close<cr>", "close (but not quit) float terminal")
 
 -- don't use ;/, from flash.nvim in normal mode
+-- paste multiple times
 vim.cmd([[
   nunmap ;
   nunmap ,
+  xnoremap p pgvy
 ]])
 
 -- accidental write buffer commands in capital case
