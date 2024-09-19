@@ -39,7 +39,11 @@ return {
             return vim.fn.getcwd()
           end,
           --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
-          settings = {},
+          settings = {
+            exportPdf = "onType",
+            -- outputPath = "$root/target/$dir/$name",
+            outputPath = "$root/target/$dir_lsp",
+          },
         },
       },
       format = {

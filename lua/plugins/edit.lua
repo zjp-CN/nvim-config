@@ -256,4 +256,17 @@ return {
     },
     event = "VeryLazy",
   },
+  {
+    "echasnovski/mini.comment",
+    opts = {
+      options = {
+        -- Function to compute custom 'commentstring' (optional)
+        custom_commentstring = function()
+          if vim.bo.filetype == "typst" then
+            return "// %s"
+          end
+        end,
+      },
+    },
+  },
 }
