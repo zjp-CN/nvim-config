@@ -25,6 +25,22 @@ return {
         -- ["rust_analyzer"] = { autostart = false }, -- rustaceanvim doesn't use lspconfig
         ["taplo"] = { autostart = false },
         ["lua_ls"] = { autostart = true },
+
+        -- typst1
+        -- ["typst_lsp"] = {
+        --   exportPdf = "onType", -- Choose onType, onSave or never.
+        --   -- serverPath = "" -- Normally, there is no need to uncomment it.
+        -- },
+        -- typst2
+        tinymist = {
+          --- todo: these configuration from lspconfig maybe broken
+          single_file_support = true,
+          root_dir = function()
+            return vim.fn.getcwd()
+          end,
+          --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
+          settings = {},
+        },
       },
       format = {
         filter = function(client)
