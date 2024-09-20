@@ -40,7 +40,8 @@ return {
           end,
           --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
           settings = {
-            exportPdf = "onType",
+            exportPdf = "never",
+            -- exportPdf = "onType",
             -- outputPath = "$root/target/$dir/$name",
             outputPath = "$root/target/$dir_lsp",
           },

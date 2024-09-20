@@ -154,6 +154,7 @@ return {
       formatters_by_ft = {
         sql = { "sql_formatter" },
         sh = { "shfmt" },
+        typst = { "typstyle" },
         -- rust = { "rustfmt" },
       },
       formatters = {
