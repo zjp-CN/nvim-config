@@ -14,11 +14,9 @@ return {
       server = {
         default_settings = {
           ["rust-analyzer"] = {
-            cargo = {
-              allFeatures = false,
-            },
+            cargo = { allFeatures = false },
             hover = { show = { structFields = 20 } },
-            -- checkOnSave = false,
+            checkOnSave = false,
           },
         },
       },
