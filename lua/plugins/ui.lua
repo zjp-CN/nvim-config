@@ -71,7 +71,9 @@ return {
   -- floating terminal
   {
     "folke/snacks.nvim",
-    opts = { terminal = { win = { position = "float" } } },
+    opts = {
+      terminal = { win = { position = "float", border = "double" } },
+    },
     keys = {
       { "<m-i>", "<cmd>lua Snacks.terminal()<cr>", mode = { "n" }, desc = "open float terminal" },
       { "<m-i>", "<cmd>close<cr>", mode = { "t" }, desc = "close (but not quit) float terminal" },
