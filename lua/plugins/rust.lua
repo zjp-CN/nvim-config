@@ -17,6 +17,7 @@ return {
             cargo = { allFeatures = false },
             hover = { show = { structFields = 20 } },
             checkOnSave = false,
+            rustc = { source = "discover" },
           },
         },
       },
