@@ -68,4 +68,6 @@ return {
   -- color plugins
   { "NvChad/nvim-colorizer.lua", event = { "BufReadPost", "BufNewFile" }, opts = {} },
   { "ziontee113/color-picker.nvim", cmd = { "PickColor", "PickColorInsert" }, opts = {} },
+  -- floating terminal
+  { "folke/snacks.nvim", opts = { terminal = { win = { position = "float" } } } },
 }
