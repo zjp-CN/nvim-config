@@ -9,22 +9,37 @@ local function diff_source()
   end
 end
 
-local enable_fancy_ui = false
+local enable_fancy_ui = true
 
 return {
   { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
   -- { "catppuccin/nvim", enabled = true, name = "catppuccin", priority = 1000, opts = {} }, -- colorscheme
-  { "folke/noice.nvim", enabled = enable_fancy_ui },
   {
-    "rcarriga/nvim-notify",
+    "folke/noice.nvim",
     enabled = enable_fancy_ui,
-    ---@class notify.Config
     opts = {
-      -- top_down = false, -- the position can only be top/bottom for now
-      render = "compact",
-      stages = "static",
+      -- views = {
+      --   popup = {
+      --     win_options = {
+      --       winhighlight = {
+      --         Normal = "NormalFloat",
+      --         FloatBorder = "FloatBorder",
+      --       },
+      --     },
+      --   },
+      -- },
     },
   },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   enabled = enable_fancy_ui,
+  --   ---@class notify.Config
+  --   opts = {
+  --     -- top_down = false, -- the position can only be top/bottom for now
+  --     render = "compact",
+  --     stages = "static",
+  --   },
+  -- },
 
   {
     "nvim-neo-tree/neo-tree.nvim",
