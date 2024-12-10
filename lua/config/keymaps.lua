@@ -26,13 +26,6 @@ bind("n", "<leader>da", "ggVGDI", "clear the content in current buffer and enter
 bind("n", "[<space>", "<cmd>put! =repeat(nr2char(10), v:count1)<cr>'[", "add an empty line before the current line")
 bind("n", "]<space>", "<cmd>put =repeat(nr2char(10), v:count1)<cr>", "add an empty line after the current line")
 
--- floating terminal
-local lazyterm = function()
-  require("lazyvim.util").terminal.open(nil, { border = "single" })
-end
-bind("n", "<m-i>", lazyterm, "open float terminal")
-bind("t", "<m-i>", "<cmd>close<cr>", "close (but not quit) float terminal")
-
 -- don't use ;/, from flash.nvim in normal mode
 -- paste multiple times
 vim.cmd([[

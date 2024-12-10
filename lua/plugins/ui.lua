@@ -69,5 +69,12 @@ return {
   { "NvChad/nvim-colorizer.lua", event = { "BufReadPost", "BufNewFile" }, opts = {} },
   { "ziontee113/color-picker.nvim", cmd = { "PickColor", "PickColorInsert" }, opts = {} },
   -- floating terminal
-  { "folke/snacks.nvim", opts = { terminal = { win = { position = "float" } } } },
+  {
+    "folke/snacks.nvim",
+    opts = { terminal = { win = { position = "float" } } },
+    keys = {
+      { "<m-i>", "<cmd>lua Snacks.terminal()<cr>", mode = { "n" }, desc = "open float terminal" },
+      { "<m-i>", "<cmd>close<cr>", mode = { "t" }, desc = "close (but not quit) float terminal" },
+    },
+  },
 }
