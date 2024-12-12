@@ -15,7 +15,10 @@ return {
         default_settings = {
           ["rust-analyzer"] = {
             cargo = { allFeatures = false },
-            hover = { show = { structFields = 20 } },
+            hover = {
+              memoryLayout = { enable = true, niches = true, size = "both" },
+              show = { fields = 50, enumVariants = 50 },
+            },
             checkOnSave = false,
             rustc = { source = "discover" },
           },
