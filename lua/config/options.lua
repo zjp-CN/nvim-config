@@ -8,6 +8,6 @@ vim.g.localleader = [[<space>]]
 
 local border = "double"
 
-vim.diagnostic.config({
-  float = { border = border },
-})
+-- vim.lsp.buf.hover({ border })
+-- vim.lsp.buf.signature_help({ border })
+vim.diagnostic.config({ float = { border } })

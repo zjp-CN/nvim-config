@@ -12,57 +12,56 @@ return {
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
-    opts = {
-      inlay_hints = { enabled = false },
-      ui = {
-        windows = {
-          default_options = {
-            border = "rounded", -- make border rounded
-          },
-        },
-      },
-      servers = {
-        -- ["rust_analyzer"] = { autostart = false }, -- rustaceanvim doesn't use lspconfig
-        ["taplo"] = { autostart = false },
-        ["lua_ls"] = { autostart = true },
+    opts = function(_, opts)
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      -- change a keymap
+      keys[#keys + 1] = { "K", '<cmd>lua vim.lsp.buf.hover({border="double"})<cr>', "Hover" }
 
-        -- typst1
-        -- ["typst_lsp"] = {
-        --   exportPdf = "onType", -- Choose onType, onSave or never.
-        --   -- serverPath = "" -- Normally, there is no need to uncomment it.
-        -- },
-        -- typst2
-        tinymist = {
-          --- todo: these configuration from lspconfig maybe broken
-          single_file_support = true,
-          root_dir = function()
-            return vim.fn.getcwd()
-          end,
-          --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
-          settings = {
-            exportPdf = "never",
-            -- exportPdf = "onType",
-            -- outputPath = "$root/target/$dir/$name",
-            outputPath = "$root/target/$dir_lsp",
+      local ret = {
+        inlay_hints = { enabled = false },
+        ui = {
+          windows = {
+            default_options = {
+              border = "rounded", -- make border rounded
+            },
           },
         },
-      },
-      format = {
-        filter = function(client)
-          -- skip formatting due to some bug
-          return client.name ~= "tsserver" or client.name ~= "volar"
-        end,
-      },
-    },
-  },
-  -- ui
-  {
-    "folke/noice.nvim",
-    opts = {
-      presets = {
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-      },
-    },
+        servers = {
+          -- ["rust_analyzer"] = { autostart = false }, -- rustaceanvim doesn't use lspconfig
+          ["taplo"] = { autostart = false },
+          ["lua_ls"] = { autostart = true },
+
+          -- typst1
+          -- ["typst_lsp"] = {
+          --   exportPdf = "onType", -- Choose onType, onSave or never.
+          --   -- serverPath = "" -- Normally, there is no need to uncomment it.
+          -- },
+          -- typst2
+          tinymist = {
+            --- todo: these configuration from lspconfig maybe broken
+            single_file_support = true,
+            root_dir = function()
+              return vim.fn.getcwd()
+            end,
+            --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
+            settings = {
+              exportPdf = "never",
+              -- exportPdf = "onType",
+              -- outputPath = "$root/target/$dir/$name",
+              outputPath = "$root/target/$dir_lsp",
+            },
+          },
+        },
+        format = {
+          filter = function(client)
+            -- skip formatting due to some bug
+            return client.name ~= "tsserver" or client.name ~= "volar"
+          end,
+        },
+      }
+
+      return vim.tbl_deep_extend("force", opts, ret)
+    end,
   },
   -- sidebar symbol tree
   {
