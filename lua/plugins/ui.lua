@@ -9,7 +9,7 @@ local function diff_source()
   end
 end
 
-local enable_fancy_ui = true
+local enable_fancy_ui = false
 
 return {
   { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
@@ -18,6 +18,11 @@ return {
     "folke/noice.nvim",
     enabled = enable_fancy_ui,
     opts = {
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = false, -- position the cmdline and popupmenu together
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
       -- views = {
       --   popup = {
       --     win_options = {
