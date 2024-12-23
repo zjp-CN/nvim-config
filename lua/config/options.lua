@@ -6,6 +6,9 @@
 vim.g.mapleader = [[\]]
 vim.g.localleader = [[<space>]]
 
+vim.opt.clipboard = "" -- disable sync with system clipboard
+vim.g.lazyvim_picker = "telescope"
+
 local border = "double"
 
 -- vim.lsp.buf.hover({ border })
