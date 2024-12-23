@@ -19,7 +19,7 @@ return {
               memoryLayout = { enable = true, niches = true, size = "both" },
               show = { fields = 50, enumVariants = 50 },
             },
-            checkOnSave = false,
+            checkOnSave = true,
             rustc = { source = "discover" },
           },
         },
