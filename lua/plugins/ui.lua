@@ -92,6 +92,8 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      scroll = { enabled = false },
+      notifier = { enabled = false },
       terminal = { win = { position = "float", border = "double" } },
     },
     keys = {
