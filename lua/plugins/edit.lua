@@ -71,16 +71,12 @@ return {
     config = function()
       vim.g.table_mode_corner = "|"
       -- regiter key group info for whichkey
-      require("which-key").register({
-        t = {
-          -- optional group name
-          name = "table mode",
-          -- describe without creating keymaps
-          d = "(table mode) delete row/col",
-          i = "(table mode) insert row/col",
-          f = "(table mode) formula",
-        },
-      }, { prefix = "<leader>" })
+      require("which-key").add({
+        { "<leader>t", group = "table mode" },
+        { "<leader>td", desc = "(table mode) delete row/col" },
+        { "<leader>tf", desc = "(table mode) formula" },
+        { "<leader>ti", desc = "(table mode) insert row/col" },
+      })
     end,
   },
   {
