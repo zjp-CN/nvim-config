@@ -1,0 +1,87 @@
+format = """
+$time$username$cmd_duration\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$buf\
+$cmake\
+$cobol\
+$container\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$haskell\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$rlang\
+$red\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$line_break\
+$jobs\
+$battery\
+$status\
+$shell\
+$directory$character"""
+
+# right_format = "$cmd_duration $username"
+
+[username]
+format = "[$user]($style) "
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[✗](bold red)"
+
+# [rust]
+# symbol = "rustc"
+# format = "via [$symbol $version](red bold) "
+
+# [package]
+# symbol = ""
+
+# [python]
+# symbol = "py "
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = "%R"
+utc_time_offset = "+8"
