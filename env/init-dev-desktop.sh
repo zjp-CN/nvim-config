@@ -5,6 +5,7 @@ cargo install cargo-binstall
 cargo binstall ouch -y
 cargo binstall starship -y
 cargo binstall du-dust -y
+cargo binstall fd-find -y
 cargo binstall bat -y
 
 # 获取系统架构信息
