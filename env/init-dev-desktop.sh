@@ -1,24 +1,46 @@
+# git clone https://github.com/zjp-CN/nvim-config ~/.config/nvim
+cp ~/.config/nvim/env/starship.toml ~/.config/
+
 cargo install cargo-binstall
 cargo binstall ouch -y
 cargo binstall starship -y
 cargo binstall du-dust -y
 cargo binstall bat -y
 
-mkdir tmp
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
+# 获取系统架构信息
+ARCH=$(uname -m)
+
 mkdir ~/.local/bin -p
-mv nvim-linux-arm64 ~/.local/bin/nvim
+mkdir tmp -p
+cd tmp
 
-wget https://github.com/jesseduffield/lazygit/releases/download/v0.51.1/lazygit_0.51.1_Linux_arm64.tar.gz
-ouch d lazygit_0.51.1_Linux_arm64.tar.gz
-mv lazygit_0.51.1_Linux_arm64/lazygit ~/.local/bin/
-rm lazygit_0.51.1_Linux_arm64 -r
+if [[ "$ARCH" == "x86_64" ]]; then
+  NEOVIM=nvim-linux-x86_64
+  LAZYGIT=lazygit_0.51.1_Linux_x86_64
+  FZF=fzf-0.62.0-linux_amd64
+elif [[ "$ARCH" == "aarch64" ]]; then
+  NEOVIM=nvim-linux-arm64
+  LAZYGIT=lazygit_0.51.1_Linux_arm64
+  FZF=fzf-0.62.0-linux_arm64
+else
+  echo "$ARCH is not supported"
+  exit 1
+fi
 
-git clone https://github.com/zjp-CN/nvim-config ~/.config/nvim
-cp ~/.config/nvim/env/starship.toml ~/.config/
+# neovim
+wget https://github.com/neovim/neovim/releases/download/nightly/$NEOVIM.tar.gz
+ouch d $NEOVIM.tar.gz
+mv $NEOVIM ~/.local/bin/nvim
 
-wget https://github.com/junegunn/fzf/releases/download/v0.62.0/fzf-0.62.0-linux_amd64.tar.gz
-ouch d fzf-0.62.0-linux_amd64.tar.gz
+# lazygit
+wget https://github.com/jesseduffield/lazygit/releases/download/v0.51.1/$LAZYGIT.tar.gz
+ouch d $LAZYGIT.tar.gz
+mv $LAZYGIT/lazygit ~/.local/bin/
+rm $LAZYGIT -r
+
+# fzf
+wget https://github.com/junegunn/fzf/releases/download/v0.62.0/$FZF.tar.gz
+ouch d $FZF.tar.gz
 mv fzf ~/.local/bin/
 
 # install cbmc
