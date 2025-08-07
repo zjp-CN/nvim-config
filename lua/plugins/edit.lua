@@ -1,6 +1,3 @@
--- default to use listed buffers as a source for nvim-cmp
-vim.g.cmp_get_bufnrs = "buflisted"
-
 local function sql_formatter_config()
   local json = "/lua/plugins/sql_formatter.json"
   local path = (jit.os == "Linux") and json or json:gsub("/", "\\")
@@ -8,44 +5,6 @@ local function sql_formatter_config()
 end
 
 local snippet_path = vim.fn.stdpath("config") .. "/snippets"
-
--- change buffers source in nvim-cmp
-local get_bufnrs = function()
-  local cmp_get_bufnrs = vim.g.cmp_get_bufnrs
-  local api = vim.api
-  local bufs = {}
-
-  --  current buffer
-  if cmp_get_bufnrs == "current_buf" then
-    table.insert(bufs, api.nvim_get_current_buf())
-    return bufs
-  end
-
-  -- buffers in current tab including unlisted ones like help
-  if cmp_get_bufnrs == "current_tab" then
-    for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
-      table.insert(bufs, api.nvim_win_get_buf(win))
-    end
-    return bufs
-  end
-
-  -- all active/listed non-empty buffers
-  -- or all buffers including hidden/unlisted ones (like help/terminal)
-  for _, buf in ipairs(api.nvim_list_bufs()) do
-    if
-      (
-        cmp_get_bufnrs == "buflisted" and api.nvim_get_option_value("buflisted", { buf = buf })
-        or cmp_get_bufnrs == "all"
-      )
-      and api.nvim_buf_is_loaded(buf)
-      and api.nvim_buf_line_count(buf) > 0
-    then
-      table.insert(bufs, buf)
-    end
-  end
-
-  return bufs
-end
 
 return {
   {
@@ -77,67 +36,6 @@ return {
         { "<leader>tf", desc = "(table mode) formula" },
         { "<leader>ti", desc = "(table mode) insert row/col" },
       })
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      {
-        "zjp-CN/nvim-cmp-lsp-rs",
-        -- dir = "/rust/github/nvim-cmp-lsp-rs",
-        -- dependencies = { "hrsh7th/nvim-cmp" },
-        -- opts = {},
-        --@param opts cmp_lsp_rs.Opts
-        -- config = function(_, opts)
-        --   require("cmp_lsp_rs").setup(opts)
-        -- end,
-        -- event = { "InsertEnter" },
-        -- main = "cmp_lsp_rs",
-      },
-    },
-    keys = {
-      { "<leader>b0", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='current_buf'" },
-      { "<leader>b1", "<cmd>let g:cmp_get_bufnrs='current_tab'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='current_tab'" },
-      { "<leader>b2", "<cmd>let g:cmp_get_bufnrs='buflisted'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='buflisted'" },
-      { "<leader>ba", "<cmd>let g:cmp_get_bufnrs='current_buf'<cr>", desc = "(nvim-cmp) cmp_get_bufnrs='all'" },
-      { "<leader>bc", "<cmd>lua require'cmp_lsp_rs'.combo()<cr>", desc = "(nvim-cmp) switch comparators" },
-    },
-    --@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      local compare = require("cmp").config.compare
-
-      -- disable auto select: always select first candidate instead
-      opts.preselect = cmp.PreselectMode.None
-
-      -- opts.view = vim.tbl_deep_extend("keep", opts.view or {}, {
-      --   docs = { auto_open = false },
-      -- })
-
-      local cmp_rs = require("cmp_lsp_rs")
-      local comparators = cmp_rs.comparators
-
-      opts.sorting.comparators = {
-        -- compare.kind,
-        -- comparators.inherent_import_inscope,
-        -- comparators.inscope_inherent,
-        compare.recently_used,
-        compare.exact,
-        compare.score,
-        comparators.inherent_import_inscope,
-        -- comparators.inscope_inherent_import,
-        comparators.sort_by_label_but_underscore_last,
-        -- compare.sort_text,
-      }
-
-      for _, source in ipairs(opts.sources) do
-        if source.name == "buffer" then
-          source.option = vim.tbl_deep_extend("keep", { get_bufnrs = get_bufnrs }, source.option or {})
-        end
-
-        cmp_rs.filter_out.entry_filter(source)
-      end
-      return opts
     end,
   },
   {
