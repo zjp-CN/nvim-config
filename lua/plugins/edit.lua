@@ -42,7 +42,7 @@ return {
     "stevearc/conform.nvim",
     dependencies = {
       "williamboman/mason.nvim",
-      opts = { ensure_installed = { "sql-formatter" } },
+      opts = { ensure_installed = { "sql-formatter", "shellcheck" } },
     },
     opts = {
       formatters_by_ft = {
