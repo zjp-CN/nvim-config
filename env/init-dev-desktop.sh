@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 # git clone https://github.com/zjp-CN/nvim-config ~/.config/nvim
 cp ~/.config/nvim/env/starship.toml ~/.config/
 
@@ -19,10 +20,12 @@ if [[ "$ARCH" == "x86_64" ]]; then
   NEOVIM=nvim-linux-x86_64
   LAZYGIT=lazygit_0.51.1_Linux_x86_64
   FZF=fzf-0.62.0-linux_amd64
+  GH=gh_2.76.2_linux_amd64
 elif [[ "$ARCH" == "aarch64" ]]; then
   NEOVIM=nvim-linux-arm64
   LAZYGIT=lazygit_0.51.1_Linux_arm64
   FZF=fzf-0.62.0-linux_arm64
+  GH=gh_2.76.2_linux_arm64
 else
   echo "$ARCH is not supported"
   exit 1
@@ -45,4 +48,9 @@ ouch d $FZF.tar.gz
 mv fzf ~/.local/bin/
 
 # install cbmc
-https://github.com/os-checker/distributed-verification/discussions/74
+# https://github.com/os-checker/distributed-verification/discussions/74
+
+# gh cli
+wget https://github.com/cli/cli/releases/download/v2.76.2/$GH.tar.gz
+ouch d $GH.tar.gz
+mv $GH/bin/gh ~/.local/bin/
