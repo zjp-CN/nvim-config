@@ -358,7 +358,7 @@ return {
     "kkharji/sqlite.lua",
     config = function()
       if on_windows then
-        vim.g.sqlite_clib_path = "E://Programming//sqlite3//sqlite3.dll"
+        vim.g.sqlite_clib_path = "A://Programming//sqlite3//sqlite3.dll"
       end
     end,
   },
