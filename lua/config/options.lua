@@ -5,9 +5,10 @@
 -- exchange default leader/localleader set by lazyvim
 vim.g.mapleader = [[\]]
 vim.g.localleader = [[<space>]]
-
-vim.opt.clipboard = "" -- disable sync with system clipboard
 vim.g.lazyvim_picker = "telescope"
+
+vim.opt.conceallevel = 0 -- no hidden symbols especially in markdown
+vim.opt.clipboard = "" -- disable sync with system clipboard
 
 local border = "double"
 
