@@ -359,6 +359,8 @@ return {
     config = function()
       if on_windows then
         vim.g.sqlite_clib_path = "A://Programming//sqlite3//sqlite3.dll"
+      elseif vim.loop.os_uname().machine == "aarch64" then
+        vim.g.sqlite_clib_path = "/lib/aarch64-linux-gnu/libsqlite3.so.0"
       end
     end,
   },
