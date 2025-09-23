@@ -17,31 +17,22 @@ local border = "double"
 vim.diagnostic.config({ float = { border } })
 
 -- **************** Custom LSP config ****************
-
--- Add custom LSP configuration, especially LSP server location and for what filetypes.
-vim.lsp.config["nrs"] = {
+vim.lsp.config["safety-lsp"] = {
   -- Command and arguments to start the server.
-  cmd = { "/home/gh-zjp-CN/tmp/tower-lsp-boilerplate/target/debug/nrs-language-server" },
+  cmd = { "/home/gh-zjp-CN/tag-std/safety-tool/target/debug/safety-lsp" },
+  -- Environment variables passed to the LSP process on spawn
+  cmd_env = { SP_DISABLE_CHECK = 1 },
+
   -- Filetypes to automatically attach to.
+  filetypes = { "rust" },
 
-  filetypes = { "nrs" },
   -- Sets the "workspace" to the directory where any of these files is found.
-
   -- Files that share a root directory will reuse the LSP server connection.
   -- Nested lists indicate equal priority, see |vim.lsp.Config|.
-  root_markers = { { ".nrs" }, ".git" },
+  root_markers = { { "Cargo.toml" }, ".git" },
 
   -- Specific settings to send to the server. The schema is server-defined.
-  settings = {
-    editor = { semanticHighlighting = { enabled = true } },
-  },
+  settings = {},
 }
-
--- Auto set up nrs filetype because neovim doesn't do it for us.
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "*.nrs" },
-  command = "set filetype=nrs",
-})
-
 -- Make LSP server config into effects.
-vim.lsp.enable("nrs")
+vim.lsp.enable("safety-lsp")
