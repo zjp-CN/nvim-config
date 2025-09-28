@@ -41,7 +41,7 @@ return {
   {
     "stevearc/conform.nvim",
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       opts = { ensure_installed = { "sql-formatter", "shellcheck" } },
     },
     opts = {
@@ -152,7 +152,7 @@ return {
     event = "VeryLazy",
   },
   {
-    "echasnovski/mini.comment",
+    "nvim-mini/mini.comment",
     opts = {
       options = {
         -- Function to compute custom 'commentstring' (optional)
