@@ -35,16 +35,19 @@ return {
       -- },
     },
   },
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   enabled = enable_fancy_ui,
-  --   ---@class notify.Config
-  --   opts = {
-  --     -- top_down = false, -- the position can only be top/bottom for now
-  --     render = "compact",
-  --     stages = "static",
-  --   },
-  -- },
+
+
+  {
+    "catppuccin/nvim",
+    opts = {
+      custom_highlights = function(colors)
+        return {
+          TermCursor = { fg = colors.base, bg = colors.green },
+          Cursor = { fg = colors.base, bg = colors.green },
+        }
+      end
+    }
+  },
 
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -100,5 +103,5 @@ return {
       { "<m-i>", "<cmd>lua Snacks.terminal()<cr>", mode = { "n" }, desc = "open float terminal" },
       { "<m-i>", "<cmd>close<cr>",                 mode = { "t" }, desc = "close (but not quit) float terminal" },
     },
-  },
+  }
 }
