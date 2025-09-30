@@ -12,16 +12,16 @@ end
 local enable_fancy_ui = false
 
 return {
-  { "LazyVim/LazyVim",              opts = { colorscheme = "catppuccin" } },
+  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
   -- { "catppuccin/nvim", enabled = true, name = "catppuccin", priority = 1000, opts = {} }, -- colorscheme
   {
     "folke/noice.nvim",
     enabled = enable_fancy_ui,
     opts = {
       presets = {
-        bottom_search = true,    -- use a classic bottom cmdline for search
+        bottom_search = true, -- use a classic bottom cmdline for search
         command_palette = false, -- position the cmdline and popupmenu together
-        lsp_doc_border = true,   -- add a border to hover docs and signature help
+        lsp_doc_border = true, -- add a border to hover docs and signature help
       },
       -- views = {
       --   popup = {
@@ -36,7 +36,6 @@ return {
     },
   },
 
-
   {
     "catppuccin/nvim",
     opts = {
@@ -45,8 +44,8 @@ return {
           TermCursor = { fg = colors.base, bg = colors.green },
           Cursor = { fg = colors.base, bg = colors.green },
         }
-      end
-    }
+      end,
+    },
   },
 
   {
@@ -89,7 +88,7 @@ return {
     },
   },
   -- color plugins
-  { "NvChad/nvim-colorizer.lua",    event = { "BufReadPost", "BufNewFile" },  opts = {} },
+  { "NvChad/nvim-colorizer.lua", event = { "BufReadPost", "BufNewFile" }, opts = {} },
   { "ziontee113/color-picker.nvim", cmd = { "PickColor", "PickColorInsert" }, opts = {} },
   -- floating terminal
   {
@@ -101,7 +100,7 @@ return {
     },
     keys = {
       { "<m-i>", "<cmd>lua Snacks.terminal()<cr>", mode = { "n" }, desc = "open float terminal" },
-      { "<m-i>", "<cmd>close<cr>",                 mode = { "t" }, desc = "close (but not quit) float terminal" },
+      { "<m-i>", "<cmd>close<cr>", mode = { "t" }, desc = "close (but not quit) float terminal" },
     },
-  }
+  },
 }
