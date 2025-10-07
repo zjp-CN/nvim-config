@@ -16,12 +16,15 @@ local border = "double"
 -- vim.lsp.buf.signature_help({ border })
 vim.diagnostic.config({ float = { border } })
 
--- **************** Custom LSP config ****************
+-- **************** safety-tool LSP config ****************
 vim.lsp.config["safety-lsp"] = {
   -- Command and arguments to start the server.
   cmd = { "/home/gh-zjp-CN/tag-std/safety-tool/target/debug/safety-lsp" },
   -- Environment variables passed to the LSP process on spawn
-  cmd_env = { SP_DISABLE_CHECK = 1 },
+  cmd_env = {
+    SP_DISABLE_CHECK = 1,
+    -- SP_FILE = "/home/gh-zjp-CN/tag-std/safety-tool/assets/sp-core.toml",
+  },
 
   -- Filetypes to automatically attach to.
   filetypes = { "rust" },
@@ -35,4 +38,4 @@ vim.lsp.config["safety-lsp"] = {
   settings = {},
 }
 -- Make LSP server config into effects.
-vim.lsp.enable("safety-lsp")
+-- vim.lsp.enable("safety-lsp")
