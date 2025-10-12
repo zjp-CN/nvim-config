@@ -39,4 +39,13 @@ return {
     cmd = "GitConflictRefresh",
     opts = {},
   },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      pickers = {
+        live_grep = { additional_args = { "--ignore-file=.rgignore" } },
+        grep_string = { additional_args = { "--ignore-file=.rgignore" } },
+      },
+    },
+  },
 }
