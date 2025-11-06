@@ -11,51 +11,47 @@ return {
   -- basic config
   {
     "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = function(_, opts)
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- change a keymap
-      keys[#keys + 1] = { "K", '<cmd>lua vim.lsp.buf.hover({border="double"})<cr>', "Hover" }
-
-      local ret = {
-        inlay_hints = { enabled = false },
-        ui = {
-          windows = {
-            default_options = {
-              border = "rounded", -- make border rounded
-            },
+    opts = {
+      inlay_hints = { enabled = false },
+      ui = {
+        windows = {
+          default_options = {
+            border = "rounded", -- make border rounded
           },
         },
-        servers = {
-          -- ["rust_analyzer"] = { autostart = false }, -- rustaceanvim doesn't use lspconfig
-          ["taplo"] = { autostart = false },
-          ["lua_ls"] = { autostart = true },
+      },
+      servers = {
+        -- ["rust_analyzer"] = { autostart = false }, -- rustaceanvim doesn't use lspconfig
+        ["taplo"] = { autostart = false },
+        ["lua_ls"] = { autostart = true },
 
-          -- typst1
-          -- ["typst_lsp"] = {
-          --   exportPdf = "onType", -- Choose onType, onSave or never.
-          --   -- serverPath = "" -- Normally, there is no need to uncomment it.
-          -- },
-          -- typst2
-          tinymist = {
-            --- todo: these configuration from lspconfig maybe broken
-            single_file_support = true,
-            root_dir = function()
-              return vim.fn.getcwd()
-            end,
-            --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
-            settings = {
-              exportPdf = "never",
-              -- exportPdf = "onType",
-              -- outputPath = "$root/target/$dir/$name",
-              outputPath = "$root/target/$dir_lsp",
-            },
+        -- typst1
+        -- ["typst_lsp"] = {
+        --   exportPdf = "onType", -- Choose onType, onSave or never.
+        --   -- serverPath = "" -- Normally, there is no need to uncomment it.
+        -- },
+        -- typst2
+        tinymist = {
+          --- todo: these configuration from lspconfig maybe broken
+          single_file_support = true,
+          root_dir = function()
+            return vim.fn.getcwd()
+          end,
+          --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
+          settings = {
+            exportPdf = "never",
+            -- exportPdf = "onType",
+            -- outputPath = "$root/target/$dir/$name",
+            outputPath = "$root/target/$dir_lsp",
           },
         },
-      }
-
-      return vim.tbl_deep_extend("force", opts, ret)
-    end,
+        ["*"] = {
+          keys = {
+            { "K", '<cmd>lua vim.lsp.buf.hover({border="double"})<cr>', "Hover" },
+          },
+        },
+      },
+    },
   },
   -- sidebar symbol tree
   {

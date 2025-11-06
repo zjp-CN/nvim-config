@@ -265,15 +265,6 @@ end
 
 return {
   {
-    "neovim/nvim-lspconfig",
-    init = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- disable a keymap
-      keys[#keys + 1] = { "gr", false }
-      keys[#keys + 1] = { "gI", false }
-    end,
-  },
-  {
     "nvim-telescope/telescope.nvim",
     keys = {
       { "gr", telescopePickers.lsp_references },
