@@ -3,7 +3,7 @@ return {
     "mrcjkb/rustaceanvim",
     keys = {
       { "<F2>", "<cmd>RustLsp hover actions<cr>", ft = "rust", desc = "RustHoverActions" },
-      { "<space><space>", "<cmd>RustLsp flyCheck<cr>", ft = "rust", desc = "Rust Fly Check" },
+      -- { "<space><space>", "<cmd>RustLsp flyCheck<cr>", ft = "rust", desc = "Rust Fly Check" },
     },
     opts = {
       tools = {
