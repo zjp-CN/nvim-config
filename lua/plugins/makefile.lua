@@ -15,6 +15,7 @@ return {
       { "<space>r", "<cmd>OverseerRun<cr>", desc = "Run Overseer Task" },
     },
     opts = {
+      templates = { "builtin", "rust" },
       task_list = {
         direction = "bottom",
         min_height = 25,
