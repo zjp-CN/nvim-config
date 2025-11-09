@@ -12,7 +12,8 @@ return {
     event = { "BufReadPost *.rs", "BufNewFile *.rs" },
     keys = {
       { "<space><space>", "<cmd>OverseerToggle<cr>", desc = "Toggle Overseer Task List" },
-      { "<space>r", "<cmd>OverseerRun<cr>", desc = "Run Overseer Task" },
+      { "<space>r", "<cmd>OverseerRun<cr>", desc = "Run A Task (Overseer)" },
+      { "<space>R", "<cmd>OverseerRunCmd<cr>", desc = "Run A Shell Command Task (Overseer)" },
     },
     opts = {
       templates = { "builtin", "rust" },
