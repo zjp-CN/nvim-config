@@ -171,4 +171,8 @@ return {
     ---@type quicker.SetupOptions
     opts = {},
   },
+  {
+    "HawkinsT/pathfinder.nvim",
+    event = "VimEnter",
+  },
 }
