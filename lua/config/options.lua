@@ -10,6 +10,17 @@ vim.g.lazyvim_picker = "telescope"
 vim.opt.conceallevel = 0 -- no hidden symbols especially in markdown
 vim.opt.clipboard = "unnamedplus" -- set this to '' to disable sync with system clipboard
 
+-- Restore jumping to next/previous diff location in diff mode. (TreeSitter overrides them.)
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "diff",
+  callback = function()
+    if vim.v.option_new == "true" or vim.wo.diff then
+      vim.keymap.set("n", "]c", "]c", { buffer = true, desc = "Next diff location" })
+      vim.keymap.set("n", "[c", "[c", { buffer = true, desc = "Previous diff location" })
+    end
+  end,
+})
+
 local border = "double"
 
 -- vim.lsp.buf.hover({ border })
