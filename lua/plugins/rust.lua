@@ -25,6 +25,7 @@ return {
             rustcSource = "discover", -- old settings in RA
           },
         },
+        cmd_env = { RA_LOG = "error" },
         status_notify_level = false,
       },
     },
