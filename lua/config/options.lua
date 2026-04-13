@@ -7,6 +7,8 @@ vim.g.mapleader = [[\]]
 vim.g.localleader = [[<space>]]
 vim.g.lazyvim_picker = "telescope"
 
+vim.opt.number = true
+vim.opt.relativenumber = false
 vim.opt.conceallevel = 0 -- no hidden symbols especially in markdown
 vim.opt.clipboard = "unnamedplus" -- set this to '' to disable sync with system clipboard
 
