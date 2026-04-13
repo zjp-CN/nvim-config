@@ -9,6 +9,25 @@ local function diff_source()
   end
 end
 
+-- This avoids calling the statusline constantly by storing the instance only once.
+local my_trouble_symbols = nil
+local function get_symbols()
+  if not my_trouble_symbols then
+    local ok, trouble = pcall(require, "trouble")
+    if ok then
+      my_trouble_symbols = trouble.statusline({
+        mode = "symbols",
+        groups = {},
+        title = false,
+        filter = { range = true },
+        format = "{kind_icon}{symbol.name}",
+        hl_group = "lualine_x_normal",
+      })
+    end
+  end
+  return my_trouble_symbols
+end
+
 local enable_fancy_ui = false
 
 return {
@@ -83,6 +102,17 @@ return {
           { "filename", path = 1 },
         },
         lualine_x = {
+          {
+            function()
+              local s = get_symbols()
+              return s and s.get() or ""
+            end,
+            cond = function()
+              local s = get_symbols()
+              return s and s.has() or false
+            end,
+            padding = { left = 1 },
+          },
           "encoding",
           "filetype",
           {
