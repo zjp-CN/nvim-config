@@ -35,7 +35,16 @@ return {
       -- },
     },
   },
-
+  {
+    "folke/trouble.nvim",
+    keys = {
+      {
+        "<leader>cs",
+        "<cmd>Trouble lsp_document_symbols toggle win.type=split win.position=right win.size=0.5<cr>",
+        desc = "Symbols (Trouble)",
+      },
+    },
+  },
   {
     "catppuccin/nvim",
     opts = {
