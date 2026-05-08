@@ -9,53 +9,53 @@ vim.g.localleader = [[<space>]]
 -- vim.opt.clipboard = "" -- disable sync with system clipboard
 -- Windows Terminal clipboard.
 -- 1. Connect `y` the unnamed register with `+` the system clipboard.
-vim.opt.clipboard = "unnamedplus"
--- 2. 手动封装 OSC 52 复制函数
-local function osc52_copy(lines)
-  -- 1. 将多行内容合并，强制使用 \n 换行（符合 Linux/Unix 标准）
-  local s = table.concat(lines, "\n")
-
-  -- 2. Base64 编码
-  local b64 = vim.base64.encode(s)
-
-  -- 3. 彻底清除 Base64 字符串中的所有空格、换行符（防止断开转义序列）
-  b64 = b64:gsub("%s+", "")
-
-  local osc
-  if vim.env.TMUX then
-    -- 4. Tmux 专属的包装格式 (DCS 序列)
-    -- 注意：在 Tmux 中，内部的 ESC 必须写成 ESC ESC (\x1b\x1b)
-    -- 格式：ESC P tmux ; ESC ESC ] 52 ; c ; [B64] BEL ESC \
-    osc = string.format("\x1bPtmux;\x1b\x1b]52;c;%s\x07\x1b\\", b64)
-  else
-    -- 普通终端格式
-    osc = string.format("\x1b]52;c;%s\x07", b64)
-  end
-
-  -- 5. 使用 io.stderr 直接写入，并立即刷新缓冲区
-  io.stderr:write(osc)
-  io.stderr:flush()
-end
--- 3. Custom clipboard channel.
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    -- ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    -- ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    ["+"] = osc52_copy,
-    ["*"] = osc52_copy,
-  },
-  paste = {
-    -- 关键：Windows Terminal 不支持远程读取剪贴板。
-    -- 这里设为从 Neovim 内部寄存器读取，防止 Neovim 因尝试访问终端剪贴板而卡顿/报错。
-    ["+"] = function()
-      return { vim.fn.getreg("+"), vim.fn.getregtype("+") }
-    end,
-    ["*"] = function()
-      return { vim.fn.getreg("*"), vim.fn.getregtype("*") }
-    end,
-  },
-}
+-- vim.opt.clipboard = "unnamedplus"
+-- -- 2. 手动封装 OSC 52 复制函数
+-- local function osc52_copy(lines)
+--   -- 1. 将多行内容合并，强制使用 \n 换行（符合 Linux/Unix 标准）
+--   local s = table.concat(lines, "\n")
+--
+--   -- 2. Base64 编码
+--   local b64 = vim.base64.encode(s)
+--
+--   -- 3. 彻底清除 Base64 字符串中的所有空格、换行符（防止断开转义序列）
+--   b64 = b64:gsub("%s+", "")
+--
+--   local osc
+--   if vim.env.TMUX then
+--     -- 4. Tmux 专属的包装格式 (DCS 序列)
+--     -- 注意：在 Tmux 中，内部的 ESC 必须写成 ESC ESC (\x1b\x1b)
+--     -- 格式：ESC P tmux ; ESC ESC ] 52 ; c ; [B64] BEL ESC \
+--     osc = string.format("\x1bPtmux;\x1b\x1b]52;c;%s\x07\x1b\\", b64)
+--   else
+--     -- 普通终端格式
+--     osc = string.format("\x1b]52;c;%s\x07", b64)
+--   end
+--
+--   -- 5. 使用 io.stderr 直接写入，并立即刷新缓冲区
+--   io.stderr:write(osc)
+--   io.stderr:flush()
+-- end
+-- -- 3. Custom clipboard channel.
+-- vim.g.clipboard = {
+--   name = "OSC 52",
+--   copy = {
+--     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+--     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+--     -- ["+"] = osc52_copy,
+--     -- ["*"] = osc52_copy,
+--   },
+--   paste = {
+--     -- 关键：Windows Terminal 不支持远程读取剪贴板。
+--     -- 这里设为从 Neovim 内部寄存器读取，防止 Neovim 因尝试访问终端剪贴板而卡顿/报错。
+--     ["+"] = function()
+--       return { vim.fn.getreg("+"), vim.fn.getregtype("+") }
+--     end,
+--     ["*"] = function()
+--       return { vim.fn.getreg("*"), vim.fn.getregtype("*") }
+--     end,
+--   },
+-- }
 
 vim.g.lazyvim_picker = "telescope"
 
