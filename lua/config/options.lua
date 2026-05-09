@@ -6,10 +6,15 @@
 vim.g.mapleader = [[\]]
 vim.g.localleader = [[<space>]]
 
+-- Ubuntu local: sync with system clipboard
+-- But shift+insert pastes primary buffer (copy content after mouse selection),
+-- doesn't pastes the last user copied contents. So in local ubuntu terminal,
+-- use ctrl+v or ctrl+shift+v (especially in neovim) to paste user contents.
+vim.opt.clipboard = "unnamedplus"
+
 -- vim.opt.clipboard = "" -- disable sync with system clipboard
 -- Windows Terminal clipboard.
 -- 1. Connect `y` the unnamed register with `+` the system clipboard.
--- vim.opt.clipboard = "unnamedplus"
 -- -- 2. 手动封装 OSC 52 复制函数
 -- local function osc52_copy(lines)
 --   -- 1. 将多行内容合并，强制使用 \n 换行（符合 Linux/Unix 标准）
@@ -62,7 +67,6 @@ vim.g.lazyvim_picker = "telescope"
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.conceallevel = 0 -- no hidden symbols especially in markdown
-vim.opt.clipboard = "unnamedplus" -- set this to '' to disable sync with system clipboard
 
 -- enable undotree and map the key to open
 vim.cmd("packadd nvim.undotree")
