@@ -142,4 +142,22 @@ return {
       { "<m-i>", "<cmd>close<cr>", mode = { "t" }, desc = "close (but not quit) float terminal" },
     },
   },
+  -- Render ANSI colors for log files.
+  {
+    "0xferrous/ansi.nvim",
+    -- Seems not working :(
+    opts = {
+      auto_enable = false, -- Auto-enable for configured filetypes
+      auto_enable_stdin = true, -- Auto-enable for piped stdin content
+      -- NOTE: *.log doesn't have log filetype by default, so even if auto_enable is true,
+      -- the ANSI colors in log file will not be rendered. Also, if we set *.log as
+      -- log filetype, other plugins will eagerly render stuff, causing this plugin
+      -- fails to render ANSI. Anyways, use shortkey to toggle color instead.
+      filetypes = { "log", "ansi" },
+      theme = "catppuccin",
+    },
+    keys = {
+      { "<space>c", "<cmd>lua require('ansi').toggle()<cr>", mode = { "n" }, desc = "toggle ANSI color rendering" },
+    },
+  },
 }
