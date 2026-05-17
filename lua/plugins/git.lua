@@ -17,8 +17,8 @@ return {
     cmd = { "DiffviewOpen", "DiffviewFileHistory" },
   },
   {
-    "akinsho/git-conflict.nvim",
-    cmd = "GitConflictRefresh",
+    "niekdomi/conflict.nvim",
+    event = "VeryLazy",
     opts = {},
   },
   {
