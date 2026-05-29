@@ -270,18 +270,18 @@ return {
       { "gr", telescopePickers.lsp_references },
       { "gI", telescopePickers.lsp_implementations },
       -- general keymap: builtin
-      { ",t", "<cmd>Telescope<cr>" },
+      { ",t", "<cmd>Telescope<cr>", "telescope builtins" },
       -- { ",l", "<cmd>Telescope live_grep<cr>" },
-      { ",l", telescopePickers.live_grep },
+      { ",l", telescopePickers.live_grep, desc = "live grep" },
       -- { ",g", "<cmd>Telescope grep_string<cr>" },
-      { ",g", telescopePickers.grep_string },
+      { ",g", telescopePickers.grep_string, desc = "grep string under current cursor" },
       { ",f", "<cmd>Telescope find_files<cr>" },
       { ",F", "<cmd>Telescope find_files no_ignore=true<cr>" },
       { ",h", "<cmd>Telescope highlights<cr>" },
       { ",,", "<cmd>Telescope help_tags<cr>" },
       { ",k", "<cmd>Telescope keymaps<cr>" },
       -- { ",b", "<cmd>Telescope buffers<cr>" },
-      { ",b", telescopePickers.prettyBuffersPicker },
+      { ",b", telescopePickers.prettyBuffersPicker, desc = "buffer picker" },
       { ",B", "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
       { ",q", "<cmd>Telescope quickfix<cr>" },
       { ",Q", "<cmd>Telescope quickfixhistory<cr>" },
@@ -407,6 +407,33 @@ return {
     },
     config = function()
       require("telescope").load_extension("frecency")
+    end,
+  },
+  {
+    "Marskey/telescope-sg",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    keys = {
+      {
+        ",a",
+        function()
+          require("telescope").extensions.ast_grep.ast_grep({ lang = "rust" })
+        end,
+        desc = "grep Rust ast node",
+      },
+    },
+    config = function()
+      require("telescope").setup({
+        extensions = {
+          ast_grep = {
+            command = {
+              "ast-grep", -- For Linux, use `ast-grep` instead of `sg`
+              "--json=stream",
+            }, -- must have --json=stream
+            grep_open_files = false, -- search in opened files
+            lang = nil, -- string value, specify language for ast-grep `nil` for default
+          },
+        },
+      })
     end,
   },
 }
