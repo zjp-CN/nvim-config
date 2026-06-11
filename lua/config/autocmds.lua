@@ -19,7 +19,8 @@ vim.api.nvim_create_autocmd({
   pattern = "*.typ",
   callback = function()
     local buf = vim.api.nvim_get_current_buf()
-    vim.api.nvim_buf_set_option(buf, "filetype", "typst")
-    -- vim.api.nvim_set_option_value("filetype", "typst", { buf })
+    vim.api.nvim_set_option_value("filetype", "typst", { buf = buf })
   end,
 })
+
+require("config.termdebugger")
