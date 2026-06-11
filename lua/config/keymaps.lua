@@ -57,3 +57,15 @@ bind("n", "<leader>u<tab>", function()
     enabled = not require("ibl.config").get_config(0).enabled,
   })
 end, "Toggle fancy indent UI on current buffer")
+
+-- Toggle rust-analyzer via `\rl` for rustaceanvim plugin.
+vim.g.start_rust_lsp = true
+vim.keymap.set("n", "<leader>rl", function()
+  if vim.g.start_rust_lsp then
+    vim.g.start_rust_lsp = false
+    vim.notify("Disable Auto Start Rust LSP. Use `:RustAnalyzer start` to manually start the LSP.", vim.log.levels.WARN)
+  else
+    vim.g.start_rust_lsp = true
+    vim.notify("Enable Auto Start Rust Lsp.", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle Auto Start Rust LSP (rust-analyzer)" })

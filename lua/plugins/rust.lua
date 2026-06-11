@@ -29,6 +29,11 @@ return {
         status_notify_level = false,
       },
     },
+    config = function(_, opts)
+      -- `<leader>rl` to toggle auto start rust-analyzer when opening a rs file.
+      opts.server.auto_attach = vim.g.start_rust_lsp == true
+      vim.g.rustaceanvim = opts
+    end,
   },
   {
     "Saecki/crates.nvim",
