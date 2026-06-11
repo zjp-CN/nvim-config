@@ -14,6 +14,7 @@ return {
       ensure_installed = {
         "rust",
         "sql",
+        "asm",
       },
     },
   },

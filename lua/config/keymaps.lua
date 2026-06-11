@@ -12,7 +12,7 @@ bind("n", "<leader>nb", "<cmd>set number! rnu!<CR>", "toggle the visibility of (
 bind("n", "<leader>NB", "<cmd>set rnu!<CR>", "toggle between relativenumber and sequence number")
 
 -- ### buffer switching
-bind("n", "<leader>dd", "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", "close buffer")
+-- bind("n", "<leader>dd", "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", "close buffer")
 
 -- ### buffer editting
 -- case switching
@@ -21,7 +21,7 @@ bind("n", "<leader>U", "vgU", "switch to uppercase under (selected) cursor")
 bind("v", "<leader>u", "gu", "switch to lowercase under (selected) cursor")
 bind("v", "<leader>U", "gU", "switch to uppercase under (selected) cursor")
 -- clear and enter
-bind("n", "<leader>da", "ggVGDI", "clear the content in current buffer and enter")
+-- bind("n", "<leader>da", "ggVGDI", "clear the content in current buffer and enter")
 -- empty line
 bind("n", "[<space>", "<cmd>put! =repeat(nr2char(10), v:count1)<cr>'[", "add an empty line before the current line")
 bind("n", "]<space>", "<cmd>put =repeat(nr2char(10), v:count1)<cr>", "add an empty line after the current line")
