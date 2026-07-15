@@ -37,10 +37,11 @@ return {
   },
   {
     "Saecki/crates.nvim",
+    ft = { "toml" },
     keys = {
-      -- { "<F4>", "<cmd>lua require('crates').show_features_popup()<cr>", desc = "crates: show_features_popup" },
-      -- { "<F5>", "<cmd>lua require('crates').show_popup()<cr>", desc = "crates: show_popup" },
-      -- { "<F6>", "<cmd>lua require('crates').show_dependencies_popup()<cr>", desc = "crates: show_dependencies_popup" },
+      { "<F4>", "<cmd>lua require('crates').show_features_popup()<cr>", desc = "crates: show_features_popup" },
+      { "<F5>", "<cmd>lua require('crates').show_popup()<cr>", desc = "crates: show_popup" },
+      { "<F6>", "<cmd>lua require('crates').show_dependencies_popup()<cr>", desc = "crates: show_dependencies_popup" },
     },
   },
 }
