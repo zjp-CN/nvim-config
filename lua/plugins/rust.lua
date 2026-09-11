@@ -1,5 +1,8 @@
 return {
   {
+    "mrjones2014/codesettings.nvim",
+  },
+  {
     "mrcjkb/rustaceanvim",
     keys = {
       { "<F2>", "<cmd>RustLsp hover actions<cr>", ft = "rust", desc = "RustHoverActions" },

@@ -89,6 +89,13 @@ local border = "double"
 -- vim.lsp.buf.signature_help({ border })
 vim.diagnostic.config({ float = { border } })
 
+vim.lsp.config("*", {
+  before_init = function(_, config)
+    local codesettings = require("codesettings")
+    codesettings.with_local_settings(config.name, config)
+  end,
+})
+
 -- **************** safety-tool LSP config ****************
 vim.lsp.config["safety-lsp"] = {
   -- Command and arguments to start the server.
