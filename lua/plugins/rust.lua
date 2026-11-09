@@ -1,9 +1,15 @@
 return {
   {
     "mrjones2014/codesettings.nvim",
+    -- lazy = false,
+    opts = {
+      --- Look for these config files
+      config_file_paths = { ".vscode/settings.json", "codesettings.json", "lspsettings.json", "rust-project.json" },
+    },
   },
   {
     "mrcjkb/rustaceanvim",
+    -- lazy = false,
     keys = {
       { "<F2>", "<cmd>RustLsp hover actions<cr>", ft = "rust", desc = "RustHoverActions" },
       -- { "<space><space>", "<cmd>RustLsp flyCheck<cr>", ft = "rust", desc = "Rust Fly Check" },
